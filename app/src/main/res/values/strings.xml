@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Medipal</string>
+    <string name="action_settings">Settings</string>
+    <string name="user_form">Enter Detail</string>
+    <string name="userName">Name</string>
+    <string name="userAddress">Address</string>
+</resources>
