@@ -66,7 +66,7 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
         ContentValues values = new ContentValues();
         values.put(personalEntry.USER_NAME, UserName);
         values.put(personalEntry.USER_ADDRESS, UserDesc);
-        Log.v(LOG_TAG,"content changed");
+        Log.v(LOG_TAG,"content changed for my branch");
 
         if (mCurrentUserUri == null) {
             Uri newUri = getContentResolver().insert(personalEntry.CONTENT_URI, values);
