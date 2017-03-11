@@ -89,8 +89,8 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
     public static final  String SQL_CREATE_ICE_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.ICE_TABLE_NAME + " ("
             + PersonalEntry.ICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PersonalEntry.ICE_NAME + " TEXT, "
-            + PersonalEntry.ICE_CONTACT_NUMBER + " INTEGER, "
-            +PersonalEntry.ICE_CONTACT_TYPE + " DATE,"
+            + PersonalEntry.ICE_CONTACT_NUMBER + " TEXT, "
+            +PersonalEntry.ICE_CONTACT_TYPE + " TEXT,"
             +PersonalEntry.ICE_DESCRIPTION + " TEXT, "
             + PersonalEntry.ICE_SEQUENCE + "INTEGER );";
 
