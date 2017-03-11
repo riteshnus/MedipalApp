@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.ritesh.medipalapplication.Activity.MainActivity"
+    tools:context="com.example.ritesh.medipalapplication.activity.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <TextView
@@ -34,5 +34,5 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
     android:id="@+id/listview"
-    tools:context="com.nus.iss.android.medipal.Activity.MainActivity"/>
+    tools:context="com.nus.iss.android.medipal.activity.MainActivity"/>
 

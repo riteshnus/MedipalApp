@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Data;
+package com.nus.iss.android.medipal.data;
 
 import android.content.ContentResolver;
 import android.net.Uri;
@@ -13,14 +13,109 @@ public class MedipalContract {
     public static final Uri BASE_CONTENT = Uri.parse("content://"+ CONTENT_AUTHORITY);
     public static final String PATH_PERSONAL = "personal";
 
-    public static final class personalEntry implements BaseColumns {
+    public static final class PersonalEntry implements BaseColumns {
         public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PERSONAL;
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PERSONAL;
         public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT,PATH_PERSONAL);
-        public static final String TABLE_NAME = "personalBio";
-        public static final String _ID = BaseColumns._ID;
-        public static final String USER_NAME = "FirstName";
-        public static final String USER_ADDRESS = "Address";
+
+        /*
+        * Table Details for Personal Bio table
+        * */
+        public static final String USER_TABLE_NAME = "PersonalBio";
+        public static final String USER_ID = BaseColumns._ID;
+        public static final String USER_NAME = "Name";
+        public static final String USER_DOB = "DOB";
+        public static final String USER_ID_NO="IDNo";
+        public static final String USER_ADDRESS="Address";
+        public static final String USER_POSTAL_CODE="PostalCode";
+        public static final String USER_HEIGHT="Height";
+        public static final String USER_BLOOD_TYPE="BloodType";
+
+        /*
+       * Table Details for Health Bio table
+       * */
+        public static final String HEALTH_BIO_TABLE_NAME="HealthBio";
+        public static final String HEALTH_BIO_ID=BaseColumns._ID;
+        public static final String HEALTH_CONDITION="Condition";
+        public static final String HEALTH_START_DATE="StartDate";
+        public static final String HEALTH_CONDITION_TYPE="ConditionType";
+
+        /*
+       * Table Details for Categories table
+       * */
+        public static final String CATEGORIES_TABLE_NAME="Categories";
+        public static final String CATEGORIES_ID=BaseColumns._ID;
+        public static final String CATEGORIES_CATEGORY_NAME="Category";
+        public static final String CATEGORIES_CODE="Code";
+        public static final String CATEGORIES_DESCRIPTION="Description";
+        public static final String CATEGORIES_REMIND="Remind";
+
+        /*
+       * Table Details for Medicine table
+       * */
+        public static final String MEDICINE_TABLE_NAME="Medicine";
+        public static final String MEDICINE_ID=BaseColumns._ID;
+        public static final String MEDICINE_MEDICINE_NAME="Medicine";
+        public static final String MEDICINE_CATID="CatID";
+        public static final String MEDICINE_DESCRIPTION="Description";
+        public static final String MEDICINE_REMIND="Remind";
+        public static final String MEDICINE_REMINDERID="ReminderID";
+        public static final String MEDICINE_QUANTITY="Quantity";
+        public static final String MEDICINE_DOSAGE="Dosage";
+        public static final String MEDICINE_CONSUME_QUANTITY="ConsumeQuantity";
+        public static final String MEDICINE_THRESHOLD="Threshold";
+        public static final String MEDICINE_DATE_ISSUED="DateIssued";
+        public static final String MEDICINE_EXPIRE_FACTOR="ExpireFactor";
+
+        /*
+       * Table Details for Measurement table
+       * */
+        public static final String MEASUREMENT_TABLE_NAME="Measurement";
+        public static final String MEASUREMENT_ID=BaseColumns._ID;
+        public static final String MEASUREMENT_SYSTOLIC="Systolic";
+        public static final String MEASUREMENT_DIASTOLIC="Diastolic";
+        public static final String MEASUREMENT_PULSE="Pulse";
+        public static final String MEASUREMENT_TEMPERATURE="Temperature";
+        public static final String MEASUREMENT_WEIGHT="Weight";
+        public static final String MEASUREMENT_MEASURED_ON="MeasuredOn";
+
+        /*
+       * Table Details for Consumption table
+       * */
+        public static final String CONSUMPTION_TABLE_NAME="Consumption";
+        public static final String CONSUMPTION_ID=BaseColumns._ID;
+        public static final String CONSUMPTION_MEDICINE_ID="MedicineID";
+        public static final String CONSUMPTION_QUANTITY="Quantity";
+        public static final String CONSUMPTION_CONSUMED_ON="ConsumedOn";
+
+        /*
+         * Table Details for Reminder table
+         * */
+        public static final String REMINDER_TABLE_NAME="Reminder";
+        public static final String REMINDER_ID=BaseColumns._ID;
+        public static final String REMINDER_FREQUENCY="Frequency";
+        public static final String REMINDER_START_TIME="StartTime";
+        public static final String REMINDER_INTERVAL="Interval";
+
+        /*
+         * Table Details for Appointment table
+         * */
+        public static final String APPOINTMENT_TABLE_NAME="Appointment";
+        public static final String APPOINTMENT_ID=BaseColumns._ID;
+        public static final String APPOINTMENT_LOCATION="Location";
+        public static final String APPOINTMENT_APPOINTMENT_DATE_TIME="Appointment";
+        public static final String APPOINTMENT_DESCRIPTION="Description";
+
+        /*
+         * Table Details for ICE table
+         * */
+        public static final String ICE_TABLE_NAME="ICE";
+        public static final String ICE_ID=BaseColumns._ID;
+        public static final String ICE_NAME="Name";
+        public static final String ICE_CONTACT_NUMBER="ContactNo";
+        public static final String ICE_CONTACT_TYPE="ContactType";
+        public static final String ICE_SEQUENCE="Sequence";
+        public static final String ICE_DESCRIPTION="Description";
 
     }
 }

@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
@@ -17,8 +17,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.nus.iss.android.medipal.Adapter.UserAdapter;
-import com.nus.iss.android.medipal.Data.MedipalContract.personalEntry;
+import com.nus.iss.android.medipal.adapter.UserAdapter;
+import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 import com.nus.iss.android.medipal.R;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this,EntryClass.class);
-                Uri currentPetUri = ContentUris.withAppendedId(personalEntry.CONTENT_URI,id);
+                Uri currentPetUri = ContentUris.withAppendedId(PersonalEntry.CONTENT_URI,id);
                 intent.setData(currentPetUri);
                 startActivity(intent);
             }
@@ -89,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                personalEntry._ID,
-                personalEntry.USER_NAME,
-                personalEntry.USER_ADDRESS,
+                PersonalEntry._ID,
+                PersonalEntry.USER_NAME,
+                PersonalEntry.USER_ADDRESS,
         } ;
-        return new CursorLoader(this,personalEntry.CONTENT_URI,projection,null,null,null);
+        return new CursorLoader(this, PersonalEntry.CONTENT_URI,projection,null,null,null);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Data;
+package com.nus.iss.android.medipal.data;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.nus.iss.android.medipal.Data.MedipalContract.personalEntry;
+import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 /**
  * Created by Ritesh on 3/8/2017.
  */
@@ -45,12 +45,12 @@ public class MedicalProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match){
             case MEMBER:
-                cursor = sqLiteDatabase.query(personalEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case MEMBER_ID:
-                selection = personalEntry._ID +"=?";
+                selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = sqLiteDatabase.query(personalEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
@@ -78,13 +78,13 @@ public class MedicalProvider extends ContentProvider {
     }
 
     public Uri InsertUser(Uri uri, ContentValues contentValues){
-        String userName = contentValues.getAsString(personalEntry.USER_NAME);
+        String userName = contentValues.getAsString(MedipalContract.PersonalEntry.USER_NAME);
         if(userName == null){
             throw new IllegalArgumentException("Member require user name ");
         }
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        long newId = sqLiteDatabase.insert(personalEntry.TABLE_NAME,null,contentValues);
+        long newId = sqLiteDatabase.insert(PersonalEntry.USER_TABLE_NAME,null,contentValues);
         if(newId == -1){
             Log.e(LOG_TAG, "Failed to insert new member "+uri);
             return null;
@@ -100,15 +100,15 @@ public class MedicalProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match){
             case MEMBER:
-                rowDeleted = sqLiteDatabase.delete(personalEntry.TABLE_NAME,selection,selectionArgs);
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.USER_TABLE_NAME,selection,selectionArgs);
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
                 break;
             case MEMBER_ID:
-                selection = personalEntry._ID +"=?";
+                selection = MedipalContract.PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowDeleted = sqLiteDatabase.delete(personalEntry.TABLE_NAME,selection,selectionArgs);
+                rowDeleted = sqLiteDatabase.delete(MedipalContract.PersonalEntry.USER_TABLE_NAME,selection,selectionArgs);
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
@@ -126,7 +126,7 @@ public class MedicalProvider extends ContentProvider {
             case MEMBER:
                 return updateUser(uri,contentValues,selection,selectionArgs);
             case MEMBER_ID:
-                selection = personalEntry._ID + "=?";
+                selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateUser(uri,contentValues,selection,selectionArgs);
             default:
@@ -135,8 +135,8 @@ public class MedicalProvider extends ContentProvider {
     }
 
     private int updateUser(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs){
-        if(contentValues.containsKey(personalEntry.USER_NAME)){
-            String userName = contentValues.getAsString(personalEntry.USER_NAME);
+        if(contentValues.containsKey(MedipalContract.PersonalEntry.USER_NAME)){
+            String userName = contentValues.getAsString(MedipalContract.PersonalEntry.USER_NAME);
             Log.v(LOG_TAG,"User: "+userName);
             if(userName == null){
                 throw new IllegalArgumentException("Name can not be blank");
@@ -148,7 +148,7 @@ public class MedicalProvider extends ContentProvider {
         }
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        int rowUpdated = sqLiteDatabase.update(personalEntry.TABLE_NAME,contentValues,selection,selectionArgs);
+        int rowUpdated = sqLiteDatabase.update(PersonalEntry.USER_TABLE_NAME,contentValues,selection,selectionArgs);
         if(rowUpdated !=0){
             getContext().getContentResolver().notifyChange(uri,null);
         }
