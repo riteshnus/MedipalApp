@@ -20,12 +20,23 @@ public class MedicalProvider extends ContentProvider {
     public static final String LOG_TAG = MedicalProvider.class.getSimpleName();
     private static final int MEMBER = 100;
     private static final int MEMBER_ID = 101;
-
+    private static final int MEDICINE=102;
+    private static final int MEDICINE_ID=103;
+    private static final int REMINDER=104;
+    private static final int REMINDER_ID=105;
+    private static final int CATEGORY=106;
+    private static final int CATEGORY_ID=107;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,MedipalContract.PATH_PERSONAL,MEMBER);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,MedipalContract.PATH_PERSONAL+"/#",MEMBER_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.USER_TABLE_NAME,MEMBER);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.USER_TABLE_NAME+"/#",MEMBER_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEDICINE_TABLE_NAME,MEDICINE);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEDICINE_TABLE_NAME+"/#",MEDICINE_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.REMINDER_TABLE_NAME,REMINDER);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.REMINDER_TABLE_NAME+"/#",REMINDER_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME,CATEGORY);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME+"/#",CATEGORY_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -39,10 +50,11 @@ public class MedicalProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        Log.v(LOG_TAG,"Query called");
+        Log.v(LOG_TAG,"Query called for uri" + uri);
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor;
         int match = sUriMatcher.match(uri);
+        Log.v(LOG_TAG,"Query to be called for " + match);
         switch (match){
             case MEMBER:
                 cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
@@ -51,6 +63,9 @@ public class MedicalProvider extends ContentProvider {
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case CATEGORY:
+                cursor=sqLiteDatabase.query(PersonalEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
@@ -71,22 +86,26 @@ public class MedicalProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match){
             case MEMBER:
-                return InsertUser(uri,values);
+                return insertTable(uri,values,PersonalEntry.USER_TABLE_NAME);
+            case MEDICINE:
+                return insertTable(uri,values,PersonalEntry.MEDICINE_TABLE_NAME);
+            case REMINDER:
+                return insertTable(uri,values,PersonalEntry.REMINDER_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didnt match with anything");
         }
     }
 
-    public Uri InsertUser(Uri uri, ContentValues contentValues){
-        String userName = contentValues.getAsString(MedipalContract.PersonalEntry.USER_NAME);
+    public Uri insertTable(Uri uri, ContentValues contentValues,String tableName){
+        /*String userName = contentValues.getAsString(MedipalContract.PersonalEntry.USER_NAME);
         if(userName == null){
             throw new IllegalArgumentException("Member require user name ");
-        }
+        }*/
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        long newId = sqLiteDatabase.insert(PersonalEntry.USER_TABLE_NAME,null,contentValues);
+        long newId = sqLiteDatabase.insert(tableName,null,contentValues);
         if(newId == -1){
-            Log.e(LOG_TAG, "Failed to insert new member "+uri);
+            Log.e(LOG_TAG, "Failed to insert into table "+uri);
             return null;
         }
         getContext().getContentResolver().notifyChange(uri,null,false);
@@ -124,17 +143,17 @@ public class MedicalProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match){
             case MEMBER:
-                return updateUser(uri,contentValues,selection,selectionArgs);
+                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
             case MEMBER_ID:
                 selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return updateUser(uri,contentValues,selection,selectionArgs);
+                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for "+uri);
         }
     }
 
-    private int updateUser(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs){
+    private int updateUser(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs,String tableName){
         if(contentValues.containsKey(MedipalContract.PersonalEntry.USER_NAME)){
             String userName = contentValues.getAsString(MedipalContract.PersonalEntry.USER_NAME);
             Log.v(LOG_TAG,"User: "+userName);
@@ -148,7 +167,7 @@ public class MedicalProvider extends ContentProvider {
         }
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        int rowUpdated = sqLiteDatabase.update(PersonalEntry.USER_TABLE_NAME,contentValues,selection,selectionArgs);
+        int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);
         if(rowUpdated !=0){
             getContext().getContentResolver().notifyChange(uri,null);
         }

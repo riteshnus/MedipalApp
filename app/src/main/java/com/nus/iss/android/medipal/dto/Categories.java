@@ -8,16 +8,18 @@ import static android.R.attr.description;
 
 public class Categories {
 
+    private int categoryId;
     private String category;
     private String  code;
     private String description;
     private boolean remind;
 
-    public Categories(String category, String code, String description, boolean remind) {
+    public Categories(int categoryId ,String category, String code, String description, boolean remind) {
         this.category = category;
         this.code = code;
         this.description = description;
         this.remind = remind;
+        this.categoryId=categoryId;
     }
 
     public String getCategory() {
@@ -50,5 +52,13 @@ public class Categories {
 
     public void setRemind(boolean remind) {
         this.remind = remind;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

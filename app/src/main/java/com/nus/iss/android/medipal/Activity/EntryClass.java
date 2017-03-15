@@ -70,7 +70,7 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
         Log.v(LOG_TAG,"content changed");
 
         if (mCurrentUserUri == null) {
-            Uri newUri = getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI, values);
+            Uri newUri = getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI_PERSONAL, values);
             Log.v(LOG_TAG, " new URI: " + newUri);
             if (newUri == null) {
                 Toast.makeText(this, "Not able to insert new user", Toast.LENGTH_SHORT).show();
@@ -91,7 +91,7 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
         //END
 
         /*
-            Uri newUri = getContentResolver().insert(PersonalEntry.CONTENT_URI, values);
+            Uri newUri = getContentResolver().insert(PersonalEntry.CONTENT_URI_PERSONAL, values);
             Log.v(LOG_TAG, " new URI: " + newUri);
             if (newUri == null) {
                 Toast.makeText(this, "Insert new member fail again", Toast.LENGTH_SHORT).show();

@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Reminder {
 
+    private int reminderId;
     private int frequency;
     private Date startTime;
     private int interval;
@@ -39,5 +40,13 @@ public class Reminder {
 
     public void setInterval(int interval) {
         this.interval = interval;
+    }
+
+    public int getReminderId() {
+        return reminderId;
+    }
+
+    public void setReminderId(int reminderId) {
+        this.reminderId = reminderId;
     }
 }

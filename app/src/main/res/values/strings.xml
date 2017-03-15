@@ -4,4 +4,22 @@
     <string name="user_form">Enter Detail</string>
     <string name="userName">Name</string>
     <string name="userAddress">Address</string>
+    <string name="add_medicine">Add Medicine</string>
+    <string name="dosage_pills">pills</string>
+    <string name="dosage_cc">cc</string>
+    <string name="dosage_ml">ml</string>
+    <string name="dosage_gr">gm</string>
+    <string name="dosage_mg">mg</string>
+    <string name="dosage_drops">drops</string>
+    <string name="dosage_pieces">pieces</string>
+    <string name="action_save">save</string>
+    <string name="threshold">Threshold</string>
+    <string name="expiry_factor">Expiry Factor</string>
+    <string name="next">NEXT</string>
+    <string name="interval">Interval</string>
+    <string name="self_apply">SEL</string>
+    <string name="complete_course">COM</string>
+    <string name="supplement">SUP</string>
+    <string name="chronic">CHR</string>
+    <string name="incidental">INC</string>
 </resources>

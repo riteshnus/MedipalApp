@@ -1,5 +1,6 @@
 package com.nus.iss.android.medipal.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -95,7 +96,6 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
             + PersonalEntry.ICE_SEQUENCE + "INTEGER );";
 
 
-
     public MedipalDBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -111,10 +111,28 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_REMINDER_DATA_TABLE);
         db.execSQL(SQL_CREATE_APPOINTMENT_DATA_TABLE);
         db.execSQL(SQL_CREATE_ICE_DATA_TABLE);
+        insertCategory(db,"Supplement","SUP","Meds for Supplement",0);
+        insertCategory(db,"Chronic","CHR","Meds for long term disease",1);
+        insertCategory(db,"Incidental","INC","For Common Cold and Flu",1);
+        insertCategory(db,"Complete Course","COM","Antibiotics for Infection",1);
+        insertCategory(db,"Self Apply","SEL","Self Prescribed Prescription",0);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+    }
+
+    private void insertCategory(SQLiteDatabase db,String categoryName,String code,String description,int remind){
+        ContentValues categoryValue=new ContentValues();
+        categoryValue.put(PersonalEntry.CATEGORIES_CATEGORY_NAME,categoryName);
+        categoryValue.put(PersonalEntry.CATEGORIES_CODE,code);
+        categoryValue.put(PersonalEntry.CATEGORIES_DESCRIPTION,description);
+        categoryValue.put(PersonalEntry.CATEGORIES_REMIND,remind);
+        db.insert(PersonalEntry.CATEGORIES_TABLE_NAME,null,categoryValue);
     }
 }

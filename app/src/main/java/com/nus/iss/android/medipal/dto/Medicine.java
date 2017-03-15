@@ -20,13 +20,10 @@ public class Medicine {
     private Date dateIssued;
     private int expireFactor;
 
-    public Medicine(String medicine, String description, Categories category,
-                    Reminder reminder, boolean remind, int quantity,
+    public Medicine(String medicine, String description, boolean remind, int quantity,
                     int dosage, int consumeQuantity, int threshold, Date dateIssued, int expireFactor) {
         this.medicine = medicine;
         this.description = description;
-        this.category = category;
-        this.reminder = reminder;
         this.remind = remind;
         this.quantity = quantity;
         this.dosage = dosage;
@@ -34,5 +31,93 @@ public class Medicine {
         this.threshold = threshold;
         this.dateIssued = dateIssued;
         this.expireFactor = expireFactor;
+    }
+
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
+    }
+
+    public int getConsumeQuantity() {
+        return consumeQuantity;
+    }
+
+    public void setConsumeQuantity(int consumeQuantity) {
+        this.consumeQuantity = consumeQuantity;
+    }
+
+    public Date getDateIssued() {
+        return dateIssued;
+    }
+
+    public void setDateIssued(Date dateIssued) {
+        this.dateIssued = dateIssued;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(int dosage) {
+        this.dosage = dosage;
+    }
+
+    public int getExpireFactor() {
+        return expireFactor;
+    }
+
+    public void setExpireFactor(int expireFactor) {
+        this.expireFactor = expireFactor;
+    }
+
+    public String getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(String medicine) {
+        this.medicine = medicine;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isRemind() {
+        return remind;
+    }
+
+    public void setRemind(boolean remind) {
+        this.remind = remind;
+    }
+
+    public Reminder getReminder() {
+        return reminder;
+    }
+
+    public void setReminder(Reminder reminder) {
+        this.reminder = reminder;
+    }
+
+    public int getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
     }
 }

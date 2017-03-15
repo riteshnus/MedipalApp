@@ -11,17 +11,19 @@ import android.provider.BaseColumns;
 public class MedipalContract {
     public static final String CONTENT_AUTHORITY = "com.nus.iss.android.medipal";
     public static final Uri BASE_CONTENT = Uri.parse("content://"+ CONTENT_AUTHORITY);
-    public static final String PATH_PERSONAL = "personal";
+    public static final String PATH_PERSONAL = "PersonalBio";
 
     public static final class PersonalEntry implements BaseColumns {
         public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PERSONAL;
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PERSONAL;
-        public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT,PATH_PERSONAL);
-
+        public final static Uri CONTENT_URI_PERSONAL = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.USER_TABLE_NAME);
+        public final static Uri CONTENT_URI_MEDICINE = Uri.withAppendedPath(MedipalContract.BASE_CONTENT,PersonalEntry.MEDICINE_TABLE_NAME);
+        public final static Uri CONTENT_URI_CATEGORY = Uri.withAppendedPath(MedipalContract.BASE_CONTENT,PersonalEntry.CATEGORIES_TABLE_NAME);
+        public final static Uri CONTENT_URI_REMINDER=Uri.withAppendedPath(MedipalContract.BASE_CONTENT,PersonalEntry.REMINDER_TABLE_NAME);
         /*
         * Table Details for Personal Bio table
         * */
-        public static final String USER_TABLE_NAME = "PersonalBio";
+        public static final String USER_TABLE_NAME = "personalBio";
         public static final String USER_ID = BaseColumns._ID;
         public static final String USER_NAME = "Name";
         public static final String USER_DOB = "DOB";
@@ -34,7 +36,7 @@ public class MedipalContract {
         /*
        * Table Details for Health Bio table
        * */
-        public static final String HEALTH_BIO_TABLE_NAME="HealthBio";
+        public static final String HEALTH_BIO_TABLE_NAME="healthBio";
         public static final String HEALTH_BIO_ID=BaseColumns._ID;
         public static final String HEALTH_CONDITION="Condition";
         public static final String HEALTH_START_DATE="StartDate";
@@ -43,7 +45,7 @@ public class MedipalContract {
         /*
        * Table Details for Categories table
        * */
-        public static final String CATEGORIES_TABLE_NAME="Categories";
+        public static final String CATEGORIES_TABLE_NAME="categories";
         public static final String CATEGORIES_ID=BaseColumns._ID;
         public static final String CATEGORIES_CATEGORY_NAME="Category";
         public static final String CATEGORIES_CODE="Code";
@@ -53,7 +55,7 @@ public class MedipalContract {
         /*
        * Table Details for Medicine table
        * */
-        public static final String MEDICINE_TABLE_NAME="Medicine";
+        public static final String MEDICINE_TABLE_NAME="medicine";
         public static final String MEDICINE_ID=BaseColumns._ID;
         public static final String MEDICINE_MEDICINE_NAME="Medicine";
         public static final String MEDICINE_CATID="CatID";
@@ -70,7 +72,7 @@ public class MedipalContract {
         /*
        * Table Details for Measurement table
        * */
-        public static final String MEASUREMENT_TABLE_NAME="Measurement";
+        public static final String MEASUREMENT_TABLE_NAME="measurement";
         public static final String MEASUREMENT_ID=BaseColumns._ID;
         public static final String MEASUREMENT_SYSTOLIC="Systolic";
         public static final String MEASUREMENT_DIASTOLIC="Diastolic";
@@ -82,7 +84,7 @@ public class MedipalContract {
         /*
        * Table Details for Consumption table
        * */
-        public static final String CONSUMPTION_TABLE_NAME="Consumption";
+        public static final String CONSUMPTION_TABLE_NAME="consumption";
         public static final String CONSUMPTION_ID=BaseColumns._ID;
         public static final String CONSUMPTION_MEDICINE_ID="MedicineID";
         public static final String CONSUMPTION_QUANTITY="Quantity";
@@ -91,7 +93,7 @@ public class MedipalContract {
         /*
          * Table Details for Reminder table
          * */
-        public static final String REMINDER_TABLE_NAME="Reminder";
+        public static final String REMINDER_TABLE_NAME="reminder";
         public static final String REMINDER_ID=BaseColumns._ID;
         public static final String REMINDER_FREQUENCY="Frequency";
         public static final String REMINDER_START_TIME="StartTime";
@@ -100,7 +102,7 @@ public class MedipalContract {
         /*
          * Table Details for Appointment table
          * */
-        public static final String APPOINTMENT_TABLE_NAME="Appointment";
+        public static final String APPOINTMENT_TABLE_NAME="appointment";
         public static final String APPOINTMENT_ID=BaseColumns._ID;
         public static final String APPOINTMENT_LOCATION="Location";
         public static final String APPOINTMENT_APPOINTMENT_DATE_TIME="Appointment";

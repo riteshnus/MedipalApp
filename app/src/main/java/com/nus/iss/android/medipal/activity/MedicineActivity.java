@@ -3,6 +3,8 @@ package com.nus.iss.android.medipal.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.nus.iss.android.medipal.R;
+
 public class MedicineActivity extends AppCompatActivity {
 
     @Override
