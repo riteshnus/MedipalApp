@@ -8,7 +8,11 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,7 +25,7 @@ import com.nus.iss.android.medipal.adapter.UserAdapter;
 import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 import com.nus.iss.android.medipal.R;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,NavigationView.OnNavigationItemSelectedListener {
 
     public static final int USER_LOADER = 0;
     public UserAdapter userCursorAdapter;
@@ -43,6 +47,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         userCursorAdapter = new UserAdapter(this, null);
         setTextView.setAdapter(userCursorAdapter);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         setTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -133,5 +145,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab1.animate().translationY(0);
         /*fab2.animate().translationY(0);
         fab3.animate().translationY(0);*/
+    }
+
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.nav_medicine_list){
+            Intent newIntent= new Intent(MainActivity.this,MedicineActivity.class);
+            startActivity(newIntent);
+        }
+        return false;
     }
 }

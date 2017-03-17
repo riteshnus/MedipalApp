@@ -67,6 +67,27 @@ public class MedicalProvider extends ContentProvider {
             case CATEGORY:
                 cursor=sqLiteDatabase.query(PersonalEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+            case CATEGORY_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(PersonalEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case MEDICINE:
+                cursor=sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case MEDICINE_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case REMINDER:
+                cursor=sqLiteDatabase.query(PersonalEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case REMINDER_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(PersonalEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
         }

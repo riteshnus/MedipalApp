@@ -1,8 +1,10 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.LoaderManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -54,6 +56,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import com.nus.iss.android.medipal.constants.Constants;
+import com.nus.iss.android.medipal.services.NotificationService;
 
 import static com.nus.iss.android.medipal.R.string.interval;
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_DATE_FORMAT;
@@ -78,6 +81,7 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     private EditText thresholdText;
     private EditText intervalText;
     private EditText descriptionEditText;
+    private PendingIntent pendingIntent;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -295,6 +299,27 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         medicine.setReminder(reminder);
         MedicineDAO medicineDAO = new MedicineDAO(this);
         medicineDAO.save(medicine);
+        addReminder(reminder);
+    }
+
+    private void addReminder(Reminder reminder) {
+        Intent myIntent = new Intent(this , NotificationService.class);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
+
+        Date date=reminder.getStartTime();
+        DateFormat format=new SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT);
+        String time=format.format(date);
+        Calendar calendar1=Calendar.getInstance();
+        calendar1.setTime(date);
+        int hour=calendar1.get(Calendar.HOUR_OF_DAY);
+        int minute=calendar1.get(Calendar.MINUTE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000*60*reminder.getInterval(), pendingIntent);
     }
 
     private void setCurentDateAndTimeToTextView() {
