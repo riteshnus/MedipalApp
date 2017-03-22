@@ -23,4 +23,28 @@
         <item>@string/complete_course</item>
         <item>@string/self_apply</item>
     </string-array>
+
+<string-array name="array_report_option">
+        <item>None</item>
+        <item>"Year"</item>
+        <item>"Month"</item>
+        <item>"Week"</item>
+    </string-array>
+
+    <string-array name="array_categoryfilter_option">
+        <item>"None"</item>
+        <item>"Supplement"</item>
+        <item>"Chronic"</item>
+        <item>"Incidental"</item>
+        <item>"Complete Course"</item>
+        <item>"Self Apply"</item>
+    </string-array>
+
+    <string-array name="array_meaurementtype_option">
+        <item>"None"</item>
+        <item>"Blood Pressure"</item>
+        <item>"Pulse"</item>
+        <item>"Temperature"</item>
+        <item>"Weight"</item>
+    </string-array>
 </resources>

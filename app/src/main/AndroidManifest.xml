@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nus.iss.android.medipal">
 
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -62,6 +65,23 @@
 	    <activity android:name=".Activity.MedicineActivity" />
         <activity android:name=".Activity.AddMedicineActivity" />
 
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".Activity.History"
+            android:label="@string/menuhistory" />
+        <activity
+            android:name=".Activity.HistoryList"
+            android:label="@string/menuhistorylist" />
+        <activity
+            android:name=".Activity.FaqHelp"
+            android:label="@string/faqHelp" />
         <service
             android:name=".services.NotificationService"
             android:enabled="true"

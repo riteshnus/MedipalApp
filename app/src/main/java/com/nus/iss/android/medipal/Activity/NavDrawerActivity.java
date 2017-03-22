@@ -146,14 +146,16 @@ public class NavDrawerActivity extends AppCompatActivity
             Intent iPersonalInfo = new Intent(NavDrawerActivity.this, PersonalInfoActivity.class);
             startActivity(iPersonalInfo);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_addMedicine) {
+            Intent intent = new Intent(NavDrawerActivity.this,AddMedicineActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_history) {
+            Intent intent = new Intent(NavDrawerActivity.this, History.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

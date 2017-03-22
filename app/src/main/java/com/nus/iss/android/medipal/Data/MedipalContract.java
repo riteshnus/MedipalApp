@@ -21,6 +21,8 @@ public class MedipalContract {
         public final static Uri CONTENT_URI_MEDICINE = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.MEDICINE_TABLE_NAME);
         public final static Uri CONTENT_URI_CATEGORY = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.CATEGORIES_TABLE_NAME);
         public final static Uri CONTENT_URI_REMINDER = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.REMINDER_TABLE_NAME);
+        public final static Uri CONTENT_URI_CONSUMPTION = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.CONSUMPTION_TABLE_NAME);
+        public final static Uri CONTENT_URI_MEASUREMENT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.MEASUREMENT_TABLE_NAME);
         public final static Uri CONTENT_URI_APPOINTMENT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.APPOINTMENT_TABLE_NAME);
         /*
         * Table Details for Personal Bio table

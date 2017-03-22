@@ -39,4 +39,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_personal_info">Personal Info</string>
+<string name="menuhistory">History</string>
+    <string name="menuhistorylist">History List</string>
+    <string name="filter">Select Filter</string>
+    <string name="by_year">By Year</string>
+    <string name="filterMedicine">Medicine</string>
+    <string name="filterOther">Format</string>
+    <string name="medicine_consumption_history">Medicine Consumption History</string>
+    <string name="measurement_history">Measurement History</string>
+    <string name="help_screen_faq">Help Screen - FAQ</string>
+    <string name="nameFaq">FAQ</string>
+    <string name="faqHelp">FAQ</string>
+    <string name="textQues1">When the reminder message will be sent to his/her invites?</string>
+    <string name="textQues2">Is the reminder message customizable?</string>
+    <string name="textAns1">ringee™ send reminder messages to invites at 10 AM Indian Standard Time[IST] on a day. This is routine task and will be send every day at 10 AM IST</string>
+    <string name="textAns2">Users are given option to customize event text, but not event place and date and time of the event.</string>
+    <string name="order">" desc"</string>
 </resources>

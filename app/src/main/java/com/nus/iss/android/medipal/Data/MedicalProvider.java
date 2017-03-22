@@ -26,8 +26,12 @@ public class MedicalProvider extends ContentProvider {
     private static final int REMINDER_ID=105;
     private static final int CATEGORY=106;
     private static final int CATEGORY_ID=107;
-    private static final int APPOINTMENT=108;
-    private static final int APPOINTMENT_ID=109;
+	private static final int CONSUMPTION=108;
+    private static final int CONSUMPTION_ID=109;
+    private static final int MEASUREMENT=110;
+    private static final int MEASUREMENT_ID=111;
+	private static final int APPOINTMENT=112;
+    private static final int APPOINTMENT_ID=113;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -41,6 +45,10 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME+"/#",CATEGORY_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME,APPOINTMENT);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME+"/#",APPOINTMENT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME,CONSUMPTION);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -84,9 +92,16 @@ public class MedicalProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+			case MEASUREMENT:
+                cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+			case CONSUMPTION:
+                cursor = sqLiteDatabase.rawQuery(selection, null);
+                break;
             case REMINDER:
                 cursor=sqLiteDatabase.query(PersonalEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+			
             case REMINDER_ID:
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
