@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
+import com.nus.iss.android.medipal.fragment.HealthBioFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -294,13 +295,13 @@ public class PersonalInfoActivity extends AppCompatActivity {
 */
 
         public void findAllViewsById(){
-             etxtName = ((EditText)mRootView.findViewById(R.id.etxtName));
-             etxtAddr = ((EditText)mRootView.findViewById(R.id.etxtAddr));
-             etxtBloodType = ((EditText)mRootView.findViewById(R.id.etxtBloodType));
-             etxtDOB = ((EditText)mRootView.findViewById(R.id.etxtDOB));
-             etxtHeight = ((EditText)mRootView.findViewById(R.id.etxtHeight));
-             etxtIDnum = ((EditText)mRootView.findViewById(R.id.etxtIDnum));
-             etxtPostalCode = ((EditText)mRootView.findViewById(R.id.etxtPostalCode));
+            etxtName = ((EditText)mRootView.findViewById(R.id.etxtName));
+            etxtAddr = ((EditText)mRootView.findViewById(R.id.etxtAddr));
+            etxtBloodType = ((EditText)mRootView.findViewById(R.id.etxtBloodType));
+            etxtDOB = ((EditText)mRootView.findViewById(R.id.etxtDOB));
+            etxtHeight = ((EditText)mRootView.findViewById(R.id.etxtHeight));
+            etxtIDnum = ((EditText)mRootView.findViewById(R.id.etxtIDnum));
+            etxtPostalCode = ((EditText)mRootView.findViewById(R.id.etxtPostalCode));
         }
 
         public void changeInputType(){
@@ -358,6 +359,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
         }
     } // End of PersonalBio Fragment
 
+
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -375,9 +378,11 @@ public class PersonalInfoActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new PersonalBioFragment();
+                case 1:
+                    return new HealthBioFragment();
 
             }
-            return PlaceholderFragment.newInstance(position + 1); // TODO remove this and return 2 fragments for profile and health bio
+            return PlaceholderFragment.newInstance(position + 1); // TODO remove this and return 2 fragments: for profile and health bio
         }
 
         @Override
