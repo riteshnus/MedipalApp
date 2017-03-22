@@ -55,4 +55,5 @@
     <string name="textAns1">ringee™ send reminder messages to invites at 10 AM Indian Standard Time[IST] on a day. This is routine task and will be send every day at 10 AM IST</string>
     <string name="textAns2">Users are given option to customize event text, but not event place and date and time of the event.</string>
     <string name="order">" desc"</string>
+    <string name="MeasurementList">Measurement</string>
 </resources>

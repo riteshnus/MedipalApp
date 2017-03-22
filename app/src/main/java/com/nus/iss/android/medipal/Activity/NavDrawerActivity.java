@@ -149,6 +149,9 @@ public class NavDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_addMedicine) {
             Intent intent = new Intent(NavDrawerActivity.this,AddMedicineActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_measurement) {
+            Intent intent = new Intent(NavDrawerActivity.this,Measurement.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -163,30 +166,4 @@ public class NavDrawerActivity extends AppCompatActivity
         return true;
     }
 
-/*
-    public void myToast(View view) {
-        Toast.makeText(this,"Yayy!",Toast.LENGTH_LONG).show();
-        int tab = 0;
-           switch (view.getId()) {
-               case R.id.ibMorning:
-                   tab = 0;
-               case R.id.ibAfternoon:
-                   tab = 1;
-               case R.id.ibEvening:
-                   tab = 2;
-               case R.id.ibNight:
-                   tab = 3;
-               default:
-                   tab = 0;
-           }
-
-
-
-
-
-        Intent iMainActivity = new Intent(NavDrawerActivity.this,MainActivity.class);
-        iMainActivity.putExtra("tab_index",tab);
-        startActivity(iMainActivity);
-    }
-*/
 }

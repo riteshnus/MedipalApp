@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/iv_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/write"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:hint="Weight"
+            android:inputType="number"
+            android:maxLength="3"/>
+
+        <TextView
+            android:id="@+id/tv_weight"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Kg"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/iv_weightbp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/datetime"/>
+
+        <TextView
+            android:id="@+id/tv_dayweight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:paddingTop="10dp"
+            android:textAppearance="?android:textAppearanceMedium"
+             />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/iv_weightFace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            />
+        <TextView
+            android:id="@+id/ev_weightNote"
+            android:layout_marginTop="21dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:textSize="@dimen/standard_21"
+            android:textStyle="italic"
+            />
+    </LinearLayout>
+
+</LinearLayout>

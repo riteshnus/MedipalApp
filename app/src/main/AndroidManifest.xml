@@ -18,11 +18,11 @@
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".Activity.MainActivity"
@@ -41,11 +41,6 @@
             android:name=".Activity.MainActivityOld"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name=".Activity.EntryClass"
@@ -86,6 +81,35 @@
             android:name=".services.NotificationService"
             android:enabled="true"
             android:exported="true"></service>
+
+        //Thushara
+        <activity
+            android:name=".Activity.bpActivity"
+            android:label="Add Blood Pressure"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".Activity.temperatureActivity"
+            android:label=" Add Temperature"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".Activity.pulseActivity"
+            android:label="Add Pulse"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".Activity.weightActivity"
+            android:label="Add Weight"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity android:name=".Activity.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.Measurement"
+            android:label="@string/MeasurementList"
+            android:theme="@style/AppThemeWithActionBar" />
     </application>
 
 </manifest>

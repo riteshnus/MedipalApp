@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+       >
+        <ImageView
+            android:id="@+id/iv_bp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/write"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/et_sys"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Sys(high)"
+            android:inputType="number"
+            android:maxHeight="3dp"
+            android:maxLength="3"
+            />
+
+        <TextView
+            android:id="@+id/tv_slash"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="/"
+            android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/et_dia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Dia(Low)"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:maxLength="3"
+            />
+        <TextView
+            android:id="@+id/tv_bpunit"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="mmHg"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/iv_datebp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+        app:srcCompat="@drawable/datetime"/>
+
+        <TextView
+            android:id="@+id/tv_daybp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:focusable="false" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+    >
+        <ImageView
+            android:id="@+id/iv_bpnote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/info"
+            />
+
+        <TextView
+            android:id="@+id/tv_infoBp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColorHighlight="@color/colorPrimary"
+            android:hint="Systolic Normal Range : less than 120mmHg\nDiastolic Normal Range : less than 80mmhg"
+            android:lines="5"
+            android:maxLines="5" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:id="@+id/iv_faceBp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/ev_bpnotes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_21"
+            android:textStyle="italic"
+            android:layout_gravity="fill_horizontal"
+            android:textSize="@dimen/standard_21"
+            android:layout_weight="5"
+            />
+
+
+
+</LinearLayout>
+</LinearLayout>

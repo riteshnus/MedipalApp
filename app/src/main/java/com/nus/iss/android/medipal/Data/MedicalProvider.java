@@ -95,6 +95,9 @@ public class MedicalProvider extends ContentProvider {
 			case MEASUREMENT:
                 cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+			case MEASUREMENT_ID:
+                cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
 			case CONSUMPTION:
                 cursor = sqLiteDatabase.rawQuery(selection, null);
                 break;
@@ -141,6 +144,8 @@ public class MedicalProvider extends ContentProvider {
                 return insertTable(uri,values,PersonalEntry.REMINDER_TABLE_NAME);
             case APPOINTMENT:
                 return insertTable(uri,values,PersonalEntry.APPOINTMENT_TABLE_NAME);
+			case MEASUREMENT:
+                return insertTable(uri,values,PersonalEntry.MEASUREMENT_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didn't match with anything");
         }

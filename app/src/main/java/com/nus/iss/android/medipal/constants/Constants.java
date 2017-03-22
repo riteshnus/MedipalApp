@@ -14,5 +14,5 @@ public  class Constants {
     public static final String REMINDER_INTERVAL="reminder_interval";
     public static final String SIMPLE_TIME_FORMAT="hh:mm";
     public static final int ADD_MEDICINE_LOADER=0;
-
+    public static final int ADD_MEASUREMENT_LOADER=0;
 }
