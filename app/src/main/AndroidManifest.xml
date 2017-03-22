@@ -14,7 +14,7 @@
         android:screenOrientation="portrait">
 
         <activity
-            android:name=".Activity.NavDrawerActivity"
+            android:name=".activity.NavDrawerActivity"
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
@@ -25,40 +25,40 @@
             </intent-filter>-->
         </activity>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="Today's Schedule"
-            android:parentActivityName=".Activity.NavDrawerActivity"
+            android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activity.PersonalInfoActivity"
+            android:name=".activity.PersonalInfoActivity"
             android:label="@string/title_activity_personal_info"
-            android:parentActivityName=".Activity.NavDrawerActivity"
+            android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".Activity.MainActivityOld"
+            android:name=".activity.MainActivityOld"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".Activity.EntryClass"
+            android:name=".activity.EntryClass"
             android:label="@string/user_form"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.AppointmentActivity"
+            android:name=".activity.AppointmentActivity"
             android:label="Add Appointment"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".Activity.AppointmentList"
+        <activity android:name=".activity.AppointmentList"
             android:label="Appointments"
             android:theme="@style/AppThemeWithActionBar" />
         <provider
-            android:name=".Data.MedicalProvider"
+            android:name=".data.MedicalProvider"
             android:authorities="com.nus.iss.android.medipal"
             android:exported="false" />
-	    <activity android:name=".Activity.MedicineActivity" />
-        <activity android:name=".Activity.AddMedicineActivity" />
+	    <activity android:name=".activity.MedicineActivity" />
+        <activity android:name=".activity.AddMedicineActivity" />
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -69,13 +69,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Activity.History"
+            android:name=".activity.History"
             android:label="@string/menuhistory" />
         <activity
-            android:name=".Activity.HistoryList"
+            android:name=".activity.HistoryList"
             android:label="@string/menuhistorylist" />
         <activity
-            android:name=".Activity.FaqHelp"
+            android:name=".activity.FaqHelp"
             android:label="@string/faqHelp" />
         <service
             android:name=".services.NotificationService"
@@ -84,22 +84,22 @@
 
         //Thushara
         <activity
-            android:name=".Activity.bpActivity"
+            android:name=".activity.bpActivity"
             android:label="Add Blood Pressure"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.temperatureActivity"
+            android:name=".activity.temperatureActivity"
             android:label=" Add Temperature"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.pulseActivity"
+            android:name=".activity.pulseActivity"
             android:label="Add Pulse"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.weightActivity"
+            android:name=".activity.weightActivity"
             android:label="Add Weight"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".Activity.SplashScreenActivity">
+        <activity android:name=".activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -107,7 +107,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Measurement"
+            android:name=".activity.Measurement"
             android:label="@string/MeasurementList"
             android:theme="@style/AppThemeWithActionBar" />
     </application>

@@ -34,5 +34,5 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
     android:id="@+id/listview"
-    tools:context="com.nus.iss.android.medipal.Activity.MainActivityOld"/>
+    tools:context="com.nus.iss.android.medipal.activity.MainActivityOld"/>
 

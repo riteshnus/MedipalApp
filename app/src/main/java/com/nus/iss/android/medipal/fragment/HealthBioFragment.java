@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.fragments;
+package com.nus.iss.android.medipal.fragment;
 
 import android.app.Fragment;
 import android.content.Context;

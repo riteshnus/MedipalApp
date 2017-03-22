@@ -9,7 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.IBinder;
 
-import com.nus.iss.android.medipal.Activity.AddMedicineActivity;
+import com.nus.iss.android.medipal.activity.AddMedicineActivity;
 import com.nus.iss.android.medipal.R;
 
 public class NotificationService extends Service {

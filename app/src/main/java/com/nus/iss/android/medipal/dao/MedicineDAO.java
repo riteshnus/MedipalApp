@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import com.nus.iss.android.medipal.dto.Medicine;
 
-import static com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
+import static com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 
 /**
  * Created by siddharth on 3/14/2017.
