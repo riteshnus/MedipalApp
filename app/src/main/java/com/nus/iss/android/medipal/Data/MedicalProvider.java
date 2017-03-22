@@ -76,7 +76,7 @@ public class MedicalProvider extends ContentProvider {
                 cursor=sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case MEDICINE_ID:
-                selection = PersonalEntry._ID +"=?";
+                selection = PersonalEntry.MEDICINE_ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
@@ -130,6 +130,7 @@ public class MedicalProvider extends ContentProvider {
             return null;
         }
         getContext().getContentResolver().notifyChange(uri,null,false);
+        sqLiteDatabase.close();
         return ContentUris.withAppendedId(uri,newId);
     }
 
@@ -153,6 +154,13 @@ public class MedicalProvider extends ContentProvider {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
                 break;
+            case REMINDER_ID:
+                selection = PersonalEntry.REMINDER_ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.REMINDER_TABLE_NAME,selection,selectionArgs);
+                if(rowDeleted !=0) {
+                    getContext().getContentResolver().notifyChange(uri,null);
+                }
             default:
                 throw new IllegalArgumentException("Can not delete the row "+ uri);
         }
@@ -169,9 +177,32 @@ public class MedicalProvider extends ContentProvider {
                 selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
+            case MEDICINE_ID:
+                selection=PersonalEntry.MEDICINE_ID + "=?";
+                selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateTable(uri,contentValues,selection,selectionArgs,PersonalEntry.MEDICINE_TABLE_NAME);
+            case REMINDER_ID:
+                selection=PersonalEntry.REMINDER_ID + "=?";
+                selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateTable(uri,contentValues,selection,selectionArgs,PersonalEntry.REMINDER_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for "+uri);
         }
+    }
+
+    private int updateTable(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs, String tableName) {
+
+        if(contentValues.size()==0){
+            return 0;
+        }
+
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);
+        if(rowUpdated !=0){
+            getContext().getContentResolver().notifyChange(uri,null);
+        }
+        sqLiteDatabase.close();
+        return rowUpdated;
     }
 
     private int updateUser(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs,String tableName){

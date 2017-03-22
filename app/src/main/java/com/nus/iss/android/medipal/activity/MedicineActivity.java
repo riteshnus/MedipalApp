@@ -1,11 +1,13 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +18,14 @@ import android.widget.TextView;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.adapter.MedicineAdapter;
 import com.nus.iss.android.medipal.data.MedipalContract;
+import com.nus.iss.android.medipal.dto.Medicine;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.data;
 import static android.os.Build.VERSION_CODES.M;
+import static com.nus.iss.android.medipal.R.string.threshold;
 
 public class MedicineActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -29,8 +33,9 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
     private static final int REMINDER_LOADER=1;
     private static final int CATEGORY_LOADER=2;
     private MedicineAdapter medicineAdpter;
-    private List<Integer> reminderIDList=new ArrayList<Integer>();
-    private TextView reminderTextView;
+    private Integer medicineId=null;
+    private List<Medicine> medicineList=new ArrayList<Medicine>();
+    private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +50,27 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                
+                int medicineId=medicineList.get(position).getMedicineId();
+                Uri medicineUri= ContentUris.withAppendedId(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE,medicineId);
+                Intent newIntent=new Intent(MedicineActivity.this,CurrentMedicineActivity.class);
+                newIntent.setData(medicineUri);
+                startActivity(newIntent);
             }
         });
-        reminderTextView= (TextView) findViewById(R.id.reminder_text);
+
         medicineAdpter=new MedicineAdapter(this,null,0);
         listView.setAdapter(medicineAdpter);
         setTitle("Active Medicine");
+        fab= (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent=new Intent(MedicineActivity.this,AddMedicineActivity.class);
+                startActivity(newIntent);
+            }
+        });
         getLoaderManager().initLoader(MEDICINE_LOADER,null,this);
-        getLoaderManager().initLoader(REMINDER_LOADER,null,this);
-        getLoaderManager().initLoader(CATEGORY_LOADER,null,this);
+
     }
 
     @Override
@@ -64,29 +80,10 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
                String[] projectionForMedicine = {
                        MedipalContract.PersonalEntry.MEDICINE_ID,
                        MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME,
-                       MedipalContract.PersonalEntry.MEDICINE_REMINDERID,
-                       MedipalContract.PersonalEntry.MEDICINE_CATID,
                        MedipalContract.PersonalEntry.MEDICINE_CONSUME_QUANTITY,
                        MedipalContract.PersonalEntry.MEDICINE_QUANTITY};
                return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projectionForMedicine, null, null, null);
-           case REMINDER_LOADER:
-               String[] projectionForReminder = {
-                       MedipalContract.PersonalEntry.REMINDER_ID,
-                       MedipalContract.PersonalEntry.REMINDER_START_TIME};
-               String selection= MedipalContract.PersonalEntry._ID +"in?";
-               List<String> selectionArgsList=new ArrayList<>();
-               for(Integer reminder:reminderIDList){
-                   selectionArgsList.add(String.valueOf(reminder));
-               }
-               String[] selectionArgs= (String[]) selectionArgsList.toArray();
-               return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_REMINDER, projectionForReminder, selection, selectionArgs, null);
-           case CATEGORY_LOADER:
-               String[] projectionForCategory = {
-                       MedipalContract.PersonalEntry.CATEGORIES_ID,
-                       MedipalContract.PersonalEntry.CATEGORIES_CATEGORY_NAME,
-                       MedipalContract.PersonalEntry.CATEGORIES_CODE,
-                       MedipalContract.PersonalEntry.CATEGORIES_REMIND};
-               return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_CATEGORY, projectionForCategory, null, null, null);
+
            default:
                return null;
        }
@@ -94,26 +91,15 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-         switch (loader.getId()){
-             case MEDICINE_LOADER:
-                 while(data.moveToNext()){
-                     int remindrIdColumnIndex=data.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_REMINDERID);
-                     int reminderId=data.getInt(remindrIdColumnIndex);
-                     reminderIDList.add(reminderId);
-                 }
-                getLoaderManager().restartLoader(REMINDER_LOADER,null,this);
+        while (data.moveToNext()){
+            Medicine medicine = new Medicine();
+            int columnIndexForMedicineId=data.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_ID);
+            int id=data.getInt(columnIndexForMedicineId);
+            medicine.setMedicineId(id);
+            medicineList.add(medicine);
+        }
 
-                 medicineAdpter.swapCursor(data);
-                 break;
-             case REMINDER_LOADER:
-                 if(data.moveToFirst()){
-                     int startTimeColumnIndex=data.getColumnIndex(MedipalContract.PersonalEntry.REMINDER_START_TIME);
-                     String startTimeString=data.getString(startTimeColumnIndex);
-                     reminderTextView.setText(startTimeString);
-                 }
-         }
-
-
+        medicineAdpter.swapCursor(data);
     }
 
     @Override
@@ -125,4 +111,6 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 }

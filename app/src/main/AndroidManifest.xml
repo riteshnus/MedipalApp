@@ -34,7 +34,16 @@
         <service
             android:name=".services.NotificationService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.CurrentMedicineActivity"
+            android:parentActivityName=".activity.MedicineActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MedicineActivity" />
+        </activity>
+        <activity android:name=".activity.ReminderActivity"></activity>
     </application>
 
 </manifest>

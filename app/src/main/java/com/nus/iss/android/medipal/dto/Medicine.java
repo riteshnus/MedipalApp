@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class Medicine {
 
+    private int medicineId;
     private String medicine;
     private String description;
     private Categories category;
@@ -20,6 +21,9 @@ public class Medicine {
     private Date dateIssued;
     private int expireFactor;
 
+    public Medicine() {
+    }
+
     public Medicine(String medicine, String description, boolean remind, int quantity,
                     int dosage, int consumeQuantity, int threshold, Date dateIssued, int expireFactor) {
         this.medicine = medicine;
@@ -31,6 +35,14 @@ public class Medicine {
         this.threshold = threshold;
         this.dateIssued = dateIssued;
         this.expireFactor = expireFactor;
+    }
+
+    public int getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(int medicineId) {
+        this.medicineId = medicineId;
     }
 
     public Categories getCategory() {

@@ -12,6 +12,15 @@
     <string name="dosage_mg">mg</string>
     <string name="dosage_drops">drops</string>
     <string name="dosage_pieces">pieces</string>
+    <string name="dosage_puffs">puffs</string>
+    <string name="dosage_units">units</string>
+    <string name="dosage_teaspoon">teaspoon</string>
+    <string name="dosage_tablespoon">tablespoon</string>
+    <string name="dosage_patch">patch</string>
+    <string name="dosage_mcg">mcg</string>
+    <string name="dosage_l">l</string>
+    <string name="dosage_meq">meq</string>
+    <string name="dosage_spray">spray</string>
     <string name="action_save">save</string>
     <string name="threshold">Threshold</string>
     <string name="expiry_factor">Expiry Factor</string>
@@ -24,4 +33,5 @@
     <string name="incidental">INC</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_update">update</string>
 </resources>

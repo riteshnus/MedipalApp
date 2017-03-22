@@ -11,7 +11,10 @@ import android.os.IBinder;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.activity.AddMedicineActivity;
+import com.nus.iss.android.medipal.activity.CurrentMedicineActivity;
 import com.nus.iss.android.medipal.activity.MainActivity;
+import com.nus.iss.android.medipal.activity.ReminderActivity;
+import com.nus.iss.android.medipal.data.MedipalContract;
 
 import static com.nus.iss.android.medipal.R.mipmap.ic_launcher;
 
@@ -24,13 +27,16 @@ public class NotificationService extends Service {
         super.onCreate();
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        NotificationManager mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        Intent intent1 = new Intent(this.getApplicationContext(), AddMedicineActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
+        NotificationManager mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        Intent intent1 = new Intent(this.getApplicationContext(), ReminderActivity.class);
+       // intent1.putExtra("uri" , MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE);
+        intent1.setData(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_CANCEL_CURRENT);
+        // pIntent.send
         Notification mNotify = new Notification.Builder(this)
-                .setContentTitle("Log Steps!")
-                .setContentText("Log your steps for today")
+                .setContentTitle("Time to Take Medicines")
+                .setContentText("Take Paracetamol")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
                 .setSound(sound)
@@ -43,5 +49,10 @@ public class NotificationService extends Service {
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
 }
