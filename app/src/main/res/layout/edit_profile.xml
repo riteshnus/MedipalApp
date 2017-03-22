@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/main_left_drawer_scroll" android:background="#000000" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" >
+        <LinearLayout android:orientation="vertical" android:id="@+id/main_left_drawer_root" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@+id/main_left_drawer_profile" android:background="@drawable/bg_user_profile_2" android:layout_width="fill_parent" android:layout_height="171.0dip" android:layout_margin="0.0dip">
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/main_left_drawer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.0dp"
+                    android:layout_marginRight="16.0dp"
+                    android:text="Guest"
+                    android:maxLines="1"
+                    android:layout_alignParentBottom="true"
+                    style="@style/TextBody" />
+
+                <ImageView android:id="@+id/main_left_drawer_avatar"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="0.0dp"
+                    android:clickable="true"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="16.0dp"
+                    android:layout_marginTop="40.0dp"
+                    android:src="@drawable/user_avatar" />
+
+            </RelativeLayout>
+
+<!--
+            <RelativeLayout android:id="@+id/main_left_drawer_switch_drawers" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="8.0dip">
+                <include android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/mainscreen_left_drawer_buttons" />
+                <include android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/mainscreen_left_drawer_users" />
+            </RelativeLayout>
+         -->
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

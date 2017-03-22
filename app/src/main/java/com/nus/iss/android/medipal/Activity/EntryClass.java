@@ -45,7 +45,7 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
             setTitle("Add a User");
         } else {
             setTitle("Edit User");
-            getLoaderManager().initLoader(MainActivity.USER_LOADER, null, this);
+            getLoaderManager().initLoader(MainActivityOld.USER_LOADER, null, this);
         }
 
         Button clickMe = (Button) findViewById(R.id.clickButton);
