@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.DatePickerDialog;
 import android.app.LoaderManager;
@@ -26,7 +26,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.nus.iss.android.medipal.Data.MedipalContract;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.dto.Appointment;
 

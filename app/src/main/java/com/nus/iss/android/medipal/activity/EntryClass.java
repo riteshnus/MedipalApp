@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -16,10 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.nus.iss.android.medipal.Data.MedipalContract;
-import com.nus.iss.android.medipal.Data.MedipalDBHelper;
+import com.nus.iss.android.medipal.data.MedipalContract;
+import com.nus.iss.android.medipal.data.MedipalDBHelper;
 import com.nus.iss.android.medipal.R;
-import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
+import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 /**
  * Created by Ritesh on 3/9/2017.
  */

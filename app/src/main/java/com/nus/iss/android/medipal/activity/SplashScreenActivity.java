@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,9 +23,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.nus.iss.android.medipal.R;
-import com.nus.iss.android.medipal.Adapter.HistoryConsumptionAdapter;
-import com.nus.iss.android.medipal.Adapter.HistoryMeasurementAdapter;
-import com.nus.iss.android.medipal.Data.MedipalContract;
+import com.nus.iss.android.medipal.adapter.HistoryConsumptionAdapter;
+import com.nus.iss.android.medipal.adapter.HistoryMeasurementAdapter;
+import com.nus.iss.android.medipal.data.MedipalContract;
 
 import java.util.ArrayList;
 import java.util.List;

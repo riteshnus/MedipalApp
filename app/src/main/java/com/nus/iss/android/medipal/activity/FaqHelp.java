@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

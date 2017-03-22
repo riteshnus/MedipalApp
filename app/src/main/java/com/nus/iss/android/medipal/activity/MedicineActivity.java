@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -11,8 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.nus.iss.android.medipal.Adapter.MedicineAdapter;
-import com.nus.iss.android.medipal.Data.MedipalContract;
+import com.nus.iss.android.medipal.adapter.MedicineAdapter;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.R;
 
 import java.util.ArrayList;

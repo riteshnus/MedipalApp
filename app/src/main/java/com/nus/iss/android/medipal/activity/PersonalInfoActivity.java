@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 /**
  * Created by Shubhanshu Gautam on 14/03/17.

@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -28,7 +28,7 @@ import android.widget.TimePicker;
 
 //import com.google.android.gms.appindexing.AppIndex;
 //import com.google.android.gms.common.api.GoogleApiClient;
-import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
+import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.dao.MedicineDAO;

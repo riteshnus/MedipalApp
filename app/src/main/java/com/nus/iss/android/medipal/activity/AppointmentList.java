@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
-import com.nus.iss.android.medipal.Data.MedipalContract;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.R;
 
 /**

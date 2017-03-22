@@ -1,4 +1,4 @@
-package com.nus.iss.android.medipal.Activity;
+package com.nus.iss.android.medipal.activity;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
@@ -20,8 +20,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.nus.iss.android.medipal.Adapter.UserAdapter;
-import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
+import com.nus.iss.android.medipal.adapter.UserAdapter;
+import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 import com.nus.iss.android.medipal.R;
 
 public class MainActivityOld extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,NavigationView.OnNavigationItemSelectedListener {
