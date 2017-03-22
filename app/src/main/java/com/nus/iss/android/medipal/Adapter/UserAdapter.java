@@ -9,7 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
-import com.nus.iss.android.medipal.Data.MedipalContract.personalEntry;
+import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
 /**
  * Created by Ritesh on 3/9/2017.
  */
@@ -30,8 +30,8 @@ public class UserAdapter extends CursorAdapter{
         TextView tvName = (TextView) view.findViewById(R.id.tvName);
         TextView tvAddress = (TextView) view.findViewById(R.id.tvAddress);
 
-        String name = cursor.getString(cursor.getColumnIndex(personalEntry.USER_NAME));
-        String address = cursor.getString(cursor.getColumnIndex(personalEntry.USER_ADDRESS));
+        String name = cursor.getString(cursor.getColumnIndex(PersonalEntry.USER_NAME));
+        String address = cursor.getString(cursor.getColumnIndex(PersonalEntry.USER_ADDRESS));
         tvName.setText(name);
         tvAddress.setText(address);
     }

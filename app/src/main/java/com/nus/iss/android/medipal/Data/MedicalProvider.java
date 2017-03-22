@@ -39,8 +39,8 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.REMINDER_TABLE_NAME+"/#",REMINDER_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME,CATEGORY);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME+"/#",CATEGORY_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME,APPOINTMENT);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME+"/#",APPOINTMENT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME,APPOINTMENT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME+"/#",APPOINTMENT_ID);
     }
 
     private MedipalDBHelper dbHelper;

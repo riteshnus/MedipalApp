@@ -38,5 +38,9 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
+    <style name="TextBody" parent="@android:style/TextAppearance">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:lineSpacingExtra">6.5sp</item>
+    </style>
 
 </resources>

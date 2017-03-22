@@ -6,4 +6,21 @@
         <item>@string/doctor</item>
         <item>@string/clinic</item>
     </string-array>
+    <string-array name="array_dosage_option">
+        <item>@string/dosage_pills</item>
+        <item>@string/dosage_cc</item>
+        <item>@string/dosage_ml</item>
+        <item>@string/dosage_gr</item>
+        <item>@string/dosage_mg</item>
+        <item>@string/dosage_drops</item>
+        <item>@string/dosage_pieces</item>
+    </string-array>
+
+    <string-array name="array_category_option">
+        <item>@string/supplement</item>
+        <item>@string/chronic</item>
+        <item>@string/incidental</item>
+        <item>@string/complete_course</item>
+        <item>@string/self_apply</item>
+    </string-array>
 </resources>

@@ -9,6 +9,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,10 +24,15 @@ import com.nus.iss.android.medipal.Adapter.UserAdapter;
 import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
 import com.nus.iss.android.medipal.R;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,NavigationView.OnNavigationItemSelectedListener {
 
     public static final int USER_LOADER = 0;
     public UserAdapter userCursorAdapter;
+    private FloatingActionButton fab1;
+    private FloatingActionButton fabAppt;
+    private FloatingActionButton fab2;
+    private FloatingActionButton fab3;
+    private boolean isFABOpen=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +45,52 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
        /* View emptyView = findViewById(R.id.empty_view);
         setTextView.setEmptyView(emptyView);*/
 
-        userCursorAdapter = new UserAdapter(this,null);
+        userCursorAdapter = new UserAdapter(this, null);
         setTextView.setAdapter(userCursorAdapter);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         setTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this,EntryClass.class);
-                Uri currentPetUri = ContentUris.withAppendedId(PersonalEntry.CONTENT_URI_PERSONAL,id);
+                Intent intent = new Intent(MainActivity.this, EntryClass.class);
+                Uri currentPetUri = ContentUris.withAppendedId(PersonalEntry.CONTENT_URI_PERSONAL, id);
                 intent.setData(currentPetUri);
                 startActivity(intent);
             }
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) findViewById(R.id.fab1);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-                Intent intent = new Intent(MainActivity.this,EntryClass.class);
+                if (!isFABOpen) {
+                    showFABMenu();
+                } else {
+                    closeFABMenu();
+                }
+
+            }
+        });
+		
+		fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddMedicineActivity.class);
                 startActivity(intent);
             }
         });
 
-        FloatingActionButton fabAppt = (FloatingActionButton) findViewById(R.id.fabApp);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabAppt = (FloatingActionButton) findViewById(R.id.fabApp);
+        fabAppt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,AppointmentList.class);
@@ -72,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
 
-        getLoaderManager().initLoader(USER_LOADER, null, this);
+        //getLoaderManager().initLoader(USER_LOADER, null, this);
     }
 
     @Override
@@ -104,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 PersonalEntry.USER_NAME,
                 PersonalEntry.USER_ADDRESS,
         } ;
-        return new CursorLoader(this,PersonalEntry.CONTENT_URI_PERSONAL,projection,null,null,null);
+        return new CursorLoader(this, PersonalEntry.CONTENT_URI_PERSONAL,projection,null,null,null);
     }
 
     @Override
@@ -115,5 +143,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         userCursorAdapter.swapCursor(null);
+    }
+    private void showFABMenu(){
+        isFABOpen=true;
+        fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        /*fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+        fab3.animate().translationY(-getResources().getDimension(R.dimen.standard_155));*/
+    }
+    private void closeFABMenu(){
+        isFABOpen=false;
+        fab1.animate().translationY(0);
+        /*fab2.animate().translationY(0);
+        fab3.animate().translationY(0);*/
+    }
+
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.nav_medicine_list){
+            Intent newIntent= new Intent(MainActivity.this, MedicineActivity.class);
+            startActivity(newIntent);
+        }
+        return false;
     }
 }
