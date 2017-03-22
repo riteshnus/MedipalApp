@@ -28,7 +28,7 @@ import android.widget.TimePicker;
 
 //import com.google.android.gms.appindexing.AppIndex;
 //import com.google.android.gms.common.api.GoogleApiClient;
-import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.dao.MedicineDAO;
@@ -346,19 +346,19 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                PersonalEntry.CATEGORIES_ID,
-                PersonalEntry.CATEGORIES_CATEGORY_NAME,
-                PersonalEntry.CATEGORIES_CODE,
-                PersonalEntry.CATEGORIES_REMIND};
-        return new CursorLoader(this, PersonalEntry.CONTENT_URI_CATEGORY, projection, null, null, null);
+                MedipalContract.CategoriesEntry.CATEGORIES_ID,
+                MedipalContract.CategoriesEntry.CATEGORIES_CATEGORY_NAME,
+                MedipalContract.CategoriesEntry.CATEGORIES_CODE,
+                MedipalContract.CategoriesEntry.CATEGORIES_REMIND};
+        return new CursorLoader(this, MedipalContract.CategoriesEntry.CONTENT_URI_CATEGORY, projection, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        int categoryNameIndex=cursor.getColumnIndex(PersonalEntry.CATEGORIES_CATEGORY_NAME);
-        int categoryCodeIndex=cursor.getColumnIndex(PersonalEntry.CATEGORIES_CODE);
-        int categoryRemindIndex=cursor.getColumnIndex(PersonalEntry.CATEGORIES_REMIND);
-        int categoryIdIndex=cursor.getColumnIndex(PersonalEntry.CATEGORIES_ID);
+        int categoryNameIndex=cursor.getColumnIndex(MedipalContract.CategoriesEntry.CATEGORIES_CATEGORY_NAME);
+        int categoryCodeIndex=cursor.getColumnIndex(MedipalContract.CategoriesEntry.CATEGORIES_CODE);
+        int categoryRemindIndex=cursor.getColumnIndex(MedipalContract.CategoriesEntry.CATEGORIES_REMIND);
+        int categoryIdIndex=cursor.getColumnIndex(MedipalContract.CategoriesEntry.CATEGORIES_ID);
         while (cursor.moveToNext()) {
            String categoryName=cursor.getString(categoryNameIndex);
             String categoryCode=cursor.getString(categoryCodeIndex);

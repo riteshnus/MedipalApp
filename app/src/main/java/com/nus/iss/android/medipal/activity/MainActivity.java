@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.nus.iss.android.medipal.R;
 
 public class MainActivity extends AppCompatActivity {
-
+    //Todo: Rename as TodayScheduleActivity
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 

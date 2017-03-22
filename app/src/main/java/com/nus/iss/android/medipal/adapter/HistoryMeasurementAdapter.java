@@ -44,34 +44,34 @@ public class HistoryMeasurementAdapter extends CursorAdapter
         Date dateMeasurement;
         Long timeMeasurement;
 
-        if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_DIASTOLIC) != -1)
+        if(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_DIASTOLIC) != -1)
         {
-            bpDiastolic = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_DIASTOLIC));
+            bpDiastolic = cursor.getString(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_DIASTOLIC));
         }
 
-        if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_SYSTOLIC) != -1)
+        if(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_SYSTOLIC) != -1)
         {
-            bpSystolic = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_SYSTOLIC));
+            bpSystolic = cursor.getString(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_SYSTOLIC));
         }
 
-        if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_PULSE) != -1)
+        if(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_PULSE) != -1)
         {
-            pulse = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_PULSE));
+            pulse = cursor.getString(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_PULSE));
         }
 
-        if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_TEMPERATURE) != -1)
+        if(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_TEMPERATURE) != -1)
         {
-            temp = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_TEMPERATURE));
+            temp = cursor.getString(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_TEMPERATURE));
         }
 
-        if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_WEIGHT) != -1)
+        if(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_WEIGHT) != -1)
         {
-            weight = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_WEIGHT));
+            weight = cursor.getString(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_WEIGHT));
         }
 
-        if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_MEASURED_ON) != -1)
+        if(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_MEASURED_ON) != -1)
         {
-            date = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_MEASURED_ON));
+            date = cursor.getString(cursor.getColumnIndex(MedipalContract.MeasurementEntry.MEASUREMENT_MEASURED_ON));
             try
             {
                 dateMeasurement = Utils.converStringToDate(date);

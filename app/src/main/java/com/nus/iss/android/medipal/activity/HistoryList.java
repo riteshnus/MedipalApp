@@ -244,17 +244,17 @@ public class HistoryList extends AppCompatActivity {
     //Method to populate data in medicine filter spinner
     public List<String> getAllMedicine()
     {
-        String[] projection = new String[]{MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME};
+        String[] projection = new String[]{MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME};
         List<String> list = new ArrayList<>();
         list.add("None");
         list.add("   ");
         list.add("   ");
-        Cursor cursor = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projection, null, null, null);
+        Cursor cursor = this.getContentResolver().query(MedipalContract.MedicineEntry.CONTENT_URI_MEDICINE, projection, null, null, null);
         if (cursor != null && cursor.moveToFirst())
         {
             do
             {
-                list.add(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME)));//adding 2nd column data
+                list.add(cursor.getString(cursor.getColumnIndex(MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME)));//adding 2nd column data
                 list.add("   ");
                 list.add("   ");
             } while (cursor.moveToNext());
@@ -298,17 +298,17 @@ public class HistoryList extends AppCompatActivity {
     //Method to get consumption list
     public void getConsumptionList(String category, String medicine)
     {
-        String consumptionTable = MedipalContract.PersonalEntry.CONSUMPTION_TABLE_NAME;
-        String medicineTable = MedipalContract.PersonalEntry.MEDICINE_TABLE_NAME;
-        String medicineId = MedipalContract.PersonalEntry.MEDICINE_ID;
-        String medicineNameCol = MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME;
-        String consumptionMedId = MedipalContract.PersonalEntry.CONSUMPTION_MEDICINE_ID;
-        String quantityCol = MedipalContract.PersonalEntry.CONSUMPTION_QUANTITY;
-        String consumedOnCol = MedipalContract.PersonalEntry.CONSUMPTION_CONSUMED_ON;
+        String consumptionTable = MedipalContract.ConsumptionEntry.CONSUMPTION_TABLE_NAME;
+        String medicineTable = MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME;
+        String medicineId = MedipalContract.MedicineEntry.MEDICINE_ID;
+        String medicineNameCol = MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME;
+        String consumptionMedId = MedipalContract.ConsumptionEntry.CONSUMPTION_MEDICINE_ID;
+        String quantityCol = MedipalContract.ConsumptionEntry.CONSUMPTION_QUANTITY;
+        String consumedOnCol = MedipalContract.ConsumptionEntry.CONSUMPTION_CONSUMED_ON;
 
         String rawQuery = "SELECT DISTINCT " + consumptionTable + "." + quantityCol + ", * FROM " + consumptionTable + ", " + medicineTable + " WHERE " + consumptionTable + "." + consumptionMedId + " = " + medicineTable + "." + medicineId;
         if (category != null && !category.isEmpty()) {
-            rawQuery = rawQuery + " AND " + medicineTable + "." + MedipalContract.PersonalEntry.MEDICINE_CATID + " = " + "\"" + category + "\"";
+            rawQuery = rawQuery + " AND " + medicineTable + "." + MedipalContract.MedicineEntry.MEDICINE_CATID + " = " + "\"" + category + "\"";
         }
 
         if (medicine != null && !medicine.isEmpty()) {
@@ -324,7 +324,7 @@ public class HistoryList extends AppCompatActivity {
         rawQuery = rawQuery + " ORDER BY " + consumptionTable + "." + consumedOnCol + getString(R.string.order);
 //        }
 
-        Cursor resultConsumption = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_CONSUMPTION, null, rawQuery, null, null);
+        Cursor resultConsumption = this.getContentResolver().query(MedipalContract.ConsumptionEntry.CONTENT_URI_CONSUMPTION, null, rawQuery, null, null);
 
         if ((resultConsumption != null ? resultConsumption.getCount() : 0) == 0) {
             TextView tvERROR = (TextView) findViewById(R.id.tvError);
@@ -368,8 +368,8 @@ public class HistoryList extends AppCompatActivity {
             }
         }
 
-        String sortBy = MedipalContract.PersonalEntry.MEASUREMENT_MEASURED_ON + getString(R.string.order);
-        Cursor resultMeasurement = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_MEASUREMENT, null, whereClause, null, sortBy);
+        String sortBy = MedipalContract.MeasurementEntry.MEASUREMENT_MEASURED_ON + getString(R.string.order);
+        Cursor resultMeasurement = this.getContentResolver().query(MedipalContract.MeasurementEntry.CONTENT_URI_MEASUREMENT, null, whereClause, null, sortBy);
         if ((resultMeasurement != null ? resultMeasurement.getCount() : 0) == 0) {
             TextView tvERROR = (TextView) findViewById(R.id.tvError);
             tvERROR.setText("No record found!!");

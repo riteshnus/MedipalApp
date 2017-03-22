@@ -21,10 +21,10 @@ public class ReminderDAO {
 
     public Reminder save(Reminder reminder){
         ContentValues values=new ContentValues();
-        values.put(MedipalContract.PersonalEntry.REMINDER_FREQUENCY,reminder.getFrequency());
-        values.put(MedipalContract.PersonalEntry.REMINDER_INTERVAL,reminder.getInterval());
-        values.put(MedipalContract.PersonalEntry.REMINDER_START_TIME, String.valueOf(reminder.getStartTime()));
-        Uri newUri=activity.getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI_REMINDER,values);
+        values.put(MedipalContract.ReminderEntry.REMINDER_FREQUENCY,reminder.getFrequency());
+        values.put(MedipalContract.ReminderEntry.REMINDER_INTERVAL,reminder.getInterval());
+        values.put(MedipalContract.ReminderEntry.REMINDER_START_TIME, String.valueOf(reminder.getStartTime()));
+        Uri newUri=activity.getContentResolver().insert(MedipalContract.ReminderEntry.CONTENT_URI_REMINDER,values);
         int id= (int) ContentUris.parseId(newUri);
         reminder.setReminderId(id);
         return reminder;

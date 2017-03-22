@@ -29,7 +29,7 @@ public class MedicineAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView nameTextView= (TextView) view.findViewById(R.id.medicine_name);
-        int columnIndexForName=cursor.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME);
+        int columnIndexForName=cursor.getColumnIndex(MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME);
         String nameText=cursor.getString(columnIndexForName);
         nameTextView.setText(nameText);
 

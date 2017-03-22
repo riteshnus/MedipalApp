@@ -57,31 +57,31 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
        switch (id){
            case MEDICINE_LOADER:
                String[] projectionForMedicine = {
-                       MedipalContract.PersonalEntry.MEDICINE_ID,
-                       MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME,
-                       MedipalContract.PersonalEntry.MEDICINE_REMINDERID,
-                       MedipalContract.PersonalEntry.MEDICINE_CATID,
-                       MedipalContract.PersonalEntry.MEDICINE_CONSUME_QUANTITY,
-                       MedipalContract.PersonalEntry.MEDICINE_QUANTITY};
-               return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projectionForMedicine, null, null, null);
+                       MedipalContract.MedicineEntry.MEDICINE_ID,
+                       MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME,
+                       MedipalContract.MedicineEntry.MEDICINE_REMINDERID,
+                       MedipalContract.MedicineEntry.MEDICINE_CATID,
+                       MedipalContract.MedicineEntry.MEDICINE_CONSUME_QUANTITY,
+                       MedipalContract.MedicineEntry.MEDICINE_QUANTITY};
+               return new CursorLoader(this, MedipalContract.MedicineEntry.CONTENT_URI_MEDICINE, projectionForMedicine, null, null, null);
            case REMINDER_LOADER:
                String[] projectionForReminder = {
-                       MedipalContract.PersonalEntry.REMINDER_ID,
-                       MedipalContract.PersonalEntry.REMINDER_START_TIME};
+                       MedipalContract.ReminderEntry.REMINDER_ID,
+                       MedipalContract.ReminderEntry.REMINDER_START_TIME};
                String selection= MedipalContract.PersonalEntry._ID +"in?";
                List<String> selectionArgsList=new ArrayList<>();
                for(Integer reminder:reminderIDList){
                    selectionArgsList.add(String.valueOf(reminder));
                }
                String[] selectionArgs= (String[]) selectionArgsList.toArray();
-               return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_REMINDER, projectionForReminder, selection, selectionArgs, null);
+               return new CursorLoader(this, MedipalContract.ReminderEntry.CONTENT_URI_REMINDER, projectionForReminder, selection, selectionArgs, null);
            case CATEGORY_LOADER:
                String[] projectionForCategory = {
-                       MedipalContract.PersonalEntry.CATEGORIES_ID,
-                       MedipalContract.PersonalEntry.CATEGORIES_CATEGORY_NAME,
-                       MedipalContract.PersonalEntry.CATEGORIES_CODE,
-                       MedipalContract.PersonalEntry.CATEGORIES_REMIND};
-               return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_CATEGORY, projectionForCategory, null, null, null);
+                       MedipalContract.CategoriesEntry.CATEGORIES_ID,
+                       MedipalContract.CategoriesEntry.CATEGORIES_CATEGORY_NAME,
+                       MedipalContract.CategoriesEntry.CATEGORIES_CODE,
+                       MedipalContract.CategoriesEntry.CATEGORIES_REMIND};
+               return new CursorLoader(this, MedipalContract.CategoriesEntry.CONTENT_URI_CATEGORY, projectionForCategory, null, null, null);
            default:
                return null;
        }
@@ -92,7 +92,7 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
          switch (loader.getId()){
              case MEDICINE_LOADER:
                  while(data.moveToNext()){
-                     int remindrIdColumnIndex=data.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_REMINDERID);
+                     int remindrIdColumnIndex=data.getColumnIndex(MedipalContract.MedicineEntry.MEDICINE_REMINDERID);
                      int reminderId=data.getInt(remindrIdColumnIndex);
                      reminderIDList.add(reminderId);
                  }
@@ -102,7 +102,7 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
                  break;
              case REMINDER_LOADER:
                  if(data.moveToFirst()){
-                     int startTimeColumnIndex=data.getColumnIndex(MedipalContract.PersonalEntry.REMINDER_START_TIME);
+                     int startTimeColumnIndex=data.getColumnIndex(MedipalContract.ReminderEntry.REMINDER_START_TIME);
                      String startTimeString=data.getString(startTimeColumnIndex);
                      reminderTextView.setText(startTimeString);
                  }

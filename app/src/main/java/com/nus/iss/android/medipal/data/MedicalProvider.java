@@ -37,18 +37,18 @@ public class MedicalProvider extends ContentProvider {
     static {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.USER_TABLE_NAME,MEMBER);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.USER_TABLE_NAME+"/#",MEMBER_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEDICINE_TABLE_NAME,MEDICINE);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEDICINE_TABLE_NAME+"/#",MEDICINE_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.REMINDER_TABLE_NAME,REMINDER);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.REMINDER_TABLE_NAME+"/#",REMINDER_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME,CATEGORY);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME+"/#",CATEGORY_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME,APPOINTMENT);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME+"/#",APPOINTMENT_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME,CONSUMPTION);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME,MEDICINE);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME+"/#",MEDICINE_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ReminderEntry.REMINDER_TABLE_NAME,REMINDER);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ReminderEntry.REMINDER_TABLE_NAME+"/#",REMINDER_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME,CATEGORY);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME+"/#",CATEGORY_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME,APPOINTMENT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME+"/#",APPOINTMENT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ConsumptionEntry.CONSUMPTION_TABLE_NAME,CONSUMPTION);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ConsumptionEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -77,46 +77,46 @@ public class MedicalProvider extends ContentProvider {
                 cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case CATEGORY:
-                cursor=sqLiteDatabase.query(PersonalEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor=sqLiteDatabase.query(MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case CATEGORY_ID:
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = sqLiteDatabase.query(PersonalEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = sqLiteDatabase.query(MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case MEDICINE:
-                cursor=sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor=sqLiteDatabase.query(MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case MEDICINE_ID:
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = sqLiteDatabase.query(PersonalEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = sqLiteDatabase.query(MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
 			case MEASUREMENT:
-                cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor=sqLiteDatabase.query(MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
 			case MEASUREMENT_ID:
-                cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor=sqLiteDatabase.query(MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
 			case CONSUMPTION:
                 cursor = sqLiteDatabase.rawQuery(selection, null);
                 break;
             case REMINDER:
-                cursor=sqLiteDatabase.query(PersonalEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor=sqLiteDatabase.query(MedipalContract.ReminderEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
 			
             case REMINDER_ID:
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = sqLiteDatabase.query(PersonalEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = sqLiteDatabase.query(MedipalContract.ReminderEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case APPOINTMENT:
-                cursor=sqLiteDatabase.query(PersonalEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor=sqLiteDatabase.query(MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case APPOINTMENT_ID:
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = sqLiteDatabase.query(PersonalEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = sqLiteDatabase.query(MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
@@ -139,13 +139,13 @@ public class MedicalProvider extends ContentProvider {
             case MEMBER:
                 return insertTable(uri,values,PersonalEntry.USER_TABLE_NAME);
             case MEDICINE:
-                return insertTable(uri,values,PersonalEntry.MEDICINE_TABLE_NAME);
+                return insertTable(uri,values, MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME);
             case REMINDER:
-                return insertTable(uri,values,PersonalEntry.REMINDER_TABLE_NAME);
+                return insertTable(uri,values, MedipalContract.ReminderEntry.REMINDER_TABLE_NAME);
             case APPOINTMENT:
-                return insertTable(uri,values,PersonalEntry.APPOINTMENT_TABLE_NAME);
+                return insertTable(uri,values, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME);
 			case MEASUREMENT:
-                return insertTable(uri,values,PersonalEntry.MEASUREMENT_TABLE_NAME);
+                return insertTable(uri,values, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didn't match with anything");
         }
@@ -183,7 +183,7 @@ public class MedicalProvider extends ContentProvider {
                 }
                 break;
             case APPOINTMENT:
-                rowDeleted = sqLiteDatabase.delete(PersonalEntry.APPOINTMENT_TABLE_NAME,selection,selectionArgs);
+                rowDeleted = sqLiteDatabase.delete(MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME,selection,selectionArgs);
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
@@ -191,7 +191,7 @@ public class MedicalProvider extends ContentProvider {
             case APPOINTMENT_ID:
                 selection = MedipalContract.PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowDeleted = sqLiteDatabase.delete(PersonalEntry.APPOINTMENT_TABLE_NAME,selection,selectionArgs);
+                rowDeleted = sqLiteDatabase.delete(MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME,selection,selectionArgs);
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
@@ -213,11 +213,11 @@ public class MedicalProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
             case APPOINTMENT:
-                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.APPOINTMENT_TABLE_NAME);
+                return updateUser(uri,contentValues,selection,selectionArgs, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME);
             case APPOINTMENT_ID:
                 selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.APPOINTMENT_TABLE_NAME);
+                return updateUser(uri,contentValues,selection,selectionArgs, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for "+uri);
         }

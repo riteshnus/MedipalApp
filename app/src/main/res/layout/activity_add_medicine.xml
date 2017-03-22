@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:hint="Symptoms/Medical Diagnosis, for which medicine is prescibed"/>
+        android:hint="Symptoms/Medical-Diagnosis"/>
     <LinearLayout
         android:id="@+id/container_category"
         android:layout_width="match_parent"

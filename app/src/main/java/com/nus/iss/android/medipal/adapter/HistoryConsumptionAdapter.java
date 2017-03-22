@@ -53,9 +53,9 @@ public class HistoryConsumptionAdapter extends CursorAdapter
         String time;
 
 
-        String nameMedHistory = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME));
+        String nameMedHistory = cursor.getString(cursor.getColumnIndex(MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME));
         String dosageHistory = cursor.getString(cursor.getInt(0));
-        String date = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.CONSUMPTION_CONSUMED_ON));
+        String date = cursor.getString(cursor.getColumnIndex(MedipalContract.ConsumptionEntry.CONSUMPTION_CONSUMED_ON));
 
         try
         {

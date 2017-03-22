@@ -223,18 +223,18 @@ public class AppointmentActivity extends AppCompatActivity implements CompoundBu
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projectionForAppointment = {
                 MedipalContract.PersonalEntry._ID,
-                MedipalContract.PersonalEntry.APPOINTMENT_LOCATION,
-                MedipalContract.PersonalEntry.APPOINTMENT_DATE_TIME,
-                MedipalContract.PersonalEntry.APPOINTMENT_DESCRIPTION,
+                MedipalContract.AppointmentEntry.APPOINTMENT_LOCATION,
+                MedipalContract.AppointmentEntry.APPOINTMENT_DATE_TIME,
+                MedipalContract.AppointmentEntry.APPOINTMENT_DESCRIPTION,
         } ;
-        return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT,projectionForAppointment,null,null,null);
+        return new CursorLoader(this, MedipalContract.AppointmentEntry.CONTENT_URI_APPOINTMENT,projectionForAppointment,null,null,null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor.moveToFirst()) {
-            String apptLocation = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.APPOINTMENT_LOCATION));
-            String apptDescription = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.APPOINTMENT_DESCRIPTION));
+            String apptLocation = cursor.getString(cursor.getColumnIndex(MedipalContract.AppointmentEntry.APPOINTMENT_LOCATION));
+            String apptDescription = cursor.getString(cursor.getColumnIndex(MedipalContract.AppointmentEntry.APPOINTMENT_DESCRIPTION));
             mApptTittleEditText.setText(apptDescription);
             switch (apptLocation) {
                 case "Doctor":

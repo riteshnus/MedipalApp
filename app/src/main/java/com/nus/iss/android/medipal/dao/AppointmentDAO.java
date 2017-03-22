@@ -20,10 +20,10 @@ public class AppointmentDAO {
 
     public void save(Appointment appointment){
         ContentValues values=new ContentValues();
-        values.put(MedipalContract.PersonalEntry.APPOINTMENT_LOCATION,appointment.getLocation());
-        values.put(MedipalContract.PersonalEntry.APPOINTMENT_DATE_TIME,String.valueOf(appointment.getAppontmentTime()));
-        values.put(MedipalContract.PersonalEntry.APPOINTMENT_DESCRIPTION,appointment.getDescription());
-        Uri newUri=activity.getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT,values);
-        activity.getContentResolver().notifyChange(MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT,null,false);
+        values.put(MedipalContract.AppointmentEntry.APPOINTMENT_LOCATION,appointment.getLocation());
+        values.put(MedipalContract.AppointmentEntry.APPOINTMENT_DATE_TIME,String.valueOf(appointment.getAppontmentTime()));
+        values.put(MedipalContract.AppointmentEntry.APPOINTMENT_DESCRIPTION,appointment.getDescription());
+        Uri newUri=activity.getContentResolver().insert(MedipalContract.AppointmentEntry.CONTENT_URI_APPOINTMENT,values);
+        activity.getContentResolver().notifyChange(MedipalContract.AppointmentEntry.CONTENT_URI_APPOINTMENT,null,false);
     }
 }

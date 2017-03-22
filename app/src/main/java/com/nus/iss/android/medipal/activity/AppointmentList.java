@@ -46,12 +46,12 @@ public class AppointmentList extends AppCompatActivity implements LoaderManager.
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projectionForAppointment = {
-                MedipalContract.PersonalEntry._ID,
-                MedipalContract.PersonalEntry.APPOINTMENT_LOCATION,
-                MedipalContract.PersonalEntry.APPOINTMENT_DATE_TIME,
-                MedipalContract.PersonalEntry.APPOINTMENT_DESCRIPTION,
+                MedipalContract.AppointmentEntry._ID,
+                MedipalContract.AppointmentEntry.APPOINTMENT_LOCATION,
+                MedipalContract.AppointmentEntry.APPOINTMENT_DATE_TIME,
+                MedipalContract.AppointmentEntry.APPOINTMENT_DESCRIPTION,
         } ;
-        return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT,projectionForAppointment,null,null,null);
+        return new CursorLoader(this, MedipalContract.AppointmentEntry.CONTENT_URI_APPOINTMENT,projectionForAppointment,null,null,null);
     }
 
     @Override

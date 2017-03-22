@@ -21,80 +21,80 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
             + PersonalEntry.USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PersonalEntry.USER_NAME + " TEXT NOT NULL, "
             + PersonalEntry.USER_DOB + " DATE, "
-            +PersonalEntry.USER_ID_NO + " TEXT, "
-            +PersonalEntry.USER_POSTAL_CODE + " TEXT, "
-            +PersonalEntry.USER_HEIGHT + " INTEGER, "
-            +PersonalEntry.USER_BLOOD_TYPE  + " TEXT );";
+            + PersonalEntry.USER_ID_NO + " TEXT, "
+            + PersonalEntry.USER_POSTAL_CODE + " TEXT, "
+            + PersonalEntry.USER_HEIGHT + " INTEGER, "
+            + PersonalEntry.USER_BLOOD_TYPE  + " TEXT );";
 
-    //Ceate Table for Health Bio
-    public static final  String SQL_CREATE_HEATH_BIO_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.HEALTH_BIO_TABLE_NAME + " ("
-            + PersonalEntry.HEALTH_BIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.HEALTH_CONDITION + " TEXT, "
-            + PersonalEntry.HEALTH_START_DATE + " DATE, "
-            +PersonalEntry.HEALTH_CONDITION_TYPE  + " TEXT );";
+    //Create Table for Health Bio
+    public static final  String SQL_CREATE_HEATH_BIO_DATA_TABLE =  "CREATE TABLE " + MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME + " ("
+            + MedipalContract.HealthBioEntry.HEALTH_BIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.HealthBioEntry.HEALTH_CONDITION + " TEXT, "
+            + MedipalContract.HealthBioEntry.HEALTH_START_DATE + " DATE, "
+            + MedipalContract.HealthBioEntry.HEALTH_CONDITION_TYPE  + " TEXT );";
 
     //Create Table for Categories
-    public static final  String SQL_CREATE_CATEGORIES_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.CATEGORIES_TABLE_NAME + " ("
-            + PersonalEntry.CATEGORIES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.CATEGORIES_CATEGORY_NAME + " TEXT, "
-            +PersonalEntry.CATEGORIES_CODE + " TEXT, "
-            +PersonalEntry.CATEGORIES_DESCRIPTION + " TEXT, "
-            +PersonalEntry.CATEGORIES_REMIND  + " INTEGER DEFAULT 0 );";
+    public static final  String SQL_CREATE_CATEGORIES_DATA_TABLE =  "CREATE TABLE " + MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME + " ("
+            + MedipalContract.CategoriesEntry.CATEGORIES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.CategoriesEntry.CATEGORIES_CATEGORY_NAME + " TEXT, "
+            + MedipalContract.CategoriesEntry.CATEGORIES_CODE + " TEXT, "
+            + MedipalContract.CategoriesEntry.CATEGORIES_DESCRIPTION + " TEXT, "
+            + MedipalContract.CategoriesEntry.CATEGORIES_REMIND  + " INTEGER DEFAULT 0 );";
 
     // Ceate Table for Medicine
-    public static final  String SQL_CREATE_MEDICINE_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.MEDICINE_TABLE_NAME + " ("
-            + PersonalEntry.MEDICINE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.MEDICINE_MEDICINE_NAME + " TEXT, "
-            +PersonalEntry.MEDICINE_DESCRIPTION + " TEXT, "
-            +PersonalEntry.MEDICINE_CATID + " INTEGER, "
-            +PersonalEntry.MEDICINE_REMINDERID + " INTEGER, "
-            +PersonalEntry.MEDICINE_REMIND + " INTEGER DEFAULT 0, "
-            +PersonalEntry.MEDICINE_QUANTITY + " INTEGER, "
-            +PersonalEntry.MEDICINE_DOSAGE + " INTEGER, "
-            +PersonalEntry.MEDICINE_CONSUME_QUANTITY + " INTEGER, "
-            +PersonalEntry.MEDICINE_THRESHOLD + " INTEGER, "
-            + PersonalEntry.MEDICINE_DATE_ISSUED + " DATE, "
-            +PersonalEntry.MEDICINE_EXPIRE_FACTOR  + " INTEGER );";
+    public static final  String SQL_CREATE_MEDICINE_DATA_TABLE =  "CREATE TABLE " + MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME + " ("
+            + MedipalContract.MedicineEntry.MEDICINE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.MedicineEntry.MEDICINE_MEDICINE_NAME + " TEXT, "
+            + MedipalContract.MedicineEntry.MEDICINE_DESCRIPTION + " TEXT, "
+            + MedipalContract.MedicineEntry.MEDICINE_CATID + " INTEGER, "
+            + MedipalContract.MedicineEntry.MEDICINE_REMINDERID + " INTEGER, "
+            + MedipalContract.MedicineEntry.MEDICINE_REMIND + " INTEGER DEFAULT 0, "
+            + MedipalContract.MedicineEntry.MEDICINE_QUANTITY + " INTEGER, "
+            + MedipalContract.MedicineEntry.MEDICINE_DOSAGE + " INTEGER, "
+            + MedipalContract.MedicineEntry.MEDICINE_CONSUME_QUANTITY + " INTEGER, "
+            + MedipalContract.MedicineEntry.MEDICINE_THRESHOLD + " INTEGER, "
+            + MedipalContract.MedicineEntry.MEDICINE_DATE_ISSUED + " DATE, "
+            + MedipalContract.MedicineEntry.MEDICINE_EXPIRE_FACTOR  + " INTEGER );";
 
     // Create Table for Measurement
-    public static final  String SQL_CREATE_MEASUREMENT_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.MEASUREMENT_TABLE_NAME + " ("
-            + PersonalEntry.MEASUREMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.MEASUREMENT_SYSTOLIC + " INTEGER, "
-            +PersonalEntry.MEASUREMENT_DIASTOLIC + " INTEGER, "
-            +PersonalEntry.MEASUREMENT_PULSE + " INTEGER, "
-            +PersonalEntry.MEASUREMENT_TEMPERATURE + " REAL, "
-            +PersonalEntry.MEASUREMENT_WEIGHT  + " INTEGER, "
-            +PersonalEntry.MEASUREMENT_MEASURED_ON + " DATE );";
+    public static final  String SQL_CREATE_MEASUREMENT_DATA_TABLE =  "CREATE TABLE " + MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME + " ("
+            + MedipalContract.MeasurementEntry.MEASUREMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.MeasurementEntry.MEASUREMENT_SYSTOLIC + " INTEGER, "
+            + MedipalContract.MeasurementEntry.MEASUREMENT_DIASTOLIC + " INTEGER, "
+            + MedipalContract.MeasurementEntry.MEASUREMENT_PULSE + " INTEGER, "
+            + MedipalContract.MeasurementEntry.MEASUREMENT_TEMPERATURE + " REAL, "
+            + MedipalContract.MeasurementEntry.MEASUREMENT_WEIGHT  + " INTEGER, "
+            + MedipalContract.MeasurementEntry.MEASUREMENT_MEASURED_ON + " DATE );";
 
     // Create Table for Consumption
-    public static final  String SQL_CREATE_CONSUMPTION_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.CONSUMPTION_TABLE_NAME + " ("
-            + PersonalEntry.CONSUMPTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.CONSUMPTION_MEDICINE_ID + " INTEGER, "
-            +PersonalEntry.CONSUMPTION_QUANTITY + " INTEGER, "
-            +PersonalEntry.CONSUMPTION_CONSUMED_ON + " DATE );";
+    public static final  String SQL_CREATE_CONSUMPTION_DATA_TABLE =  "CREATE TABLE " + MedipalContract.ConsumptionEntry.CONSUMPTION_TABLE_NAME + " ("
+            + MedipalContract.ConsumptionEntry.CONSUMPTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.ConsumptionEntry.CONSUMPTION_MEDICINE_ID + " INTEGER, "
+            + MedipalContract.ConsumptionEntry.CONSUMPTION_QUANTITY + " INTEGER, "
+            + MedipalContract.ConsumptionEntry.CONSUMPTION_CONSUMED_ON + " DATE );";
 
     // Ceate table for Reminder
-    public static final  String SQL_CREATE_REMINDER_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.REMINDER_TABLE_NAME + " ("
-            + PersonalEntry.REMINDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.REMINDER_FREQUENCY + " INTEGER, "
-            +PersonalEntry.REMINDER_START_TIME + " DATE,"
-            +PersonalEntry.REMINDER_INTERVAL + " INTEGER );";
+    public static final  String SQL_CREATE_REMINDER_DATA_TABLE =  "CREATE TABLE " + MedipalContract.ReminderEntry.REMINDER_TABLE_NAME + " ("
+            + MedipalContract.ReminderEntry.REMINDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.ReminderEntry.REMINDER_FREQUENCY + " INTEGER, "
+            + MedipalContract.ReminderEntry.REMINDER_START_TIME + " DATE,"
+            + MedipalContract.ReminderEntry.REMINDER_INTERVAL + " INTEGER );";
 
     // Create Table for Appointment
-    public static final  String SQL_CREATE_APPOINTMENT_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.APPOINTMENT_TABLE_NAME + " ("
-            + PersonalEntry.APPOINTMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.APPOINTMENT_LOCATION + " INTEGER, "
-            +PersonalEntry.APPOINTMENT_DATE_TIME + " DATE,"
-            +PersonalEntry.APPOINTMENT_DESCRIPTION + " TEXT );";
+    public static final  String SQL_CREATE_APPOINTMENT_DATA_TABLE =  "CREATE TABLE " + MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME + " ("
+            + MedipalContract.AppointmentEntry.APPOINTMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.AppointmentEntry.APPOINTMENT_LOCATION + " INTEGER, "
+            + MedipalContract.AppointmentEntry.APPOINTMENT_DATE_TIME + " DATE,"
+            + MedipalContract.AppointmentEntry.APPOINTMENT_DESCRIPTION + " TEXT );";
 
     // Create table for ICE
-    public static final  String SQL_CREATE_ICE_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.ICE_TABLE_NAME + " ("
-            + PersonalEntry.ICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PersonalEntry.ICE_NAME + " TEXT, "
-            + PersonalEntry.ICE_CONTACT_NUMBER + " TEXT, "
-            +PersonalEntry.ICE_CONTACT_TYPE + " TEXT,"
-            +PersonalEntry.ICE_DESCRIPTION + " TEXT, "
-            + PersonalEntry.ICE_SEQUENCE + "INTEGER );";
+    public static final  String SQL_CREATE_ICE_DATA_TABLE =  "CREATE TABLE " + MedipalContract.IceEntry.ICE_TABLE_NAME + " ("
+            + MedipalContract.IceEntry.ICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MedipalContract.IceEntry.ICE_NAME + " TEXT, "
+            + MedipalContract.IceEntry.ICE_CONTACT_NUMBER + " TEXT, "
+            + MedipalContract.IceEntry.ICE_CONTACT_TYPE + " TEXT,"
+            + MedipalContract.IceEntry.ICE_DESCRIPTION + " TEXT, "
+            + MedipalContract.IceEntry.ICE_SEQUENCE + "INTEGER );";
 
 
     public MedipalDBHelper(Context context) {
@@ -130,10 +130,10 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
 
     private void insertCategory(SQLiteDatabase db,String categoryName,String code,String description,int remind){
         ContentValues categoryValue=new ContentValues();
-        categoryValue.put(PersonalEntry.CATEGORIES_CATEGORY_NAME,categoryName);
-        categoryValue.put(PersonalEntry.CATEGORIES_CODE,code);
-        categoryValue.put(PersonalEntry.CATEGORIES_DESCRIPTION,description);
-        categoryValue.put(PersonalEntry.CATEGORIES_REMIND,remind);
-        db.insert(PersonalEntry.CATEGORIES_TABLE_NAME,null,categoryValue);
+        categoryValue.put(MedipalContract.CategoriesEntry.CATEGORIES_CATEGORY_NAME,categoryName);
+        categoryValue.put(MedipalContract.CategoriesEntry.CATEGORIES_CODE,code);
+        categoryValue.put(MedipalContract.CategoriesEntry.CATEGORIES_DESCRIPTION,description);
+        categoryValue.put(MedipalContract.CategoriesEntry.CATEGORIES_REMIND,remind);
+        db.insert(MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME,null,categoryValue);
     }
 }
