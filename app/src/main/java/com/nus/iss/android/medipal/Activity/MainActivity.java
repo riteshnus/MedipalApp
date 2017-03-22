@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nus.iss.android.medipal.Adapter.UserAdapter;
-import com.nus.iss.android.medipal.Data.MedipalContract.personalEntry;
+import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
 import com.nus.iss.android.medipal.R;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this,EntryClass.class);
-                Uri currentPetUri = ContentUris.withAppendedId(personalEntry.CONTENT_URI,id);
+                Uri currentPetUri = ContentUris.withAppendedId(PersonalEntry.CONTENT_URI_PERSONAL,id);
                 intent.setData(currentPetUri);
                 startActivity(intent);
             }
@@ -60,6 +60,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(intent);
             }
         });
+
+        FloatingActionButton fabAppt = (FloatingActionButton) findViewById(R.id.fabApp);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,AppointmentList.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         getLoaderManager().initLoader(USER_LOADER, null, this);
     }
@@ -89,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                personalEntry._ID,
-                personalEntry.USER_NAME,
-                personalEntry.USER_ADDRESS,
+                PersonalEntry._ID,
+                PersonalEntry.USER_NAME,
+                PersonalEntry.USER_ADDRESS,
         } ;
-        return new CursorLoader(this,personalEntry.CONTENT_URI,projection,null,null,null);
+        return new CursorLoader(this,PersonalEntry.CONTENT_URI_PERSONAL,projection,null,null,null);
     }
 
     @Override

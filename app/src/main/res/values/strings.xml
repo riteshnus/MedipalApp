@@ -4,4 +4,10 @@
     <string name="user_form">Enter Detail</string>
     <string name="userName">Name</string>
     <string name="userAddress">Address</string>
+    <string name="empty_appointment_content">Tab the "+" \n to add your first \n appointment</string>
+    <string name="appointment_tittle">Appointment tittle</string>
+    <string name="doctor">Hospital</string>
+    <string name="selectCategory">select Location</string>
+    <string name="clinic">Clinic</string>
+    <string name="action_save">save</string>
 </resources>

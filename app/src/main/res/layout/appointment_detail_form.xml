@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/ev_appt_tittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/appointment_tittle"
+            android:layout_margin="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:src="@drawable/ic_location"
+            android:contentDescription="abc"
+            android:layout_margin="20dp"
+            />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/select_doctor"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
+                android:spinnerMode="dropdown"
+                >
+            </Spinner>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_schedule"
+            android:contentDescription="abs"
+            android:layout_margin="20dp"
+            />
+        <!--<CalendarView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CalendarView>-->
+        <TextView
+            android:id="@+id/app_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="Test date"
+          android:layout_marginTop="25dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+        <TextView
+            android:id="@+id/app_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="Test time"
+            android:layout_marginTop="25dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_add_alert"
+            android:layout_margin="20dp"
+            />
+
+        <TextView
+            android:id="@+id/app_reminder"
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:layout_weight="5"
+            android:layout_marginTop="20dp"
+            android:hint="Reminder"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/ReminderSwitch" />
+
+    </LinearLayout>
+</LinearLayout>

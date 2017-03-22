@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.nus.iss.android.medipal.Data.MedipalDBHelper;
 import com.nus.iss.android.medipal.R;
-import com.nus.iss.android.medipal.Data.MedipalContract.personalEntry;
+import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
 /**
  * Created by Ritesh on 3/9/2017.
  */
@@ -64,12 +64,12 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
         SQLiteDatabase sqLiteDatabase = medipalDBHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(personalEntry.USER_NAME, UserName);
-        values.put(personalEntry.USER_ADDRESS, UserDesc);
+        values.put(PersonalEntry.USER_NAME, UserName);
+        values.put(PersonalEntry.USER_ADDRESS, UserDesc);
         Log.v(LOG_TAG,"content changed for my branch");
 
         if (mCurrentUserUri == null) {
-            Uri newUri = getContentResolver().insert(personalEntry.CONTENT_URI, values);
+            Uri newUri = getContentResolver().insert(PersonalEntry.CONTENT_URI_PERSONAL, values);
             Log.v(LOG_TAG, " new URI: " + newUri);
             if (newUri == null) {
                 Toast.makeText(this, "Not able to insert new user", Toast.LENGTH_SHORT).show();
@@ -105,9 +105,9 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                personalEntry._ID,
-                personalEntry.USER_NAME,
-                personalEntry.USER_ADDRESS
+                PersonalEntry._ID,
+                PersonalEntry.USER_NAME,
+                PersonalEntry.USER_ADDRESS
         };
         return new CursorLoader(this, mCurrentUserUri, projection, null, null, null);
     }
@@ -115,8 +115,8 @@ public class EntryClass extends AppCompatActivity implements LoaderManager.Loade
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor.moveToFirst()) {
-            String userName = cursor.getString(cursor.getColumnIndex(personalEntry.USER_NAME));
-            String userAddress = cursor.getString(cursor.getColumnIndex(personalEntry.USER_ADDRESS));
+            String userName = cursor.getString(cursor.getColumnIndex(PersonalEntry.USER_NAME));
+            String userAddress = cursor.getString(cursor.getColumnIndex(PersonalEntry.USER_ADDRESS));
             mUserName.setText(userName);
             mUserAddress.setText(userAddress);
         }
