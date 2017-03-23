@@ -29,6 +29,7 @@ public class ReminderDAO {
         Uri newUri=activity.getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI_REMINDER,values);
         int id= (int) ContentUris.parseId(newUri);
         reminder.setReminderId(id);
+        activity.getContentResolver().notifyChange(MedipalContract.PersonalEntry.CONTENT_URI_REMINDER,null,false);
         return reminder;
     }
 
@@ -38,9 +39,11 @@ public class ReminderDAO {
         values.put(MedipalContract.PersonalEntry.REMINDER_INTERVAL,reminder.getInterval());
         values.put(MedipalContract.PersonalEntry.REMINDER_START_TIME, String.valueOf(reminder.getStartTime()));
         int idi=activity.getContentResolver().update(reminderUri,values,null,null);
+        activity.getContentResolver().notifyChange(reminderUri,null,false);
         return reminder;
     }
     public void delete(Uri reminderUri){
         activity.getContentResolver().delete(reminderUri,null,null);
+        activity.getContentResolver().notifyChange(reminderUri,null,false);
     }
 }

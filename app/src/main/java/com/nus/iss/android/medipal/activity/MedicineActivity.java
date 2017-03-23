@@ -75,18 +75,18 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-       switch (id){
-           case MEDICINE_LOADER:
-               String[] projectionForMedicine = {
-                       MedipalContract.PersonalEntry.MEDICINE_ID,
-                       MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME,
-                       MedipalContract.PersonalEntry.MEDICINE_CONSUME_QUANTITY,
-                       MedipalContract.PersonalEntry.MEDICINE_QUANTITY};
-               return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projectionForMedicine, null, null, null);
+        switch (id){
+            case MEDICINE_LOADER:
+                String[] projectionForMedicine = {
+                        MedipalContract.PersonalEntry.MEDICINE_ID,
+                        MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME,
+                        MedipalContract.PersonalEntry.MEDICINE_CONSUME_QUANTITY,
+                        MedipalContract.PersonalEntry.MEDICINE_QUANTITY};
+                return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projectionForMedicine, null, null, null);
 
-           default:
-               return null;
-       }
+            default:
+                return null;
+        }
     }
 
     @Override

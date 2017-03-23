@@ -11,6 +11,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
+
+import static com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry.APPOINTMENT_ID;
+import static com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry.MEASUREMENT_ID;
+
 /**
  * Created by Ritesh on 3/8/2017.
  */
@@ -26,6 +30,12 @@ public class MedicalProvider extends ContentProvider {
     private static final int REMINDER_ID=105;
     private static final int CATEGORY=106;
     private static final int CATEGORY_ID=107;
+    private static final int CONSUMPTION=108;
+    private static final int CONSUMPTION_ID=109;
+    private static final int MEASUREMENT=110;
+    private static final int MEASUREMENT_ID=111;
+    private static final int APPOINTMENT=112;
+    private static final int APPOINTMENT_ID=113;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -37,6 +47,12 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.REMINDER_TABLE_NAME+"/#",REMINDER_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME,CATEGORY);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CATEGORIES_TABLE_NAME+"/#",CATEGORY_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME,APPOINTMENT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.APPOINTMENT_TABLE_NAME+"/#",APPOINTMENT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME,CONSUMPTION);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -88,6 +104,23 @@ public class MedicalProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.REMINDER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+            case MEASUREMENT:
+                cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case MEASUREMENT_ID:
+                cursor=sqLiteDatabase.query(PersonalEntry.MEASUREMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case CONSUMPTION:
+                cursor = sqLiteDatabase.rawQuery(selection, null);
+                break;
+            case APPOINTMENT:
+                cursor=sqLiteDatabase.query(PersonalEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case APPOINTMENT_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(PersonalEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
         }
@@ -112,6 +145,10 @@ public class MedicalProvider extends ContentProvider {
                 return insertTable(uri,values,PersonalEntry.MEDICINE_TABLE_NAME);
             case REMINDER:
                 return insertTable(uri,values,PersonalEntry.REMINDER_TABLE_NAME);
+            case APPOINTMENT:
+                return insertTable(uri,values,PersonalEntry.APPOINTMENT_TABLE_NAME);
+            case MEASUREMENT:
+                return insertTable(uri,values,PersonalEntry.MEASUREMENT_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didnt match with anything");
         }
@@ -139,6 +176,7 @@ public class MedicalProvider extends ContentProvider {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         int rowDeleted ;
         final int match = sUriMatcher.match(uri);
+        Log.v(LOG_TAG,"Query to be called for " + match);
         switch (match){
             case MEMBER:
                 rowDeleted = sqLiteDatabase.delete(PersonalEntry.USER_TABLE_NAME,selection,selectionArgs);
@@ -161,6 +199,29 @@ public class MedicalProvider extends ContentProvider {
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
+                break;
+            case MEDICINE_ID:
+                selection = PersonalEntry.MEDICINE_ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.MEDICINE_TABLE_NAME,selection,selectionArgs);
+                if(rowDeleted !=0) {
+                    getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
+            case APPOINTMENT:
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.APPOINTMENT_TABLE_NAME,selection,selectionArgs);
+                if(rowDeleted !=0) {
+                    getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
+            case APPOINTMENT_ID:
+                selection = MedipalContract.PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.APPOINTMENT_TABLE_NAME,selection,selectionArgs);
+                if(rowDeleted !=0) {
+                    getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
             default:
                 throw new IllegalArgumentException("Can not delete the row "+ uri);
         }
@@ -185,6 +246,12 @@ public class MedicalProvider extends ContentProvider {
                 selection=PersonalEntry.REMINDER_ID + "=?";
                 selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateTable(uri,contentValues,selection,selectionArgs,PersonalEntry.REMINDER_TABLE_NAME);
+            case APPOINTMENT:
+                return updateTable(uri,contentValues,selection,selectionArgs,PersonalEntry.APPOINTMENT_TABLE_NAME);
+            case APPOINTMENT_ID:
+                selection = PersonalEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateTable(uri,contentValues,selection,selectionArgs,PersonalEntry.APPOINTMENT_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for "+uri);
         }

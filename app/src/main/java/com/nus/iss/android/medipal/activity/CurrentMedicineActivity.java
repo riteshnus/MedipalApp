@@ -1,6 +1,7 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.app.PendingIntent;
 import android.content.ContentUris;
@@ -19,10 +20,11 @@ import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.constants.Constants;
+import com.nus.iss.android.medipal.dao.MedicineDAO;
 import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.Reminder;
 import com.nus.iss.android.medipal.helper.Utils;
-import com.nus.iss.android.medipal.services.NotificationService;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,6 +34,7 @@ import java.util.Date;
 
 import static android.R.attr.category;
 import static android.R.attr.format;
+import static android.os.Build.VERSION_CODES.M;
 
 public class CurrentMedicineActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -88,6 +91,7 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
                         MedipalContract.PersonalEntry.MEDICINE_CATID,
                         MedipalContract.PersonalEntry.MEDICINE_DESCRIPTION,
                         MedipalContract.PersonalEntry.MEDICINE_DATE_ISSUED,
+                        MedipalContract.PersonalEntry.MEDICINE_REMIND,
                         MedipalContract.PersonalEntry.MEDICINE_EXPIRE_FACTOR};
                 return new CursorLoader(this,medicineUri,projectionForMedicine,null,null,null);
             case REMINDER_LOADER:
@@ -189,6 +193,12 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
             myIntent.setData(medicineUri);
             startActivity(myIntent);
         }
+        if (item.getItemId() == R.id.action_delete) {
+            if (medicineUri != null) {
+                deleteMedicine();
+                finish();
+            }
+        }
         if (item.getItemId() == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
             return true;
@@ -199,5 +209,9 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+    private void deleteMedicine() {
+        MedicineDAO medicineDAO=new MedicineDAO(this);
+        medicineDAO.delete(medicineUri);
     }
 }

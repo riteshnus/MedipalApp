@@ -1,6 +1,7 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.LoaderManager;
 import android.app.PendingIntent;
@@ -47,10 +48,9 @@ import java.util.TimeZone;
 
 import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.helper.Utils;
-import com.nus.iss.android.medipal.services.NotificationService;
 
-import static android.content.Context.ALARM_SERVICE;
-import static com.nus.iss.android.medipal.R.string.interval;
+import com.nus.iss.android.medipal.receiver.MedicineReceiver;
+
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_DATE_FORMAT;
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_TIME_FORMAT;
 
@@ -82,7 +82,7 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     private Medicine medicine;
     private Uri categoryUri;
     private Uri reminderUri;
-
+    private String errorMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,7 +190,7 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     }
 
     /**
-     * Setup the dropdown spinner that allows the user to select the dosage unit of the meicine and category.
+     * Setup the dropdown spinner that allows the user to select the dosage unit of the medicine and category.
      */
     private void setupSpinner() {
         // Create adapter for spinner. The list options are from the String array it will use
@@ -272,8 +272,10 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals(getString(R.string.supplement))) {
                         category_text = "SUP";
-                        remindSwitch.setChecked(Boolean.FALSE);
-                        reminderlayout.setVisibility(View.GONE);
+                        if(medicineUri==null) {
+                            remindSwitch.setChecked(Boolean.FALSE);
+                            reminderlayout.setVisibility(View.GONE);
+                        }
                     } else if (selection.equals(getString(R.string.chronic))) {
                         category_text = "CHR";
                         remindSwitch.setChecked(Boolean.TRUE);
@@ -288,8 +290,10 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                         reminderlayout.setVisibility(View.VISIBLE);
                     } else if (selection.equals(getString(R.string.self_apply))) {
                         category_text = "SEL";
-                        remindSwitch.setChecked(Boolean.FALSE);
-                        reminderlayout.setVisibility(View.GONE);
+                        if(medicineUri==null) {
+                            remindSwitch.setChecked(Boolean.FALSE);
+                            reminderlayout.setVisibility(View.GONE);
+                        }
                     }
                 }
             }
@@ -333,22 +337,24 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
             reminder = new Reminder(3, startTime, interval); //TODO frequency needs to be added on screen.
             ReminderDAO reminderDAO = new ReminderDAO(this);
             reminder = reminderDAO.save(reminder);
-            addReminder(reminder);
+
         }
-        Medicine medicine = new Medicine(name, description, remindForMedicine, quantity,dosage, consumeQuantity, threshold, issueDate, expiryFactor);
+        medicine = new Medicine(name, description, remindForMedicine, quantity,dosage, consumeQuantity, threshold, issueDate, expiryFactor);
         medicine.setCategory(categories);
         medicine.setReminder(reminder);
         MedicineDAO medicineDAO = new MedicineDAO(this);
         medicineDAO.save(medicine);
         medicineUri= ContentUris.withAppendedId(PersonalEntry.CONTENT_URI_MEDICINE,medicine.getMedicineId());
-
+       if(remindForMedicine){
+           addReminder(reminder);
+       }
     }
 
     private void addReminder(Reminder reminder) {
-        Intent myIntent = new Intent(this , NotificationService.class);
+        Intent myIntent = new Intent(this , MedicineReceiver.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
-        myIntent.setData(medicineUri);
+        myIntent.putExtra("medicine",medicine.getMedicine());
+        pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Date date=reminder.getStartTime();
         DateFormat format=new SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT);
         String time=format.format(date);
@@ -360,14 +366,9 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         calendar.set(Calendar.SECOND,0);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
-        /*myIntent.putExtra("URI",medicineUri);
-        Bundle bundle=myIntent.getExtras();
-        try {
-            pendingIntent.send(this.getApplicationContext(),0,myIntent,null,null,null,bundle);
-        } catch (PendingIntent.CanceledException e) {
-            e.printStackTrace();
-        }*/
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000*60*reminder.getInterval(), pendingIntent);
+        myIntent.setAction("Paracetamol");
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000*60*60*reminder.getInterval(), pendingIntent);
+
     }
 
     private void setCurentDateAndTimeToTextView() {
@@ -393,16 +394,28 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_save) {
-            if(medicineUri!=null){
-                updateMedicine();
-            }else {
-                boolean remind = remindSwitch.isChecked();
-                createAndInsertMedicine();
+            if (isValid()) {
+                if (medicineUri != null) {
+                    updateMedicine();
+                } else {
+                    boolean remind = remindSwitch.isChecked();
+                    createAndInsertMedicine();
+                }
+                finish();
             }
-            finish();
+            else {
+                new AlertDialog.Builder(this)
+                        .setMessage(errorMsg)
+                        .setNegativeButton("Ok", null)
+                        .setCancelable(false)
+                        .show();
+            }
         }
+
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private void updateMedicine() {
         MedicineDAO medicineDAO=new MedicineDAO(this);
@@ -411,7 +424,11 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         int quantity = Integer.parseInt(quantityTextView.getText().toString());
         int consumeQuantity = Integer.parseInt(dosageText.getText().toString());
         int expiryFactor = Integer.parseInt(expiryFactorTextView.getText().toString());
-        int threshold = Integer.parseInt(thresholdText.getText().toString());
+        int threshold=0;
+        if(!TextUtils.isEmpty(thresholdText.getText())){
+            threshold = Integer.parseInt(thresholdText.getText().toString());
+        }
+
         int interval = Integer.parseInt(intervalText.getText().toString());
         DateFormat formatForDate = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
         DateFormat formatForTime = new SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT);
@@ -433,7 +450,6 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         medicine.setExpireFactor(expiryFactor);
         medicine.setDateIssued(issueDate);
         medicine.setDosage(dosage);
-        Categories categories=categoryMap.get(category_text);
         ReminderDAO reminderDAO=new ReminderDAO(this);
         Reminder reminder;
        if(remindForMedicine){
@@ -449,8 +465,6 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                medicine.setReminder(reminder);
            }
        }
-
-        medicine.setCategory(categories);
        if(medicine.getReminder()!=null) {
            addReminder(medicine.getReminder());
        }
@@ -591,6 +605,8 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                 }
                 if(medicine.isRemind()) {
                     getLoaderManager().restartLoader(REMINDER_LOADER, null, this);
+                }else {
+                    setData();
                 }
                 break;
             case REMINDER_LOADER:
@@ -614,47 +630,58 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                     reminder.setReminderId(remId);
                     medicine.setReminder(reminder);
                 }
-                nameTextView.setText(medicine.getMedicine());
-                descriptionEditText.setText(medicine.getDescription());
-                quantityTextView.setText(String.valueOf(medicine.getQuantity()));
-                dateOfIssueTextView.setText(Utils.convertDateToString(medicine.getDateIssued()));
-                expiryFactorTextView.setText(String.valueOf(medicine.getExpireFactor()));
-                dosageText.setText(String.valueOf(medicine.getConsumeQuantity()));
-                categorySpinner.setSelection(getPositionForCategory(medicine.getCategory().getCode()));
-                dosageSpinner.setSelection(medicine.getDosage());
-                if(medicine.isRemind()) {
-                    reminderlayout.setVisibility(View.VISIBLE);
-                    remindSwitch.setChecked(medicine.isRemind());
-                    startTimeTextView.setText(Utils.convertTimeToString(medicine.getReminder().getStartTime()));
-                    intervalText.setText(String.valueOf(medicine.getReminder().getInterval()));
-                }
-                if(medicine.getThreshold()!=0){
-                    thresholdReminderSwitch.setChecked(Boolean.TRUE);
-                    thresholdText.setVisibility(View.VISIBLE);
-                    thresholdText.setText(String.valueOf(medicine.getThreshold()));
-                }else {
-                    thresholdReminderSwitch.setChecked(Boolean.FALSE);
-                    thresholdText.setVisibility(View.GONE);
-                }
+                setData();
 
 
                 break;
 
         }
-        cursor.close();
+
+    }
+
+    private void setData() {
+        nameTextView.setText(medicine.getMedicine());
+        descriptionEditText.setText(medicine.getDescription());
+        quantityTextView.setText(String.valueOf(medicine.getQuantity()));
+        dateOfIssueTextView.setText(Utils.convertDateToString(medicine.getDateIssued()));
+        expiryFactorTextView.setText(String.valueOf(medicine.getExpireFactor()));
+        dosageText.setText(String.valueOf(medicine.getConsumeQuantity()));
+        categorySpinner.setSelection(getPositionForCategory(category_text));
+        dosageSpinner.setSelection(medicine.getDosage());
+        if(medicine.isRemind()) {
+            reminderlayout.setVisibility(View.VISIBLE);
+            remindSwitch.setChecked(medicine.isRemind());
+            startTimeTextView.setText(Utils.convertTimeToString(medicine.getReminder().getStartTime()));
+            intervalText.setText(String.valueOf(medicine.getReminder().getInterval()));
+        }else {
+            reminderlayout.setVisibility(View.GONE);
+        }
+        if(medicine.getThreshold()!=0){
+            thresholdReminderSwitch.setChecked(Boolean.TRUE);
+            thresholdText.setVisibility(View.VISIBLE);
+            thresholdText.setText(String.valueOf(medicine.getThreshold()));
+        }else {
+            thresholdReminderSwitch.setChecked(Boolean.FALSE);
+            thresholdText.setVisibility(View.GONE);
+        }
     }
 
     private int getPositionForCategory(String code) {
         int position=0;
         if(code.equals("SUP")){
+            category_text = "SUP";
             position=0;
         }else if(code.equals("CHR")){
+            category_text = "CHR";
             position=1;
         }else if(code.equals("INC")){
+            category_text = "INC";
             position=2;
         }else if(code.equals("COM")){
+            category_text = "COM";
             position=3;
         }else if(code.equals("SEL")){
+            category_text = "SEL";
             position=4;
         }
         return position;
@@ -668,5 +695,38 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private boolean isValid(){
+
+        if(TextUtils.isEmpty(nameTextView.getText())){
+            errorMsg="Name of Medicine Can not be empty";
+            return false;
+        }
+        if(TextUtils.isEmpty(quantityTextView.getText())){
+            errorMsg="Medicine Quantity Can not be empty";
+            return false;
+        }
+        if(TextUtils.isEmpty(dosageText.getText())){
+            errorMsg="Daily to be consumed quantity Can not be empty";
+            return false;
+        }
+        if(TextUtils.isEmpty(expiryFactorTextView.getText())){
+            errorMsg="Expiry Factor of Medicine Can not be empty";
+            return false;
+        }
+        if(remindSwitch.isChecked()) {
+            if (TextUtils.isEmpty(intervalText.getText())) {
+                errorMsg = "Interval for Reminder Can not be empty";
+                return false;
+            }
+        }
+        if(thresholdReminderSwitch.isChecked()) {
+            if (TextUtils.isEmpty(thresholdText.getText())) {
+                errorMsg = "Medicine threshold Can not be empty";
+                return false;
+            }
+        }
+        return true;
     }
 }

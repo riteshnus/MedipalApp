@@ -59,4 +59,8 @@ public class MedicineDAO {
         int rowUpdate=activity.getContentResolver().update(medicineUri,values,null,null);
         activity.getContentResolver().notifyChange(medicineUri,null,false);
     }
+    public void delete(Uri medicineUri){
+        activity.getContentResolver().delete(medicineUri,null,null);
+        activity.getContentResolver().notifyChange(medicineUri,null,false);
+    }
 }

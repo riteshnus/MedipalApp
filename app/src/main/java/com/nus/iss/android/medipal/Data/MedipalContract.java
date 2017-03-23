@@ -20,6 +20,9 @@ public class MedipalContract {
         public final static Uri CONTENT_URI_MEDICINE = Uri.withAppendedPath(MedipalContract.BASE_CONTENT,PersonalEntry.MEDICINE_TABLE_NAME);
         public final static Uri CONTENT_URI_CATEGORY = Uri.withAppendedPath(MedipalContract.BASE_CONTENT,PersonalEntry.CATEGORIES_TABLE_NAME);
         public final static Uri CONTENT_URI_REMINDER=Uri.withAppendedPath(MedipalContract.BASE_CONTENT,PersonalEntry.REMINDER_TABLE_NAME);
+        public final static Uri CONTENT_URI_CONSUMPTION = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.CONSUMPTION_TABLE_NAME);
+        public final static Uri CONTENT_URI_MEASUREMENT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.MEASUREMENT_TABLE_NAME);
+        public final static Uri CONTENT_URI_APPOINTMENT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.APPOINTMENT_TABLE_NAME);
         /*
         * Table Details for Personal Bio table
         * */
@@ -105,7 +108,7 @@ public class MedipalContract {
         public static final String APPOINTMENT_TABLE_NAME="appointment";
         public static final String APPOINTMENT_ID=BaseColumns._ID;
         public static final String APPOINTMENT_LOCATION="Location";
-        public static final String APPOINTMENT_APPOINTMENT_DATE_TIME="Appointment";
+        public static final String APPOINTMENT_DATE_TIME="Appointment";
         public static final String APPOINTMENT_DESCRIPTION="Description";
 
         /*

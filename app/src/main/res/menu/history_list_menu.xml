@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.HistoryList">
+    <item
+        android:id="@+id/filter"
+        android:title="filter"
+        android:icon="@mipmap/ic_filter"
+        app:showAsAction="always" />
+</menu>

@@ -83,7 +83,7 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
     public static final  String SQL_CREATE_APPOINTMENT_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.APPOINTMENT_TABLE_NAME + " ("
             + PersonalEntry.APPOINTMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PersonalEntry.APPOINTMENT_LOCATION + " INTEGER, "
-            +PersonalEntry.APPOINTMENT_APPOINTMENT_DATE_TIME + " DATE,"
+            +PersonalEntry.APPOINTMENT_DATE_TIME + " DATE,"
             +PersonalEntry.APPOINTMENT_DESCRIPTION + " TEXT );";
 
     // Create table for ICE
