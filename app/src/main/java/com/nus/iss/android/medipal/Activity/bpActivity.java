@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -64,6 +65,9 @@ public class bpActivity extends AppCompatActivity implements LoaderManager.Loade
         sdf2 = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
         String currentDateandTime = sdf.format(new Date());
         measureDate.setText(currentDateandTime);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
 
 /*datepicker*/
 
@@ -222,7 +226,11 @@ public class bpActivity extends AppCompatActivity implements LoaderManager.Loade
         return true;
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_saveBp) {

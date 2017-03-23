@@ -47,12 +47,19 @@
             android:label="@string/user_form"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.AppointmentActivity"
+            android:name=".Activity.addAppointmentActivity"
             android:label="Add Appointment"
-            android:theme="@style/AppThemeWithActionBar" />
+            android:theme="@style/AppThemeWithActionBar"
+            android:parentActivityName=".Activity.AppointmentList"/>
+        <activity
+            android:name=".Activity.appointmentAction"
+            android:label="View Appointment"
+            android:theme="@style/AppThemeWithActionBar"
+            android:parentActivityName=".Activity.AppointmentList"/>
         <activity android:name=".Activity.AppointmentList"
             android:label="Appointments"
-            android:theme="@style/AppThemeWithActionBar" />
+            android:theme="@style/AppThemeWithActionBar"
+            android:parentActivityName=".Activity.NavDrawerActivity"/>
         <provider
             android:name=".Data.MedicalProvider"
             android:authorities="com.nus.iss.android.medipal"
@@ -73,10 +80,16 @@
             android:label="@string/menuhistory" />
         <activity
             android:name=".Activity.HistoryList"
-            android:label="@string/menuhistorylist" />
+            android:label="@string/menuhistorylist"
+            android:parentActivityName=".Activity.NavDrawerActivity"/>
         <activity
-            android:name=".Activity.FaqHelp"
-            android:label="@string/faqHelp" />
+            android:name=".Activity.FaqHelpActivity"
+            android:label="@string/faqHelp"
+            android:parentActivityName=".Activity.NavDrawerActivity"/>
+        <activity
+            android:name=".Activity.AboutUs"
+            android:label="@string/faqHelp"
+            android:parentActivityName=".Activity.NavDrawerActivity"/>
         <service
             android:name=".services.NotificationService"
             android:enabled="true"
@@ -94,6 +107,7 @@
         <activity
             android:name=".Activity.pulseActivity"
             android:label="Add Pulse"
+            android:parentActivityName=".Activity.Measurement"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
             android:name=".Activity.weightActivity"
@@ -109,7 +123,24 @@
         <activity
             android:name=".Activity.Measurement"
             android:label="@string/MeasurementList"
+            android:theme="@style/AppThemeWithActionBar"
+            android:parentActivityName=".Activity.NavDrawerActivity"/>
+
+        <activity
+            android:name=".Activity.ICEContactList"
+            android:label="ICE Contact"
+            android:parentActivityName=".Activity.NavDrawerActivity"
             android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".Activity.AddContactActivity"
+            android:label="Add Contact"
+            android:theme="@style/AppThemeWithActionBar"
+            android:parentActivityName=".Activity.ICEContactList"/>
+        <activity
+            android:name=".Activity.ContactAction"
+            android:label="View Contact"
+            android:theme="@style/AppThemeWithActionBar"
+            android:parentActivityName=".Activity.ICEContactList"/>
     </application>
 
 </manifest>

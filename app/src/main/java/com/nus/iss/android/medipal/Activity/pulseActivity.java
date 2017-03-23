@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Loader;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -56,7 +57,9 @@ public class pulseActivity extends AppCompatActivity implements LoaderManager.Lo
         //sdf2 = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
         String currentDateandTime = sdf.format(new Date());
         mesureDate.setText(currentDateandTime);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
 
         /*datepicker*/
 
@@ -165,12 +168,15 @@ public class pulseActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_savePulse) {
-
             createAndInsertMeasurement();
-
-
         }
         return super.onOptionsItemSelected(item);
     }

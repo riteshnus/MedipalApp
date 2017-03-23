@@ -20,13 +20,17 @@
         android:id="@+id/name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:drawableLeft="@mipmap/med"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:hint="Medicine name"/>
     <EditText
         android:id="@+id/quantity_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20sp"
+        android:layout_marginTop="10dp"
         android:inputType="number"
         android:hint="Quantity Issued"/>
     <LinearLayout
@@ -34,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="4dp">
 
         <!-- Label -->
@@ -43,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:inputType="number"
             android:textSize="20sp" />
 
@@ -66,17 +72,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:id="@+id/date_of_issue_text"
         android:text="Date of Issue"
         android:layout_marginBottom="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:drawableLeft="@mipmap/date"
         android:layout_marginLeft="4dp"
         android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/expiry_text"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:inputType="number"
         android:hint="@string/expiry_factor"/>
     <EditText
@@ -84,7 +95,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:hint="Symptoms/Medical Diagnosis, for which medicine is prescibed"/>
+        android:drawableLeft="@drawable/notes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="10dp"
+        android:hint="Symptoms/Medical Diagnosis">
+
+    </EditText>
     <LinearLayout
         android:id="@+id/container_category"
         android:layout_width="match_parent"
@@ -100,6 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:textSize="20sp"
             android:fontFamily="sans-serif" />
@@ -123,6 +141,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_marginBottom="8dp">
         <TextView
@@ -130,6 +149,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/remind_text"
             android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Reminder"
             android:textSize="20sp"
             />
@@ -149,6 +169,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/reminder_time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/datetime"
         android:text="Start Time"
         android:layout_marginBottom="8dp"
         android:textSize="20sp"
@@ -158,6 +181,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:inputType="number"
         android:hint="@string/interval"/>
 
@@ -165,6 +190,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_marginBottom="8dp">
         <TextView
@@ -173,6 +199,7 @@
             android:id="@+id/threshold_reminder"
             android:layout_weight="1"
             android:text="Threshold Reminder"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="20sp"
             />
         <Switch
@@ -185,7 +212,9 @@
         android:id="@+id/threshold_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20sp"
+        android:layout_marginTop="10dp"
         android:inputType="number"
         android:hint="@string/threshold"/>
 </LinearLayout>

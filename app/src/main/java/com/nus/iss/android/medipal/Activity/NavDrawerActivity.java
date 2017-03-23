@@ -154,10 +154,19 @@ public class NavDrawerActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        }  else if (id == R.id.nav_appointment) {
+            Intent intent = new Intent(NavDrawerActivity.this,AppointmentList.class);
+            startActivity(intent);
+        }  else if (id == R.id.nav_send) {
 
         } else if (id == R.id.nav_history) {
             Intent intent = new Intent(NavDrawerActivity.this, History.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_iceContact) {
+            Intent intent = new Intent(NavDrawerActivity.this, ICEContactList.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_aboutUs) {
+            Intent intent = new Intent(NavDrawerActivity.this, AboutUs.class);
             startActivity(intent);
         }
 

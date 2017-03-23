@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -22,10 +23,10 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.Adapter.HistoryConsumptionAdapter;
 import com.nus.iss.android.medipal.Adapter.HistoryMeasurementAdapter;
 import com.nus.iss.android.medipal.Data.MedipalContract;
+import com.nus.iss.android.medipal.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,7 @@ public class HistoryList extends AppCompatActivity {
     private GoogleApiClient client;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.history_list_menu, menu);
@@ -49,227 +49,219 @@ public class HistoryList extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if (item.getItemId() == R.id.filter)
-        {
-            Bundle bundle = getIntent().getExtras();
-            String text = bundle.getString("NAME");
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.filter:
+                Bundle bundle = getIntent().getExtras();
+                String text = bundle.getString("NAME");
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(HistoryList.this).setCancelable(true)
-                    .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            final Bundle b = new Bundle();
-                            b.putString("CategoryFilter", categoryValue);
-                            b.putString("MedicineFilter", medicineValue);
-                            b.putString("MeasurementTypeFilter", measurementTypeValue);
-                            b.putString("FormatFilter", formatValue);
-                            b.putString("NAME", name);
-                            HistoryList.this.finish();
-                            Intent intent = new Intent(HistoryList.this, HistoryList.class);
-                            intent.putExtras(b);
-                            startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(HistoryList.this).setCancelable(true)
+                        .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                final Bundle b = new Bundle();
+                                b.putString("CategoryFilter", categoryValue);
+                                b.putString("MedicineFilter", medicineValue);
+                                b.putString("MeasurementTypeFilter", measurementTypeValue);
+                                b.putString("FormatFilter", formatValue);
+                                b.putString("NAME", name);
+                                HistoryList.this.finish();
+                                Intent intent = new Intent(HistoryList.this, HistoryList.class);
+                                intent.putExtras(b);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                View mView = getLayoutInflater().inflate(R.layout.popup_filter_layout, null);
+
+                //To manage filter options
+
+                View categoryLayout = mView.findViewById(R.id.catLayout);
+                View medicineLayout = mView.findViewById(R.id.medLayout);
+                View measurementLayout = mView.findViewById(R.id.measurementLayout);
+
+                if (Objects.equals(text, "CONSUMPTION")) {
+                    categoryLayout.setVisibility(View.VISIBLE);
+                    medicineLayout.setVisibility(View.VISIBLE);
+                    name = "CONSUMPTION";
+                } else if (Objects.equals(text, "MEASUREMENT")) {
+                    measurementLayout.setVisibility(View.VISIBLE);
+                    name = "MEASUREMENT";
+                }
+
+                //category spinner
+                final Spinner category = (Spinner) mView.findViewById(R.id.spinnerCategory);
+                ArrayAdapter categorySpinnerAdapter = ArrayAdapter.createFromResource(HistoryList.this,
+                        R.array.array_categoryfilter_option, android.R.layout.simple_spinner_item);
+                categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                category.setAdapter(categorySpinnerAdapter);
+
+                //medicine spinner
+                Spinner medicine = (Spinner) mView.findViewById(R.id.spinnerMedicine);
+                List<String> arrayMedicine = getAllMedicine();
+                ArrayAdapter<String> medicineSpinnerAdapter = new ArrayAdapter<>(HistoryList.this,
+                        android.R.layout.simple_spinner_item, arrayMedicine);
+                medicineSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                medicine.setAdapter(medicineSpinnerAdapter);
+
+                //measurement spinner
+                Spinner measurement = (Spinner) mView.findViewById(R.id.spinnerMeasurementType);
+                ArrayAdapter measurementTypeSpinnerAdapter = ArrayAdapter.createFromResource(HistoryList.this,
+                        R.array.array_meaurementtype_option, android.R.layout.simple_spinner_item);
+                measurementTypeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                measurement.setAdapter(measurementTypeSpinnerAdapter);
+
+
+                //report spinner
+                Spinner other = (Spinner) mView.findViewById(R.id.spinner);
+                ArrayAdapter reportSpinnerAdapter = ArrayAdapter.createFromResource(HistoryList.this,
+                        R.array.array_report_option, android.R.layout.simple_spinner_item);
+                reportSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                other.setAdapter(reportSpinnerAdapter);
+
+                //category spinner value selection
+                category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selection = (String) parent.getItemAtPosition(position);
+                        if (!TextUtils.isEmpty(selection) && !Objects.equals(selection, "None")) {
+                            switch (selection) {
+                                case "Supplement":
+                                    categoryValue = "1";
+                                    break;
+                                case "Chronic":
+                                    categoryValue = "2";
+                                    break;
+                                case "Incidental":
+                                    categoryValue = "3";
+                                    break;
+                                case "Complete Course":
+                                    categoryValue = "4";
+                                    break;
+                                case "Self Apply":
+                                    categoryValue = "5";
+                                    break;
+                                default:
+                                    categoryValue = null;
+                                    break;
+                            }
                         }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-            View mView = getLayoutInflater().inflate(R.layout.popup_filter_layout, null);
 
-            //To manage filter options
+                    }
 
-            View categoryLayout = mView.findViewById(R.id.catLayout);
-            View medicineLayout = mView.findViewById(R.id.medLayout);
-            View measurementLayout = mView.findViewById(R.id.measurementLayout);
+                    // Because AdapterView is an abstract class, onNothingSelected must be defined
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        //  mGender = 0; // Unknown
+                    }
+                });
 
-            if (Objects.equals(text, "CONSUMPTION"))
-            {
-                categoryLayout.setVisibility(View.VISIBLE);
-                medicineLayout.setVisibility(View.VISIBLE);
-                name = "CONSUMPTION";
-            }
-            else if (Objects.equals(text, "MEASUREMENT"))
-            {
-                measurementLayout.setVisibility(View.VISIBLE);
-                name = "MEASUREMENT";
-            }
-
-            //category spinner
-            final Spinner category = (Spinner) mView.findViewById(R.id.spinnerCategory);
-            ArrayAdapter categorySpinnerAdapter = ArrayAdapter.createFromResource(HistoryList.this,
-                    R.array.array_categoryfilter_option, android.R.layout.simple_spinner_item);
-            categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-            category.setAdapter(categorySpinnerAdapter);
-
-            //medicine spinner
-            Spinner medicine = (Spinner) mView.findViewById(R.id.spinnerMedicine);
-            List<String> arrayMedicine = getAllMedicine();
-            ArrayAdapter<String> medicineSpinnerAdapter = new ArrayAdapter<>(HistoryList.this,
-                    android.R.layout.simple_spinner_item, arrayMedicine);
-            medicineSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-            medicine.setAdapter(medicineSpinnerAdapter);
-
-            //measurement spinner
-            Spinner measurement = (Spinner) mView.findViewById(R.id.spinnerMeasurementType);
-            ArrayAdapter measurementTypeSpinnerAdapter = ArrayAdapter.createFromResource(HistoryList.this,
-                    R.array.array_meaurementtype_option, android.R.layout.simple_spinner_item);
-            measurementTypeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-            measurement.setAdapter(measurementTypeSpinnerAdapter);
-
-
-            //report spinner
-            Spinner other = (Spinner) mView.findViewById(R.id.spinner);
-            ArrayAdapter reportSpinnerAdapter = ArrayAdapter.createFromResource(HistoryList.this,
-                    R.array.array_report_option, android.R.layout.simple_spinner_item);
-            reportSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-            other.setAdapter(reportSpinnerAdapter);
-
-            //category spinner value selection
-            category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selection = (String) parent.getItemAtPosition(position);
-                    if (!TextUtils.isEmpty(selection) && !Objects.equals(selection, "None")) {
-                        switch (selection) {
-                            case "Supplement":
-                                categoryValue = "1";
-                                break;
-                            case "Chronic":
-                                categoryValue = "2";
-                                break;
-                            case "Incidental":
-                                categoryValue = "3";
-                                break;
-                            case "Complete Course":
-                                categoryValue = "4";
-                                break;
-                            case "Self Apply":
-                                categoryValue = "5";
-                                break;
-                            default:
-                                categoryValue = null;
-                                break;
+                //medicine spinner value selection
+                medicine.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selection = (String) parent.getItemAtPosition(position);
+                        if (!TextUtils.isEmpty(selection)) {
+                            if (Objects.equals(selection, "None")) {
+                                medicineValue = null;
+                                return;
+                            }
+                            medicineValue = selection;
                         }
                     }
 
-                }
+                    // Because AdapterView is an abstract class, onNothingSelected must be defined
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        //  mGender = 0; // Unknown
+                    }
+                });
 
-                // Because AdapterView is an abstract class, onNothingSelected must be defined
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    //  mGender = 0; // Unknown
-                }
-            });
-
-            //medicine spinner value selection
-            medicine.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selection = (String) parent.getItemAtPosition(position);
-                    if (!TextUtils.isEmpty(selection)) {
-                        if (Objects.equals(selection, "None")) {
-                            medicineValue = null;
-                            return;
+                //Measurement type spinner value selection
+                measurement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selection = (String) parent.getItemAtPosition(position);
+                        if (!TextUtils.isEmpty(selection)) {
+                            if (Objects.equals(selection, "None")) {
+                                measurementTypeValue = null;
+                                return;
+                            }
+                            measurementTypeValue = selection;
                         }
-                        medicineValue = selection;
                     }
-                }
 
-                // Because AdapterView is an abstract class, onNothingSelected must be defined
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    //  mGender = 0; // Unknown
-                }
-            });
+                    // Because AdapterView is an abstract class, onNothingSelected must be defined
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        //  mGender = 0; // Unknown
+                    }
+                });
 
-            //Measurement type spinner value selection
-            measurement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selection = (String) parent.getItemAtPosition(position);
-                    if (!TextUtils.isEmpty(selection)) {
-                        if (Objects.equals(selection, "None")) {
-                            measurementTypeValue = null;
-                            return;
+                //Report spinner value selection
+                other.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selection = (String) parent.getItemAtPosition(position);
+                        if (!TextUtils.isEmpty(selection) && !Objects.equals(selection, "None")) {
+                            formatValue = selection;
                         }
-                        measurementTypeValue = selection;
                     }
-                }
 
-                // Because AdapterView is an abstract class, onNothingSelected must be defined
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    //  mGender = 0; // Unknown
-                }
-            });
-
-            //Report spinner value selection
-            other.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selection = (String) parent.getItemAtPosition(position);
-                    if (!TextUtils.isEmpty(selection) && !Objects.equals(selection, "None")) {
-                        formatValue = selection;
+                    // Because AdapterView is an abstract class, onNothingSelected must be defined
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        //  mGender = 0; // Unknown
                     }
-                }
+                });
 
-                // Because AdapterView is an abstract class, onNothingSelected must be defined
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    //  mGender = 0; // Unknown
-                }
-            });
-
-            builder.setView(mView);
-            AlertDialog alert = builder.create();
-            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-            lp.copyFrom(alert.getWindow().getAttributes());
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            alert.show();
-            alert.getWindow().setAttributes(lp);
-            //alert.getWindow().setBackgroundDrawable(R.style.MyTheme);
-            //alert.getWindow().getDecorView().getBackground().setColorFilter(new LightingColorFilter(0x999999,0x9999CC));
-            return true;
-            //}
-//                    });
+                builder.setView(mView);
+                AlertDialog alert = builder.create();
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(alert.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                alert.show();
+                alert.getWindow().setAttributes(lp);
+                //alert.getWindow().setBackgroundDrawable(R.style.MyTheme);
+                //alert.getWindow().getDecorView().getBackground().setColorFilter(new LightingColorFilter(0x999999,0x9999CC));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     //Method to populate data in medicine filter spinner
-    public List<String> getAllMedicine()
-    {
+    public List<String> getAllMedicine() {
         String[] projection = new String[]{MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME};
         List<String> list = new ArrayList<>();
         list.add("None");
         list.add("   ");
         list.add("   ");
         Cursor cursor = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projection, null, null, null);
-        if (cursor != null && cursor.moveToFirst())
-        {
-            do
-            {
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
                 list.add(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME)));//adding 2nd column data
                 list.add("   ");
                 list.add("   ");
             } while (cursor.moveToNext());
         }
 
-        if (cursor != null)
-        {
+        if (cursor != null) {
             cursor.close();
         }
         return list;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_list);
 
@@ -281,13 +273,11 @@ public class HistoryList extends AppCompatActivity {
         String measurementType = bundle.getString("MeasurementTypeFilter");
 
         //To identify the button click either consumption or measurement
-        if (Objects.equals(text, "CONSUMPTION"))
-        {
+        if (Objects.equals(text, "CONSUMPTION")) {
             getConsumptionList(category, medicine);
         }
 
-        if (Objects.equals(text, "MEASUREMENT"))
-        {
+        if (Objects.equals(text, "MEASUREMENT")) {
             getMeasurementList(measurementType);
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -296,8 +286,7 @@ public class HistoryList extends AppCompatActivity {
     }
 
     //Method to get consumption list
-    public void getConsumptionList(String category, String medicine)
-    {
+    public void getConsumptionList(String category, String medicine) {
         String consumptionTable = MedipalContract.PersonalEntry.CONSUMPTION_TABLE_NAME;
         String medicineTable = MedipalContract.PersonalEntry.MEDICINE_TABLE_NAME;
         String medicineId = MedipalContract.PersonalEntry.MEDICINE_ID;
@@ -340,8 +329,7 @@ public class HistoryList extends AppCompatActivity {
     }
 
     //Method to get list of measurement
-    public void getMeasurementList(String measurementType)
-    {
+    public void getMeasurementList(String measurementType) {
         //String[] projection = new String[0];
         String whereClause = "";
         if (measurementType != null) {

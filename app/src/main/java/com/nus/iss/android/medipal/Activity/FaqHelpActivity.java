@@ -1,13 +1,15 @@
 package com.nus.iss.android.medipal.Activity;
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
 
-public class FaqHelp extends AppCompatActivity
+public class FaqHelpActivity extends AppCompatActivity
 {
     TextView ques1, ques2, ans1, ans2;
 
@@ -36,7 +38,7 @@ public class FaqHelp extends AppCompatActivity
                 {
                     ans1.setVisibility(View.GONE);
                 }
-                //Toast.makeText(FaqHelp.this, "Button clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FaqHelpActivity.this, "Button clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -55,5 +57,14 @@ public class FaqHelp extends AppCompatActivity
             }
         });
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

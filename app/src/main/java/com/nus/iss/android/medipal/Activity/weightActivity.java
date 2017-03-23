@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Loader;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -58,6 +59,9 @@ public class weightActivity extends AppCompatActivity implements LoaderManager.L
         sdf2 = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
         String currentDateandTime = sdf.format(new Date());
         mesureDate.setText(currentDateandTime);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
 
 
         /*datepicker*/
@@ -203,7 +207,11 @@ public class weightActivity extends AppCompatActivity implements LoaderManager.L
         MedDao.saveWeight(weightEntry);
         finish();
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
     @Override
     public void onBackPressed() {
         if(weightTextView.getText().toString().length()!=0){

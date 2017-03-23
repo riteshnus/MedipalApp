@@ -7,14 +7,31 @@
 
     android:weightSum="1">
 
-  <ImageView android:id="@+id/splashscreen" android:layout_width="247dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/splashscreenicon"
-        android:layout_gravity="center"
-        android:background="#00ffffff"
-      android:minWidth="100dp"
-        android:layout_marginTop="200dp"
-      android:layout_weight="0.20" />
+  <ImageView
+      android:id="@+id/splashscreen"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="@dimen/standard_105"
+
+      android:src="@mipmap/splashscreenicon"
+      android:layout_weight="0.53" />
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="MediPAL"
+      android:textStyle="bold"
+      android:textAlignment="center"
+      android:textSize="30dp"
+      />
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Because its sweet to get reminded for your medications!"
+      android:textStyle="italic"
+      android:textAlignment="center"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+      />
 
     <!--<TextView android:layout_width="fill_parent"
         android:layout_marginTop="10dp"

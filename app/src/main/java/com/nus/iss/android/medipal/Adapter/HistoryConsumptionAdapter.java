@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
+import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.Data.MedipalContract;
 import com.nus.iss.android.medipal.helper.Utils;
 
@@ -44,7 +45,7 @@ public class HistoryConsumptionAdapter extends CursorAdapter
         TextView firstColumn = (TextView) view.findViewById(R.id.idMedName);
         TextView secondColumn = (TextView) view.findViewById(R.id.idDosage);
         TextView thirdColumn = (TextView) view.findViewById(R.id.idMedDate);
-        TextView fourthColumn = (TextView) view.findViewById(R.id.idMedTime);
+        //TextView fourthColumn = (TextView) view.findViewById(R.id.idMedTime);
         ImageView imgTaken = (ImageView) view.findViewById(R.id.ivTakenMedicine);
         ImageView imgMissed = (ImageView) view.findViewById(R.id.ivMissedMedicine);
 
@@ -59,13 +60,16 @@ public class HistoryConsumptionAdapter extends CursorAdapter
 
         try
         {
-            dateOfConsumption = Utils.converStringToDate(date);
-            //date = Utils.convertDateToString(dateOfConsumption);
-            DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            date = formatDate.format(dateOfConsumption);
-            SimpleDateFormat date_format = new SimpleDateFormat("HH:mm");
-            timeOfConsumption = date_format.format(dateOfConsumption.getTime());
-            time = timeOfConsumption;
+//            dateOfConsumption = Utils.converStringToDate(date);
+//            //date = Utils.convertDateToString(dateOfConsumption);
+              String dateFormat = "EEE, d MMM, HH:mm a";
+              SimpleDateFormat sdfDate = new SimpleDateFormat(dateFormat);
+//            date = formatDate.format(dateOfConsumption);
+//            SimpleDateFormat date_format = new SimpleDateFormat("HH:mm");
+//            timeOfConsumption = date_format.format(dateOfConsumption.getTime());
+//            time = timeOfConsumption;
+              dateOfConsumption = Utils.converStringToDate(date);
+              date = sdfDate.format(dateOfConsumption);
 
             //date = date + " " + time;
         }
@@ -91,6 +95,6 @@ public class HistoryConsumptionAdapter extends CursorAdapter
         firstColumn.setText(nameMedHistory);
         secondColumn.setText(dosageHistory);
         thirdColumn.setText(date);
-        fourthColumn.setText(time);
+        //fourthColumn.setText(time);
     }
 }

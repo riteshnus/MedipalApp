@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/ev_appt_tittle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/appointment_tittle"
-            android:layout_margin="20dp"
+    <EditText
+        android:id="@+id/ev_appt_tittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:hint="@string/appointment_tittle"
+        android:textSize="25dp"
+        android:layout_margin="30dp"
         />
 
     <LinearLayout
@@ -17,27 +19,38 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="33dp"
+            android:layout_width="0dp"
             android:layout_height="33dp"
-            android:src="@drawable/ic_location"
-            android:contentDescription="abc"
+            android:layout_weight="1"
+            android:src="@mipmap/doc"
             android:layout_margin="20dp"
             />
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:orientation="vertical">
+            android:orientation="vertical">-->
 
-            <Spinner
-                android:id="@+id/select_doctor"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:layout_margin="20dp"
-                android:spinnerMode="dropdown"
-                >
-            </Spinner>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/select_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="gravity"
+            android:layout_gravity="center"
+            android:layout_weight="8"
+            android:textSize="20dp"
+            android:hint="select Category"
+            android:drawableRight="@mipmap/arrow"
+            android:layout_marginRight="20dp"/>
+        <!--<Spinner
+            android:id="@+id/select_doctor"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:spinnerMode="dropdown"
+            >
+        </Spinner>-->
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 
@@ -50,7 +63,6 @@
             android:layout_height="33dp"
             android:layout_weight="1"
             android:src="@drawable/ic_schedule"
-            android:contentDescription="abs"
             android:layout_margin="20dp"
             />
         <!--<CalendarView
@@ -63,18 +75,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:hint="Test date"
-          android:layout_marginTop="25dp"
+            android:textSize="20dp"
+            android:layout_marginTop="25dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             />
+
         <TextView
             android:id="@+id/app_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:hint="Test time"
             android:layout_marginTop="25dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            />
+            android:layout_weight="3"
+            android:textSize="20dp"
+            android:hint="Test time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,6 +108,7 @@
             android:id="@+id/app_reminder"
             android:layout_width="0dp"
             android:layout_height="33dp"
+            android:textSize="20dp"
             android:layout_weight="5"
             android:layout_marginTop="20dp"
             android:hint="Reminder"

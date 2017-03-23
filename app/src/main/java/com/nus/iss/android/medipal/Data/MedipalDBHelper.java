@@ -13,7 +13,7 @@ import com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
 
 public class MedipalDBHelper extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "MedipalDatabase.db";
+    public static final String DB_NAME = "MedipalDatabaseD.db";
     public static final int DB_VERSION = 1;
 
     // Create Table for PErsonal Bio
@@ -94,7 +94,7 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
             + PersonalEntry.ICE_CONTACT_NUMBER + " TEXT, "
             +PersonalEntry.ICE_CONTACT_TYPE + " TEXT,"
             +PersonalEntry.ICE_DESCRIPTION + " TEXT, "
-            + PersonalEntry.ICE_SEQUENCE + "INTEGER );";
+            + PersonalEntry.ICE_SEQUENCE + " INTEGER );";
 
 
     public MedipalDBHelper(Context context) {

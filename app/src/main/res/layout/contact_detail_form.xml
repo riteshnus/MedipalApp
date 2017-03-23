@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="20dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+       android:orientation="horizontal">
+    <EditText
+        android:id="@+id/et_IceName"
+        android:inputType="text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:hint="Name"
+        android:drawablePadding="15dp"
+        android:drawableLeft="@mipmap/person"
+        android:layout_weight="3"/>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/et_IceNo"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:inputType="phone"
+        android:drawableLeft="@android:drawable/sym_action_call"
+        android:drawablePadding="8dp"
+        android:hint="Contact Number" />
+
+    <TextView
+        android:id="@+id/tv_IcePriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAlignment="gravity"
+        android:layout_marginStart="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:hint="Click to Select Priority"
+        android:drawableRight="@mipmap/arrow"
+
+        />
+</LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_IceType"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:hint="Click to Select Type"
+        android:drawableRight="@mipmap/arrow"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+        />
+
+    <EditText
+        android:id="@+id/et_IceDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Describe your contact"
+        android:inputType="text"
+        android:textStyle="italic"
+        android:drawableLeft="@drawable/notes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+</LinearLayout>

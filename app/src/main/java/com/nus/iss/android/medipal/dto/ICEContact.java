@@ -22,6 +22,7 @@ public class ICEContact {
 
     public String getName() {
         return name;
+
     }
 
     public void setName(String name) {

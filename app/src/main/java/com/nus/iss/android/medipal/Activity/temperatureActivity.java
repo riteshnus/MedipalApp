@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Loader;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -57,6 +58,9 @@ public class temperatureActivity extends AppCompatActivity implements LoaderMana
         sdf2 = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
         String currentDateandTime = sdf.format(new Date());
         mesureDate.setText(currentDateandTime);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
 
         /*datepicker*/
 
@@ -151,7 +155,11 @@ public class temperatureActivity extends AppCompatActivity implements LoaderMana
     }
 
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.

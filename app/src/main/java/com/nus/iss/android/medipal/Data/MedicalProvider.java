@@ -32,6 +32,8 @@ public class MedicalProvider extends ContentProvider {
     private static final int MEASUREMENT_ID=111;
 	private static final int APPOINTMENT=112;
     private static final int APPOINTMENT_ID=113;
+    private static final int ICECONTACT=114;
+    private static final int ICECONTACT_ID=115;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -49,6 +51,8 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.ICE_TABLE_NAME,ICECONTACT);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.ICE_TABLE_NAME+"/#",ICECONTACT_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -118,6 +122,14 @@ public class MedicalProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+            case ICECONTACT:
+                cursor=sqLiteDatabase.query(PersonalEntry.ICE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case ICECONTACT_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(PersonalEntry.ICE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
         }
@@ -146,6 +158,8 @@ public class MedicalProvider extends ContentProvider {
                 return insertTable(uri,values,PersonalEntry.APPOINTMENT_TABLE_NAME);
 			case MEASUREMENT:
                 return insertTable(uri,values,PersonalEntry.MEASUREMENT_TABLE_NAME);
+            case ICECONTACT:
+                return insertTable(uri,values,PersonalEntry.ICE_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didn't match with anything");
         }
@@ -196,6 +210,20 @@ public class MedicalProvider extends ContentProvider {
                     getContext().getContentResolver().notifyChange(uri,null);
                 }
                 break;
+            case ICECONTACT:
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.ICE_TABLE_NAME,selection,selectionArgs);
+                if(rowDeleted !=0) {
+                    getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
+            case ICECONTACT_ID:
+                selection = MedipalContract.PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.ICE_TABLE_NAME,selection,selectionArgs);
+                if(rowDeleted !=0) {
+                    getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
             default:
                 throw new IllegalArgumentException("Can not delete the row "+ uri);
         }
@@ -218,6 +246,12 @@ public class MedicalProvider extends ContentProvider {
                 selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.APPOINTMENT_TABLE_NAME);
+            case ICECONTACT:
+                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.ICE_TABLE_NAME);
+            case ICECONTACT_ID:
+                selection = PersonalEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.ICE_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for "+uri);
         }

@@ -12,8 +12,14 @@ import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.Data.MedipalContract;
 import com.nus.iss.android.medipal.helper.Utils;
 
+
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Medha Sharma on 15/3/2017.
@@ -75,12 +81,14 @@ public class HistoryMeasurementAdapter extends CursorAdapter
             try
             {
                 dateMeasurement = Utils.converStringToDate(date);
-                date = Utils.convertDateToString(dateMeasurement);
+                DateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                date = formatDate.format(dateMeasurement);
+                //date = Utils.convertDateToString(dateMeasurement);
 
-                timeMeasurement = dateMeasurement.getTime();
-                timeMeasure = timeMeasurement.toString();
+//                timeMeasurement = dateMeasurement.getTime();
+//                timeMeasure = timeMeasurement.toString();
 
-                date = date + timeMeasure;
+                //date = date + timeMeasure;
 
             }
             catch (ParseException e)
@@ -109,6 +117,10 @@ public class HistoryMeasurementAdapter extends CursorAdapter
         {
             type = "Temperature";
             value = temp;
+            Double d = Double.parseDouble(value);
+            DecimalFormat df2 = new DecimalFormat(".#");
+            value = df2.format(d);
+
         }
         else if(weight != null && !weight.isEmpty())
         {

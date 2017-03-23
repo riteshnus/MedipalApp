@@ -54,7 +54,7 @@ public class History extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(History.this, FaqHelp.class));
+                startActivity(new Intent(History.this, FaqHelpActivity.class));
             }
         });
     }

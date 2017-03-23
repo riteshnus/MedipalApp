@@ -5,6 +5,7 @@
     <string name="userName">Name</string>
     <string name="userAddress">Address</string>
     <string name="empty_appointment_content">Tab the "+" \n to add your first \n appointment</string>
+    <string name="empty_contact_content">Tab the "+" \n to add your first \n ICE</string>
     <string name="appointment_tittle">Appointment tittle</string>
     <string name="doctor">Hospital</string>
     <string name="selectCategory">select Location</string>
@@ -52,7 +53,7 @@
     <string name="faqHelp">FAQ</string>
     <string name="textQues1">When the reminder message will be sent to his/her invites?</string>
     <string name="textQues2">Is the reminder message customizable?</string>
-    <string name="textAns1">ringee™ send reminder messages to invites at 10 AM Indian Standard Time[IST] on a day. This is routine task and will be send every day at 10 AM IST</string>
+    <string name="textAns1">ringeeï¿½ send reminder messages to invites at 10 AM Indian Standard Time[IST] on a day. This is routine task and will be send every day at 10 AM IST</string>
     <string name="textAns2">Users are given option to customize event text, but not event place and date and time of the event.</string>
     <string name="order">" desc"</string>
     <string name="MeasurementList">Measurement</string>
