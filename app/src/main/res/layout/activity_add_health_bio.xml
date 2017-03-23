@@ -21,8 +21,9 @@
             android:id="@+id/et_userDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textImeMultiLine"
+            android:inputType="textMultiLine"
             android:maxLines="4"
+            android:scrollHorizontally="false"
             android:hint="Enter health description here"
             android:text=""/>
 
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkedButton="@+id/rb_condition"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -48,16 +49,17 @@
                 android:text="Condition" />
         </RadioGroup>
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_edit"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/colorAccent"
+                android:src="@android:drawable/ic_menu_my_calendar" />
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="0dp"

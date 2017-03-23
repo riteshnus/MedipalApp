@@ -47,6 +47,11 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
+    <style name="VerticalDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
     <!--<style name="CustomDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:bottomBright">@color/wallet_holo_blue_light</item>
         <item name="android:bottomDark">@color/wallet_holo_blue_light</item>

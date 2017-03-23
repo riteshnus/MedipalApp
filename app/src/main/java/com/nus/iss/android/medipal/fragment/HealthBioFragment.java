@@ -3,6 +3,7 @@ package com.nus.iss.android.medipal.fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,11 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
+
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.activity.AddHealthBioActivity;
 import com.nus.iss.android.medipal.adapter.HealthBioAdapter;
 import com.nus.iss.android.medipal.callback.ToolbarActionModeCallback;
 import com.nus.iss.android.medipal.data.MedipalContract;
+import com.nus.iss.android.medipal.dto.Categories;
 import com.nus.iss.android.medipal.listener.RecyclerClickListener;
 import com.nus.iss.android.medipal.listener.RecyclerTouchListener;
 
@@ -29,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class HealthBioFragment extends android.support.v4.app.Fragment {
+public class HealthBioFragment extends android.support.v4.app.Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     private static View view;
@@ -37,7 +44,8 @@ public class HealthBioFragment extends android.support.v4.app.Fragment {
     private static MatrixCursor dummyCursor;
     private static HealthBioAdapter hbAdapter;
     private ActionMode mActionMode;
-    private FloatingActionButton addHealthBio;
+    private FloatingActionButton addHealthBioFab;
+    private static final int HEALTH_BIO_LOADER=0;
 
     public HealthBioFragment() {
         // Required empty public constructor
@@ -49,6 +57,14 @@ public class HealthBioFragment extends android.support.v4.app.Fragment {
         view = inflater.inflate(R.layout.fragment_health_bio, container, false);
         populateRecyclerView();
         implementRecyclerViewClickListeners();
+        addHealthBioFab = (FloatingActionButton) view.findViewById(R.id.hb_fab);
+        addHealthBioFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent hbIntent = new Intent(getContext(),AddHealthBioActivity.class);
+                startActivity(hbIntent);
+            }
+        });
         return view;
     }
 
@@ -58,6 +74,8 @@ public class HealthBioFragment extends android.support.v4.app.Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+/*        // ToDO---------------
         dummyCursor = new MatrixCursor(new String[]{
                 MedipalContract.HealthBioEntry.HEALTH_BIO_ID,
                 MedipalContract.HealthBioEntry.HEALTH_CONDITION,
@@ -68,8 +86,11 @@ public class HealthBioFragment extends android.support.v4.app.Fragment {
             //item_models.add(new HealthBio("Condition " + i, new Date(System.currentTimeMillis()), "C" + i));
             dummyCursor.addRow(new String[]{i+"","Condition " + i, new Date(System.currentTimeMillis()).toString(), "C" + i});
         }
+        // ToDo----------------*/
 
-        hbAdapter = new HealthBioAdapter(getActivity(), dummyCursor);
+        // hbAdapter = new HealthBioAdapter(getActivity(), dummyCursor);
+        getLoaderManager().initLoader(HEALTH_BIO_LOADER,null,this);
+        hbAdapter = new HealthBioAdapter(getActivity(), null);
         recyclerView.setAdapter(hbAdapter);
         hbAdapter.notifyDataSetChanged();
     }
@@ -148,4 +169,32 @@ public class HealthBioFragment extends android.support.v4.app.Fragment {
         mActionMode.finish();//Finish action mode after use
 
     }
+
+
+    // Loader
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] projection = {
+                MedipalContract.HealthBioEntry.HEALTH_BIO_ID,
+                MedipalContract.HealthBioEntry.HEALTH_CONDITION,
+                MedipalContract.HealthBioEntry.HEALTH_CONDITION_TYPE,
+                MedipalContract.HealthBioEntry.HEALTH_START_DATE};
+        return new CursorLoader(this.getContext(), MedipalContract.HealthBioEntry.CONTENT_URI_HEALTH_BIO, projection, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        //cursor.moveToNext()
+        getLoaderManager().restartLoader(HEALTH_BIO_LOADER,null,this);
+
+        hbAdapter.swapCursor(cursor);
+        hbAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+
 }

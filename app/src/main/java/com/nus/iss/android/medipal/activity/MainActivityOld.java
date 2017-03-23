@@ -144,6 +144,7 @@ public class MainActivityOld extends AppCompatActivity implements LoaderManager.
     public void onLoaderReset(Loader<Cursor> loader) {
         userCursorAdapter.swapCursor(null);
     }
+
     private void showFABMenu(){
         isFABOpen=true;
         fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));

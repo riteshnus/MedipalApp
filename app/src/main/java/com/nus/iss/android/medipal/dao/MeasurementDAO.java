@@ -31,9 +31,7 @@ public class MeasurementDAO {
         val.put(MedipalContract.MeasurementEntry.MEASUREMENT_DIASTOLIC, measurement.getDiastolic());
         val.put(MedipalContract.MeasurementEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
 
-        Uri myUri = activity.getContentResolver().insert(
-                MedipalContract.MeasurementEntry.CONTENT_URI_MEASUREMENT, val);
-
+        Uri myUri = activity.getContentResolver().insert(MedipalContract.MeasurementEntry.CONTENT_URI_MEASUREMENT, val);
         activity.getContentResolver().notifyChange(MedipalContract.MeasurementEntry.CONTENT_URI_MEASUREMENT, null, false);
 
 

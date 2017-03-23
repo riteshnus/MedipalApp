@@ -32,13 +32,16 @@ public class MedicalProvider extends ContentProvider {
     private static final int MEASUREMENT_ID=111;
 	private static final int APPOINTMENT=112;
     private static final int APPOINTMENT_ID=113;
+    private static final int HEALTH_BIO=200;
+    private static final int HEALTH_BIO_ID=201;
+
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.USER_TABLE_NAME,MEMBER);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.USER_TABLE_NAME+"/#",MEMBER_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, PersonalEntry.USER_TABLE_NAME,MEMBER);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, PersonalEntry.USER_TABLE_NAME+"/#",MEMBER_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME,MEDICINE);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME+"/#",MEDICINE_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME+"/#",MEDICINE_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ReminderEntry.REMINDER_TABLE_NAME,REMINDER);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ReminderEntry.REMINDER_TABLE_NAME+"/#",REMINDER_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME,CATEGORY);
@@ -49,6 +52,10 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ConsumptionEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
+/*        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME+"/#",HEALTH_BIO);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME+"/#",HEALTH_BIO_ID); */
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME ,HEALTH_BIO);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME+"/#",HEALTH_BIO_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -75,6 +82,14 @@ public class MedicalProvider extends ContentProvider {
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case HEALTH_BIO:
+                cursor = sqLiteDatabase.query(MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case HEALTH_BIO_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case CATEGORY:
                 cursor=sqLiteDatabase.query(MedipalContract.CategoriesEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
@@ -137,7 +152,7 @@ public class MedicalProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match){
             case MEMBER:
-                return insertTable(uri,values,PersonalEntry.USER_TABLE_NAME);
+                return insertTable(uri,values, MedipalContract.PersonalEntry.USER_TABLE_NAME);
             case MEDICINE:
                 return insertTable(uri,values, MedipalContract.MedicineEntry.MEDICINE_TABLE_NAME);
             case REMINDER:
@@ -146,6 +161,8 @@ public class MedicalProvider extends ContentProvider {
                 return insertTable(uri,values, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME);
 			case MEASUREMENT:
                 return insertTable(uri,values, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME);
+            case HEALTH_BIO:
+                return insertTable(uri,values, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didn't match with anything");
         }
@@ -165,13 +182,13 @@ public class MedicalProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        int rowDeleted ;
+        int rowDeleted = 0 ;
         final int match = sUriMatcher.match(uri);
-        switch (match){
+        switch (match) {
             case MEMBER:
-                rowDeleted = sqLiteDatabase.delete(PersonalEntry.USER_TABLE_NAME,selection,selectionArgs);
-                if(rowDeleted !=0) {
-                    getContext().getContentResolver().notifyChange(uri,null);
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.USER_TABLE_NAME, selection, selectionArgs);
+                if (rowDeleted != 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
                 }
                 break;
             case MEMBER_ID:
@@ -180,6 +197,14 @@ public class MedicalProvider extends ContentProvider {
                 rowDeleted = sqLiteDatabase.delete(MedipalContract.PersonalEntry.USER_TABLE_NAME,selection,selectionArgs);
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
+            case HEALTH_BIO:
+                if (selection != null) {
+                    rowDeleted = sqLiteDatabase.delete(MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME, selection, selectionArgs);
+                    if (rowDeleted != 0) {
+                        getContext().getContentResolver().notifyChange(uri, null);
+                    }
                 }
                 break;
             case APPOINTMENT:
@@ -207,11 +232,17 @@ public class MedicalProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match){
             case MEMBER:
-                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
+                return updateRows(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
             case MEMBER_ID:
                 selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
+                return updateRows(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
+            case HEALTH_BIO:
+                return updateRows(uri,contentValues,selection,selectionArgs, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME);
+            case HEALTH_BIO_ID:
+                selection = PersonalEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateRows(uri,contentValues,selection,selectionArgs,MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME);
             case APPOINTMENT:
                 return updateUser(uri,contentValues,selection,selectionArgs, MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME);
             case APPOINTMENT_ID:
@@ -235,6 +266,16 @@ public class MedicalProvider extends ContentProvider {
         if(contentValues.size()==0){
             return 0;
         }
+
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);
+        if(rowUpdated !=0){
+            getContext().getContentResolver().notifyChange(uri,null);
+        }
+        return rowUpdated;
+
+    }
+    private int updateRows(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs,String tableName){
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);

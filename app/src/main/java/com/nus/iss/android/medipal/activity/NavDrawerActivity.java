@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -27,6 +29,13 @@ import java.text.SimpleDateFormat;
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private boolean isFABOpen=false;
+    FloatingActionButton fab;
+    FloatingActionButton fabApptt;
+    FloatingActionButton fabMeasure;
+    FloatingActionButton fabMedi;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +43,59 @@ public class NavDrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* ---- FAB buttons ---- */
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.bringToFront();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "fab Clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (!isFABOpen) {
+                    rotateFabForward();
+                    showFABMenu();
+                    fabApptt.setVisibility(View.VISIBLE);
+                    fabMeasure.setVisibility(View.VISIBLE);
+                    fabMedi.setVisibility(View.VISIBLE);
+                } else {
+                    rotateFabBackward();
+                    closeFABMenu();
+                    fabApptt.setVisibility(View.GONE);
+                    fabMeasure.setVisibility(View.GONE);
+                    fabMedi.setVisibility(View.GONE);
+                }
             }
         });
+
+        fabApptt = (FloatingActionButton) findViewById(R.id.fab_appointment);
+        fabApptt.setVisibility(View.GONE);
+        fabApptt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent= new Intent(NavDrawerActivity.this, AppointmentActivity.class);
+                startActivity(newIntent);
+            }
+        });
+
+        fabMeasure = (FloatingActionButton) findViewById(R.id.fab_measurement);
+        fabMeasure.setVisibility(View.GONE);
+        fabMeasure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NavDrawerActivity.this,Measurement.class);
+                startActivity(intent);
+            }
+        });
+
+        fabMedi = (FloatingActionButton) findViewById(R.id.fab_medicine);
+        fabMedi.setVisibility(View.GONE);
+        fabMedi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NavDrawerActivity.this,AddMedicineActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /* ---------------------- */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,7 +118,6 @@ public class NavDrawerActivity extends AppCompatActivity
         ImageButton evening = (ImageButton)findViewById(R.id.ibEvening);
         ImageButton night = (ImageButton)findViewById(R.id.ibNight);
 
-        // TODO remove these listeners, implement View.OnClickListener in this class, and use switch case with view ids
         morning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +152,38 @@ public class NavDrawerActivity extends AppCompatActivity
             }
 
         });
-        //------------ End ------------
+        /* ---------- button listeners End ---------- */
+    } // End of onCreate
+
+    private void showFABMenu(){
+        isFABOpen=true;
+        fabApptt.animate().translationY(-getResources().getDimension(R.dimen.standard_70));
+        fabMeasure.animate().translationY(-getResources().getDimension(R.dimen.standard_140));
+        fabMedi.animate().translationY(-getResources().getDimension(R.dimen.standard_210));
+    }
+    private void closeFABMenu(){
+        isFABOpen=false;
+        fabApptt.animate().translationY(0);
+        fabMeasure.animate().translationY(0);
+        fabMedi.animate().translationY(0);
+    }
+
+    public void rotateFabForward() {
+        ViewCompat.animate(fab)
+                .rotation(135.0F)
+                .withLayer()
+                .setDuration(300L)
+                .setInterpolator(new OvershootInterpolator(10.0F))
+                .start();
+    }
+
+    public void rotateFabBackward() {
+        ViewCompat.animate(fab)
+                .rotation(0.0F)
+                .withLayer()
+                .setDuration(300L)
+                .setInterpolator(new OvershootInterpolator(10.0F))
+                .start();
     }
 
     @Override
@@ -121,16 +205,11 @@ public class NavDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -140,25 +219,25 @@ public class NavDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action for profile photo
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_edit_profile) {
             Intent iPersonalInfo = new Intent(NavDrawerActivity.this, PersonalInfoActivity.class);
             startActivity(iPersonalInfo);
-
         } else if (id == R.id.nav_addMedicine) {
             Intent intent = new Intent(NavDrawerActivity.this,AddMedicineActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_measurement) {
             Intent intent = new Intent(NavDrawerActivity.this,Measurement.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_appointment) {
+            Intent intent = new Intent(NavDrawerActivity.this, AppointmentList.class);
+            startActivity(intent);
         } else if (id == R.id.nav_history) {
             Intent intent = new Intent(NavDrawerActivity.this, History.class);
             startActivity(intent);
+        }else if(id == R.id.nav_faq){
+            startActivity(new Intent(NavDrawerActivity.this, FaqHelp.class));
+        } else if(id == R.id.nav_about_us){
+            // link about us
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

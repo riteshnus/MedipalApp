@@ -1,7 +1,9 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
+import com.nus.iss.android.medipal.dao.HealthBioDAO;
+import com.nus.iss.android.medipal.dto.HealthBio;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,75 +25,58 @@ import java.util.Date;
 
 public class AddHealthBioActivity extends AppCompatActivity {
 
-    private EditText descriotionTextView;
-    private RadioButton allergyRadio;
+    private EditText condDescrTextView;
     private RadioButton conditionRadio;
     private TextView dateTextView;
-    private SimpleDateFormat sdf;
-    private SimpleDateFormat sdf2;
+
+    private SimpleDateFormat sdfView = new SimpleDateFormat("EEE, d MMM yyyy");
+    private SimpleDateFormat sdfDB= new SimpleDateFormat("yyyy-MM-dd");
 
     final Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener date= new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            // TODO Auto-generated method stub
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-
-        }
-
-    };
+    DatePickerDialog.OnDateSetListener dateSetListener;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_health_bio);
-        descriotionTextView = (EditText) findViewById(R.id.et_userDescription);
-        allergyRadio = (RadioButton) findViewById(R.id.rb_allergy);
+        condDescrTextView = (EditText) findViewById(R.id.et_userDescription);
         conditionRadio = (RadioButton) findViewById(R.id.rb_condition);
         dateTextView = (TextView) findViewById(R.id.tv_date);
-        String DateFormat = "dd-MM-yyyy";
-        String myFormat = "EEE, d MMM yyyy";
-        /*to set the current date in the textview*/
-        sdf = new SimpleDateFormat(myFormat);
-        //sdf2 = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
-        String currentDateandTime = sdf.format(new Date(System.currentTimeMillis()));
-        dateTextView.setText(currentDateandTime);
-        sdf2 = new SimpleDateFormat(DateFormat);
-         /*datepicker*/
 
+        /* to set the current date in the textview */
+        dateTextView.setText(sdfView.format(new Date(System.currentTimeMillis())));
 
+        /*datepicker*/
+         dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
         dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(AddHealthBioActivity.this, date, myCalendar
+                new DatePickerDialog(AddHealthBioActivity.this, dateSetListener, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-
             }
         });
 
 
-
-    }
+    } // End of on Create
 
 
 
     private void updateLabel(){
-
-        dateTextView.setText(sdf.format(myCalendar.getTime()));
+        dateTextView.setText(sdfView.format(myCalendar.getTime()));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_editor.xml file.
-        // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.activity_add_health_bio, menu);
         return true;
     }
@@ -97,10 +84,7 @@ public class AddHealthBioActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_save) {
-
             createAndInsertDetail();
-
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -108,18 +92,21 @@ public class AddHealthBioActivity extends AppCompatActivity {
 
     public void createAndInsertDetail() {
 
-        if(null != descriotionTextView.getText() && !descriotionTextView.getText().toString().isEmpty()) {
-            String description = (descriotionTextView.getText().toString());}
-        else
-        {
-            descriotionTextView.setError("Field cannot be blank");
+        String description;
+        // C=Condition , A=Allergy
+        String condType;
+        Date condStartDate;
+
+        if(null != condDescrTextView.getText() && !condDescrTextView.getText().toString().isEmpty()) {
+            description = (condDescrTextView.getText().toString());}
+        else {
+            condDescrTextView.setError("Field cannot be blank");
             return;
         }
 
-        Date textField=null;
-
         try {
-            textField = sdf2.parse(sdf2.format(sdf.parse(String.valueOf(dateTextView.getText()))));
+            //condStartDate = sdfDB.parse(sdfDB.format(sdfView.parse(String.valueOf(dateTextView.getText()))));
+            condStartDate = sdfDB.parse(sdfDB.format(sdfView.parse(String.valueOf(dateTextView.getText()))));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -127,20 +114,19 @@ public class AddHealthBioActivity extends AppCompatActivity {
             return;
         }
 
-        int condition =0;
-        boolean allergy = allergyRadio.isChecked();
+        //boolean allergy = allergyRadio.isChecked();
 
-        if(allergy)
+        if(conditionRadio.isChecked())
         {
-            condition=0;
-        }
-        else{
-            condition=1;
+            condType="C";
+        } else{
+            condType="A";
         }
 
-/*        MeasurementDAO MedDao = new MeasurementDAO(this);
-        MedDao.saveTemp(tempEntry);
-        finish();*/
+        HealthBio healthBio = new HealthBio(description,condStartDate,condType);
+        HealthBioDAO hbDao = new HealthBioDAO(this);
+        hbDao.save(healthBio);
+        finish(); // finish activity
     }
 
 

@@ -10,9 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.data.MedipalContract;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Shubhanshu Gautam on 19/03/17.
@@ -24,6 +28,8 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
     private CursorAdapter mCursorAdapter;
     //to select multiple items
     private SparseBooleanArray mSelectedItemsIds;
+    private SimpleDateFormat sdfView = new SimpleDateFormat("EEE, d MMM yyyy");
+    private SimpleDateFormat sdfDB= new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 
 
     // only Constructor
@@ -52,14 +58,32 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
                         cursor.getString(
                                 cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_CONDITION)));
 
+                if( cursor.getString(cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_CONDITION_TYPE))
+                        .equals("A") )
+                conditionType.setText("Allergy");
+                else{
+                    conditionType.setText("Condition");
+                }
+
+                try {
+                    startDate.setText(
+                            sdfView.format(sdfDB.parse(cursor.getString(
+                                    cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_START_DATE))))
+                            );
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(context, "error setting date", Toast.LENGTH_SHORT).show();
+                }
+/*
                 conditionType.setText(
                         cursor.getString(
                                 cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_CONDITION_TYPE)));
 
-                startDate.setText(
+               startDate.setText(
                         cursor.getString(
                                 cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_START_DATE)));
-            }
+
+ */           }
         };
     } // *** End of Constructor ***
 
@@ -128,6 +152,15 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
         return mSelectedItemsIds;
     }
 
+
+    public void swapCursor(Cursor cursor){
+        Cursor oldCursor = mCursorAdapter.swapCursor(cursor);
+
+/*        if(oldCursor!=null){
+            oldCursor.close();
+        }
+*/
+    }
 
 
 

@@ -36,6 +36,14 @@
             android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.AddHealthBioActivity"
+            android:label="@string/title_activity_add_health_bio"
+            android:parentActivityName=".activity.PersonalInfoActivity"
+            android:theme="@style/AppThemeWithActionBar"
+            android:screenOrientation="portrait"/>
+
+        <!-- ********** -->
 
         <activity
             android:name=".activity.MainActivityOld"
@@ -82,7 +90,7 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        //Thushara
+        <!--Thushara-->
         <activity
             android:name=".activity.bpActivity"
             android:label="Add Blood Pressure"
