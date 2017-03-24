@@ -15,9 +15,9 @@
             android:icon="@drawable/bp"
             android:title="Add Measurement" />
         <item
-            android:id="@+id/nav_addMedicine"
+            android:id="@+id/nav_medicine"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Add Medicine" />
+            android:title="My Medicine" />
         <item
             android:id="@+id/nav_history"
             android:icon="@drawable/ic_menu_manage"

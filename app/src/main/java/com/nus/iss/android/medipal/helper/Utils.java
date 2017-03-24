@@ -31,7 +31,7 @@ public class Utils {
     public static Date converStringToDate(String dateString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
                 Locale.ENGLISH);
-        DateFormat format=new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT,Locale.getDefault());
+
         Date date=sdf.parse(dateString);
         return date;
     }
@@ -59,9 +59,12 @@ public class Utils {
         Date date=sdf.parse(dateString);
         Calendar cal=Calendar.getInstance();
         cal.setTime(date);
-        int hour=cal.get(Calendar.HOUR_OF_DAY);
+        /*int hour=cal.get(Calendar.HOUR_OF_DAY);
         int min=cal.get(Calendar.MINUTE);
-        String timeString=hour+ ":"+ min;
+        String timeString=hour+ ":"+ min;*/
+        Date newDate=cal.getTime();
+        SimpleDateFormat format=new SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT);
+        String timeString=format.format(newDate);
         return timeString;
     }
 }

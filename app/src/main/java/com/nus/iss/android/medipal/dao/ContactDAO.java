@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.net.Uri;
 
-import com.nus.iss.android.medipal.Data.MedipalContract;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.ICEContact;
 
 /**

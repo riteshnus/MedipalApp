@@ -1,5 +1,7 @@
 package com.nus.iss.android.medipal.dto;
 
+import static android.R.attr.description;
+
 /**
  * Created by siddharth on 3/11/2017.
  */

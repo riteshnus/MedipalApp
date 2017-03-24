@@ -9,7 +9,7 @@ import com.nus.iss.android.medipal.dto.Pulse;
 import com.nus.iss.android.medipal.dto.Temperature;
 import com.nus.iss.android.medipal.dto.Weight;
 
-import static com.nus.iss.android.medipal.Data.MedipalContract.PersonalEntry;
+import static com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 
 /**
  * Created by thushara on 3/16/2017.

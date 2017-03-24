@@ -12,7 +12,7 @@
     android:rowCount="2"
 
     android:layout_marginTop="@dimen/grid_layout_margin"
-    tools:context="com.nus.iss.android.medipal.Activity.NavDrawerActivity"
+    tools:context="com.nus.iss.android.medipal.activity.NavDrawerActivity"
     tools:showIn="@layout/app_bar_nav_drawer"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

@@ -14,7 +14,7 @@
         android:screenOrientation="portrait">
 
         <activity
-            android:name=".Activity.NavDrawerActivity"
+            android:name=".activity.NavDrawerActivity"
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
@@ -25,47 +25,44 @@
             </intent-filter>-->
         </activity>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="Today's Schedule"
-            android:parentActivityName=".Activity.NavDrawerActivity"
+            android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activity.PersonalInfoActivity"
+            android:name=".activity.PersonalInfoActivity"
             android:label="@string/title_activity_personal_info"
-            android:parentActivityName=".Activity.NavDrawerActivity"
+            android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".Activity.MainActivityOld"
+            android:name=".activity.MainActivityOld"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
-            android:name=".Activity.EntryClass"
-            android:label="@string/user_form"
-            android:theme="@style/AppThemeWithActionBar" />
-        <activity
-            android:name=".Activity.addAppointmentActivity"
+            android:name=".activity.AddAppointmentActivity"
             android:label="Add Appointment"
             android:theme="@style/AppThemeWithActionBar"
-            android:parentActivityName=".Activity.AppointmentList"/>
+            android:parentActivityName=".activity.AppointmentList"/>
         <activity
-            android:name=".Activity.appointmentAction"
+            android:name=".activity.AppointmentAction"
             android:label="View Appointment"
             android:theme="@style/AppThemeWithActionBar"
-            android:parentActivityName=".Activity.AppointmentList"/>
-        <activity android:name=".Activity.AppointmentList"
+            android:parentActivityName=".activity.AppointmentList"/>
+        <activity android:name=".activity.AppointmentList"
             android:label="Appointments"
             android:theme="@style/AppThemeWithActionBar"
-            android:parentActivityName=".Activity.NavDrawerActivity"/>
+            android:parentActivityName=".activity.NavDrawerActivity"/>
         <provider
-            android:name=".Data.MedicalProvider"
+            android:name=".data.MedicalProvider"
             android:authorities="com.nus.iss.android.medipal"
             android:exported="false" />
-	    <activity android:name=".Activity.MedicineActivity" />
-        <activity android:name=".Activity.AddMedicineActivity" />
+	    <activity android:name=".activity.MedicineActivity" />
+        <activity android:name=".activity.AddMedicineActivity" />
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -76,44 +73,40 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Activity.History"
+            android:name=".activity.History"
             android:label="@string/menuhistory" />
         <activity
-            android:name=".Activity.HistoryList"
+            android:name=".activity.HistoryList"
             android:label="@string/menuhistorylist"
-            android:parentActivityName=".Activity.NavDrawerActivity"/>
+            android:parentActivityName=".activity.NavDrawerActivity"/>
         <activity
-            android:name=".Activity.FaqHelpActivity"
+            android:name=".activity.FaqHelpActivity"
             android:label="@string/faqHelp"
-            android:parentActivityName=".Activity.NavDrawerActivity"/>
+            android:parentActivityName=".activity.NavDrawerActivity"/>
         <activity
-            android:name=".Activity.AboutUs"
+            android:name=".activity.AboutUs"
             android:label="@string/faqHelp"
-            android:parentActivityName=".Activity.NavDrawerActivity"/>
-        <service
-            android:name=".services.NotificationService"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:parentActivityName=".activity.NavDrawerActivity"/>
 
         //Thushara
         <activity
-            android:name=".Activity.bpActivity"
+            android:name=".activity.BpActivity"
             android:label="Add Blood Pressure"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.temperatureActivity"
+            android:name=".activity.TemperatureActivity"
             android:label=" Add Temperature"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.pulseActivity"
+            android:name=".activity.PulseActivity"
             android:label="Add Pulse"
-            android:parentActivityName=".Activity.Measurement"
+            android:parentActivityName=".activity.Measurement"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.weightActivity"
+            android:name=".activity.WeightActivity"
             android:label="Add Weight"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".Activity.SplashScreenActivity">
+        <activity android:name=".activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -121,26 +114,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Measurement"
+            android:name=".activity.Measurement"
             android:label="@string/MeasurementList"
             android:theme="@style/AppThemeWithActionBar"
-            android:parentActivityName=".Activity.NavDrawerActivity"/>
+            android:parentActivityName=".activity.NavDrawerActivity"/>
 
         <activity
-            android:name=".Activity.ICEContactList"
+            android:name=".activity.ICEContactList"
             android:label="ICE Contact"
-            android:parentActivityName=".Activity.NavDrawerActivity"
+            android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".Activity.AddContactActivity"
+            android:name=".activity.AddContactActivity"
             android:label="Add Contact"
             android:theme="@style/AppThemeWithActionBar"
-            android:parentActivityName=".Activity.ICEContactList"/>
+            android:parentActivityName=".activity.ICEContactList"/>
         <activity
-            android:name=".Activity.ContactAction"
+            android:name=".activity.ContactAction"
             android:label="View Contact"
             android:theme="@style/AppThemeWithActionBar"
-            android:parentActivityName=".Activity.ICEContactList"/>
+            android:parentActivityName=".activity.ICEContactList"/>
+	    <activity
+            android:name=".activity.CurrentMedicineActivity"
+            android:parentActivityName=".activity.MedicineActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MedicineActivity" />
+        </activity>
+        <activity android:name=".activity.ReminderActivity" />
+        <!--<service
+            android:name=".services.NotificationIntentService"
+            android:exported="true"
+            android:enabled="true"></service>-->
+        <receiver android:name=".receiver.MedicineReceiver"
+            android:enabled="true"/>
+        <receiver android:name=".receiver.MedicineReceiver"
+            android:enabled="true"/>
     </application>
 
 </manifest>

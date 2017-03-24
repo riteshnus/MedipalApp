@@ -1,13 +1,17 @@
 package com.nus.iss.android.medipal.dto;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by siddharth on 3/11/2017.
  */
 
-public class Medicine {
+public class Medicine implements Serializable {
 
+    private int medicineId;
     private String medicine;
     private String description;
     private Categories category;
@@ -19,6 +23,10 @@ public class Medicine {
     private int threshold;
     private Date dateIssued;
     private int expireFactor;
+    private List<Consumption> consumptionList;
+
+    public Medicine() {
+    }
 
     public Medicine(String medicine, String description, boolean remind, int quantity,
                     int dosage, int consumeQuantity, int threshold, Date dateIssued, int expireFactor) {
@@ -31,6 +39,14 @@ public class Medicine {
         this.threshold = threshold;
         this.dateIssued = dateIssued;
         this.expireFactor = expireFactor;
+    }
+
+    public int getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(int medicineId) {
+        this.medicineId = medicineId;
     }
 
     public Categories getCategory() {
@@ -119,5 +135,21 @@ public class Medicine {
 
     public void setThreshold(int threshold) {
         this.threshold = threshold;
+    }
+
+    public List<Consumption> getConsumptionList() {
+        return consumptionList;
+    }
+
+    public void setConsumptionList(List<Consumption> consumptionList) {
+        this.consumptionList = consumptionList;
+    }
+
+    public void addConsumption(Consumption consumption){
+        if(consumptionList==null){
+            consumptionList=new ArrayList<Consumption>();
+        }
+        consumptionList.add(consumption);
+        consumption.setMedicine(this);
     }
 }
