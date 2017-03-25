@@ -10,53 +10,54 @@
         android:layout_height="wrap_content"
         android:padding="2dp"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/bp"
-            />
+
 
         <TextView
             android:id="@+id/tv_contact_name"
             android:layout_width="0dp"
             android:layout_weight="4"
+            android:drawableLeft="@mipmap/person"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
             android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="test"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/bp" />
-
-        <TextView
-            android:id="@+id/tv_contact_number"
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+               <TextView
+                     android:id="@+id/tv_contact_number"
+                     android:layout_width="0dp"
+                   android:layout_marginStart="20dp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                   android:drawableLeft="@android:drawable/stat_sys_vp_phone_call"
+                   android:drawablePadding="29dp"
+                   android:gravity="center_vertical"
+                   android:hint="test"
+                   android:textSize="20dp"
+                   android:layout_marginTop="10dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/bp" />
 
         <TextView
+            android:drawableLeft="@drawable/notes"
+            android:drawablePadding="17dp"
+            android:gravity="center_vertical"
+            android:hint="test"
+            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/tv_contact_description"
             android:layout_width="0dp"
             android:layout_weight="4"
@@ -68,16 +69,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/bp" />
 
         <TextView
             android:id="@+id/tv_contact_priority"
             android:layout_width="0dp"
+            android:drawableLeft="@android:drawable/btn_star_big_on"
+            android:drawablePadding="17dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:hint="test"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="4"
             android:layout_gravity="center"
             android:layout_height="wrap_content" />
@@ -87,17 +89,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/bp" />
 
         <TextView
             android:id="@+id/tv_contact_type"
             android:layout_width="0dp"
             android:layout_weight="4"
+            android:drawableLeft="@mipmap/doc"
+            android:layout_marginStart="10dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:hint="test"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content" />
     </LinearLayout>

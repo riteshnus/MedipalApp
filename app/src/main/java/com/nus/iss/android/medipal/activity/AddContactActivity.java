@@ -54,7 +54,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
             @Override
             public void onClick(View v) {
 
-                final CharSequence[] items = {"1", "2", "3"};
+                final CharSequence[] items = {"1", "2", "3", "4"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
                 builder.setTitle("Select Your Priority Order");
@@ -118,8 +118,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         switch (item.getItemId()) {
             case R.id.action_save:
                 createAndInsertContact();
-                finish();
-                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -127,20 +126,21 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
     public void createAndInsertContact()
     {
         int rowsAffected = 0;
-        String name;
-        String contact;
-        String priority;
-        String type;
-        String des;
+        String name="";
+        String contact="";
+        String priority="";
+        String type="";
+        String des="";
 
-        if(null != nameTextView.getText() && !nameTextView.getText().toString().isEmpty())
-        {
-        name  = (nameTextView.getText().toString());
-        }
-        else
+        if(nameTextView.getText().toString().isEmpty())
         {
             nameTextView.setError("Field cannot be blank");
             return;
+
+        }
+        else
+        {
+            name  = (nameTextView.getText().toString());
         }
 
         if(null != contactTextView.getText() && !contactTextView.getText().toString().isEmpty())
@@ -187,6 +187,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         ContactDAO contactDAO = new ContactDAO(this);
         if (mCurrentContactUri == null) {
             contactDAO.saveIce(newEntry);
+            finish();
         } else {
             rowsAffected = contactDAO.update(newEntry,mCurrentContactUri);
             if (rowsAffected == 0) {

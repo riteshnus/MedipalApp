@@ -23,7 +23,9 @@
         android:textSize="25sp"
         android:drawableLeft="@mipmap/med"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="Medicine name"/>
+        android:hint="Medicine name"
+        android:maxLength="50"
+        />
     <EditText
         android:id="@+id/quantity_text"
         android:layout_width="match_parent"
@@ -32,6 +34,7 @@
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:inputType="number"
+        android:maxLength="3"
         android:hint="Quantity Issued"/>
     <LinearLayout
         android:id="@+id/container_dosage"
@@ -89,18 +92,9 @@
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:inputType="number"
+        android:maxLength="2"
         android:hint="@string/expiry_factor"/>
-    <EditText
-        android:id="@+id/description_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:drawableLeft="@drawable/notes"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_marginTop="10dp"
-        android:hint="Symptoms/Medical Diagnosis">
 
-    </EditText>
     <LinearLayout
         android:id="@+id/container_category"
         android:layout_width="match_parent"
@@ -138,21 +132,36 @@
                 android:spinnerMode="dropdown"/>
         </LinearLayout>
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/notes"
+        android:hint="Symptoms/Medical Diagnosis"
+        android:maxLength="255"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="20sp">
+
+    </EditText>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_marginBottom="8dp">
+
         <TextView
+            android:id="@+id/remind_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/remind_text"
             android:layout_weight="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Reminder"
-            android:textSize="20sp"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="20sp" />
+
         <Switch
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -216,6 +225,7 @@
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:inputType="number"
+        android:maxLength="3"
         android:hint="@string/threshold"/>
 </LinearLayout>
 </ScrollView>

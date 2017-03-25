@@ -8,10 +8,12 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -108,6 +110,10 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         descriptionEditText = (EditText) findViewById(R.id.description_text);
         remindSwitch = (Switch) findViewById(R.id.remind_switch);
         thresholdReminderSwitch.setChecked(Boolean.FALSE);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
+
         thresholdText.setVisibility(View.GONE);
         addListeners();
         setupSpinner();
@@ -690,10 +696,35 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+
+
+        if(nameTextView.getText().toString().length()!=0){
+
+            new android.support.v7.app.AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+
+        else
+        {
+            finish();
+        }
     }
 
     private boolean isValid(){
@@ -722,10 +753,24 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         }
         if(thresholdReminderSwitch.isChecked()) {
             if (TextUtils.isEmpty(thresholdText.getText())) {
+
                 errorMsg = "Medicine threshold Can not be empty";
                 return false;
             }
         }
+            int threshold;
+        threshold=Integer.parseInt(thresholdText.getText().toString());
+            int quantity;
+        quantity= Integer.parseInt(quantityTextView.getText().toString());
+
+
+            if (threshold>quantity) {
+                errorMsg = "Threshold cannot be greater than Quantity";
+                return false;
+            }
+
+
+
         return true;
     }
 }

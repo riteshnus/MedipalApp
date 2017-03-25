@@ -177,8 +177,6 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
         if (item.getItemId() == R.id.action_saveWeight) {
 
             createAndInsertMeasurement();
-
-
         }
         return super.onOptionsItemSelected(item);
     }

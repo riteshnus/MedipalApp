@@ -235,13 +235,13 @@ public class PulseActivity extends AppCompatActivity implements LoaderManager.Lo
                 })
                 .setNegativeButton("No", null)
                 .show();
-            }
+    }
 
         else
-            {
-                finish();
-            }
+    {
+        finish();
     }
+}
 
 
     @Override

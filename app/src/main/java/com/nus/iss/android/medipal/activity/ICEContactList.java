@@ -45,6 +45,7 @@ public class ICEContactList extends AppCompatActivity implements LoaderManager.L
         fabAddAppt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(ICEContactList.this,AddContactActivity.class);
                 startActivity(intent);
             }

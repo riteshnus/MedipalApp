@@ -86,8 +86,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 // this.finish();
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.action_settings:
-                return true;
+
         }
 
 

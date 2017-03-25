@@ -15,6 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/reminder_medicine_id"
+        android:drawableLeft="@mipmap/medicine"
+        android:drawablePadding="10dp"
+        android:textSize="20dp"
+        android:gravity="center_vertical"
         android:text="MEdicine Name" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,12 +29,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/datetime"
+            android:drawablePadding="10dp"
+            android:textSize="20dp"
+            android:gravity="center_vertical"
             android:text="Scheduled At"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/reminder_time_text"
             android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:textAlignment="textEnd"
+            android:textSize="20dp"
             android:text="9:00 PM"/>
        </LinearLayout>
 
@@ -43,6 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textSize="20dp"
         android:id="@+id/ignore_button"
         android:text="Ignore" />
         <Button
@@ -50,12 +62,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/snooze_button"
+            android:textSize="20dp"
             android:text="Snooze" />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/take_button"
+            android:textSize="20dp"
             android:text="Take" />
     </LinearLayout>
 </LinearLayout>

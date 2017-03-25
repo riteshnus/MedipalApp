@@ -61,7 +61,8 @@
             android:name=".data.MedicalProvider"
             android:authorities="com.nus.iss.android.medipal"
             android:exported="false" />
-	    <activity android:name=".activity.MedicineActivity" />
+	    <activity android:name=".activity.MedicineActivity"
+            android:parentActivityName=".activity.NavDrawerActivity"/>
         <activity android:name=".activity.AddMedicineActivity" />
 
         <!--
@@ -85,7 +86,7 @@
             android:parentActivityName=".activity.NavDrawerActivity"/>
         <activity
             android:name=".activity.AboutUs"
-            android:label="@string/faqHelp"
+            android:label="About Us"
             android:parentActivityName=".activity.NavDrawerActivity"/>
 
         //Thushara

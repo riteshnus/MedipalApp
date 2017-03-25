@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    android:weightSum="1">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,53 +14,61 @@
         android:inputType="text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
         android:hint="Name"
+        android:maxLength="100"
         android:drawablePadding="15dp"
         android:drawableLeft="@mipmap/person"
         android:layout_weight="3"/>
 </LinearLayout>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <EditText
-        android:id="@+id/et_IceNo"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:inputType="phone"
-        android:drawableLeft="@android:drawable/sym_action_call"
-        android:drawablePadding="8dp"
-        android:hint="Contact Number" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_IcePriority"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textAlignment="gravity"
-        android:layout_marginStart="20dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="Click to Select Priority"
-        android:drawableRight="@mipmap/arrow"
+        <EditText
+            android:id="@+id/et_IceNo"
+            style="@style/Widget.AppCompat.AutoCompleteTextView"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@android:drawable/sym_action_call"
+            android:drawablePadding="8dp"
+            android:hint="Contact Number"
+            android:maxLength="20"
+            android:inputType="phone"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        />
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_IcePriority"
+            android:layout_width="322dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@mipmap/arrow"
+            android:hint="Click to Select Priority"
+            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_IceType"
-        android:layout_width="226dp"
+        android:layout_width="322dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:hint="Click to Select Type"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
         android:drawableRight="@mipmap/arrow"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 
@@ -70,8 +79,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Describe your contact"
+        android:maxLength="255"
+        android:textSize="20dp"
         android:inputType="text"
         android:textStyle="italic"
         android:drawableLeft="@drawable/notes"
