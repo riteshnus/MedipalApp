@@ -1,21 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvBio"
-            android:layout_width="250dp"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_weight="3"
+            android:paddingLeft="10dp">
+            <TextView
+                android:text="Condition"
+                android:id="@+id/hb_condition_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_purple"
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:textSize="16sp" />
+            <TextView
+                android:text="Start Date"
+                android:id="@+id/hb_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/hb_condition_type"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+        <View style="@style/VerticalDivider"
+            android:layout_weight="0.1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:id="@+id/hb_condition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:maxLines="3"
             android:layout_gravity="left"
-            android:text="qwertyuicgcgxcvhgvxzhcvhxvchvxh\zvcvxnvcnxvznvcnzxvcvvcnbxc bn xnc bvvvnvnbvgfhgvhvghvhvhvh34vhv44nbvvvv56nbv5nvvbnv5nvvnbvnvnvnbbvnvn"/>
+            android:layout_weight="7"
+            android:text="  "/>
 
 
     </LinearLayout>

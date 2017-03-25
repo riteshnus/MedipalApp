@@ -34,6 +34,11 @@ public class MedicalProvider extends ContentProvider {
     private static final int APPOINTMENT_ID=113;
     private static final int ICECONTACT=114;
     private static final int ICECONTACT_ID=115;
+	
+	private static final int HEALTH_BIO=200;
+    private static final int HEALTH_BIO_ID=201;
+    private static final int MEDICINE_REMINDER_ID=202;
+
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -53,6 +58,8 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.ICE_TABLE_NAME,ICECONTACT);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY,PersonalEntry.ICE_TABLE_NAME+"/#",ICECONTACT_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME ,HEALTH_BIO);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MEDICINE_REMINDER_JOIN ,MEDICINE_REMINDER_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -80,6 +87,15 @@ public class MedicalProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.USER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+            case HEALTH_BIO:
+                cursor = sqLiteDatabase.query(MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case HEALTH_BIO_ID:
+                selection = PersonalEntry._ID +"=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+
             case CATEGORY:
                 cursor=sqLiteDatabase.query(PersonalEntry.CATEGORIES_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
@@ -129,6 +145,9 @@ public class MedicalProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(PersonalEntry.ICE_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
+			case MEDICINE_REMINDER_ID:
+                cursor = sqLiteDatabase.rawQuery(selection, null);
+                break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);
         }
@@ -159,6 +178,9 @@ public class MedicalProvider extends ContentProvider {
                 return insertTable(uri,values,PersonalEntry.MEASUREMENT_TABLE_NAME);
             case ICECONTACT:
                 return insertTable(uri,values,PersonalEntry.ICE_TABLE_NAME);
+            case HEALTH_BIO:
+            	return insertTable(uri,values, MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME);
+
             default:
                 throw new IllegalArgumentException("Uri didn't match with anything");
         }
@@ -179,14 +201,14 @@ public class MedicalProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        int rowDeleted ;
+        int rowDeleted =0;
         final int match = sUriMatcher.match(uri);
         Log.v(LOG_TAG,"Query to be called for " + match);
         switch (match){
             case MEMBER:
-                rowDeleted = sqLiteDatabase.delete(PersonalEntry.USER_TABLE_NAME,selection,selectionArgs);
-                if(rowDeleted !=0) {
-                    getContext().getContentResolver().notifyChange(uri,null);
+                rowDeleted = sqLiteDatabase.delete(PersonalEntry.USER_TABLE_NAME, selection, selectionArgs);
+                if (rowDeleted != 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
                 }
                 break;
             case MEMBER_ID:
@@ -211,6 +233,14 @@ public class MedicalProvider extends ContentProvider {
                 rowDeleted = sqLiteDatabase.delete(PersonalEntry.MEDICINE_TABLE_NAME,selection,selectionArgs);
                 if(rowDeleted !=0) {
                     getContext().getContentResolver().notifyChange(uri,null);
+                }
+                break;
+			case HEALTH_BIO:
+                if (selection != null) {
+                    rowDeleted = sqLiteDatabase.delete(MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME, selection, selectionArgs);
+                    if (rowDeleted != 0) {
+                        getContext().getContentResolver().notifyChange(uri, null);
+                    }
                 }
                 break;
             case APPOINTMENT:
@@ -257,7 +287,14 @@ public class MedicalProvider extends ContentProvider {
                 selection = PersonalEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateUser(uri,contentValues,selection,selectionArgs,PersonalEntry.USER_TABLE_NAME);
-            case MEDICINE_ID:
+                       case HEALTH_BIO:
+                return updateRows(uri,contentValues,selection,selectionArgs, MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME);
+            case HEALTH_BIO_ID:
+                selection = PersonalEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateRows(uri,contentValues,selection,selectionArgs,MedipalContract.PersonalEntry.HEALTH_BIO_TABLE_NAME);
+ 
+			case MEDICINE_ID:
                 selection=PersonalEntry.MEDICINE_ID + "=?";
                 selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateTable(uri,contentValues,selection,selectionArgs,PersonalEntry.MEDICINE_TABLE_NAME);
@@ -309,6 +346,16 @@ public class MedicalProvider extends ContentProvider {
         if(contentValues.size()==0){
             return 0;
         }
+
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);
+        if(rowUpdated !=0){
+            getContext().getContentResolver().notifyChange(uri,null);
+        }
+        return rowUpdated;
+
+    }
+    private int updateRows(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs,String tableName){
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);

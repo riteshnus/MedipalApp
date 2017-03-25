@@ -12,7 +12,7 @@ public class MedipalContract {
     public static final String CONTENT_AUTHORITY = "com.nus.iss.android.medipal";
     public static final Uri BASE_CONTENT = Uri.parse("content://"+ CONTENT_AUTHORITY);
     public static final String PATH_PERSONAL = "PersonalBio";
-
+    public static final String MEDICINE_REMINDER_JOIN = "MedRemindJoin";
     public static final class PersonalEntry implements BaseColumns {
 
         public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PERSONAL;
@@ -25,6 +25,9 @@ public class MedipalContract {
         public final static Uri CONTENT_URI_MEASUREMENT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.MEASUREMENT_TABLE_NAME);
         public final static Uri CONTENT_URI_APPOINTMENT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.APPOINTMENT_TABLE_NAME);
         public final static Uri CONTENT_URI_CONTACT = Uri.withAppendedPath(BASE_CONTENT,PersonalEntry.ICE_TABLE_NAME);
+		public final static Uri CONTENT_URI_HEALTH_BIO = Uri.withAppendedPath(MedipalContract.BASE_CONTENT, PersonalEntry.HEALTH_BIO_TABLE_NAME);
+		public final static Uri CONTENT_URI_MEDICINE_REMINDER_JOIN = Uri.withAppendedPath(MedipalContract.BASE_CONTENT, MEDICINE_REMINDER_JOIN);
+
         /*
         * Table Details for Personal Bio table
         * */
@@ -73,7 +76,7 @@ public class MedipalContract {
         public static final String MEDICINE_THRESHOLD="Threshold";
         public static final String MEDICINE_DATE_ISSUED="DateIssued";
         public static final String MEDICINE_EXPIRE_FACTOR="ExpireFactor";
-
+		public static final String MEDICINE_TIME = "Time";
         /*
        * Table Details for Measurement table
        * */

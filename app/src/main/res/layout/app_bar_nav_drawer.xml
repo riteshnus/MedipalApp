@@ -24,22 +24,6 @@
     <include layout="@layout/content_nav_drawer" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="177dp"
-        android:layout_height="@dimen/standard_45"
-        android:layout_margin="@dimen/standard_21"
-        app:srcCompat="@drawable/ic_add_circle"
-        app:layout_anchorGravity="top|center_horizontal"
-        android:layout_gravity="bottom|end"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,6 +31,31 @@
         android:layout_margin="@dimen/fab_margin"
         app:elevation="10dp"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:elevation="5dp"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_medicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:elevation="5dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_measurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:elevation="5dp"
+        app:srcCompat="@drawable/bp" />
 
     <TextView
         android:id="@+id/dateTextView"

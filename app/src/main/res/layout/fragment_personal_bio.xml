@@ -96,6 +96,7 @@
                 android:paddingRight="@dimen/prof_etxt_padding"
                 android:ems="12"
                 android:hint="Postal Code"
+                android:digits="0123456789"
                 android:inputType="number" />
             <TextView
                 android:layout_width="wrap_content"
@@ -113,6 +114,7 @@
                 android:paddingRight="@dimen/prof_etxt_padding"
                 android:ems="12"
                 android:hint="Height"
+                android:digits="0123456789."
                 android:inputType="number" />
             <TextView
                 android:layout_width="wrap_content"

@@ -21,17 +21,18 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
             + PersonalEntry.USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PersonalEntry.USER_NAME + " TEXT NOT NULL, "
             + PersonalEntry.USER_DOB + " DATE, "
-            +PersonalEntry.USER_ID_NO + " TEXT, "
-            +PersonalEntry.USER_POSTAL_CODE + " TEXT, "
-            +PersonalEntry.USER_HEIGHT + " INTEGER, "
-            +PersonalEntry.USER_BLOOD_TYPE  + " TEXT );";
+            + PersonalEntry.USER_ID_NO + " TEXT, "
+            + PersonalEntry.USER_POSTAL_CODE + " TEXT, "
+			+ PersonalEntry.USER_ADDRESS + " TEXT, "
+            + PersonalEntry.USER_HEIGHT + " INTEGER, "
+            + PersonalEntry.USER_BLOOD_TYPE  + " TEXT );";
 
     //Ceate Table for Health Bio
     public static final  String SQL_CREATE_HEATH_BIO_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.HEALTH_BIO_TABLE_NAME + " ("
             + PersonalEntry.HEALTH_BIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PersonalEntry.HEALTH_CONDITION + " TEXT, "
             + PersonalEntry.HEALTH_START_DATE + " DATE, "
-            +PersonalEntry.HEALTH_CONDITION_TYPE  + " TEXT );";
+            + PersonalEntry.HEALTH_CONDITION_TYPE  + " TEXT );";
 
     //Create Table for Categories
     public static final  String SQL_CREATE_CATEGORIES_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.CATEGORIES_TABLE_NAME + " ("

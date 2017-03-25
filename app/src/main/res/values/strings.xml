@@ -1,9 +1,8 @@
 <resources>
-
-
+    <string name="empty_view_schedule">Nothing scheduled \n for this part of the day</string>
     <string name="empty_appointment_content">Tab the "+" \n to add your first \n appointment</string>
     <string name="empty_contact_content">Tab the "+" \n to add your first \n ICE</string>
-    <string name="appointment_tittle">Appointment tittle</string>
+    <string name="appointment_tittle">Appointment title</string>
     <string name="doctor">Hospital</string>
     <string name="selectCategory">select Location</string>
     <string name="clinic">Clinic</string>
@@ -13,11 +12,13 @@
     <string name="grid_button_margin">10dp</string>
     <string name="grid_layout_margin">10dp</string>
     <string name="grid_btn_padding">10dp</string>
+    <string name="delete">delete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_personal_info">Personal Info</string>
-<string name="menuhistory">History</string>
+    <string name="title_activity_add_health_bio">Add Symptom/Diagnosis</string>
+    <string name="menuhistory">History</string>
     <string name="menuhistorylist">History List</string>
     <string name="filter">Select Filter</string>
     <string name="by_year">By Year</string>
