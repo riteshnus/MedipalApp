@@ -67,7 +67,7 @@ public class NavDrawerActivity extends AppCompatActivity
         fabApptt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newIntent= new Intent(NavDrawerActivity.this, AppointmentAction.class);
+                Intent newIntent= new Intent(NavDrawerActivity.this, AddAppointmentActivity.class);
                 startActivity(newIntent);
             }
         });
