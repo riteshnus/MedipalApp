@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +53,7 @@ import com.nus.iss.android.medipal.helper.Utils;
 
 import com.nus.iss.android.medipal.receiver.MedicineReceiver;
 
+import static android.R.id.empty;
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_DATE_FORMAT;
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_TIME_FORMAT;
 
@@ -71,7 +74,8 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     private TextView startTimeTextView;
     private Switch thresholdReminderSwitch;
     private EditText thresholdText;
-    private EditText intervalText;
+    private  EditText intervalText;
+    private EditText frequencyText;
     private EditText descriptionEditText;
     private PendingIntent pendingIntent;
     private Uri medicineUri;
@@ -83,6 +87,8 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     private Uri categoryUri;
     private Uri reminderUri;
     private String errorMsg;
+    private int interval;
+    private int frequency;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +109,8 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         reminderlayout = (LinearLayout) findViewById(R.id.reminder_layout);
         startTimeTextView = (TextView) findViewById(R.id.reminder_time);
         thresholdText = (EditText) findViewById(R.id.threshold_text);
-        intervalText = (EditText) findViewById(R.id.interval_text);
+        intervalText= (EditText) findViewById(R.id.interval_text);
+        frequencyText= (EditText) findViewById(R.id.frequency_text);
         thresholdReminderSwitch = (Switch) findViewById(R.id.threshold_remind_switch);
         descriptionEditText = (EditText) findViewById(R.id.description_text);
         remindSwitch = (Switch) findViewById(R.id.remind_switch);
@@ -333,8 +340,9 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         Categories categories=categoryMap.get(category_text);
         Reminder reminder=null;
         if(remindForMedicine) {
-            int interval = Integer.parseInt(intervalText.getText().toString());
-            reminder = new Reminder(3, startTime, interval); //TODO frequency needs to be added on screen.
+            interval= Integer.parseInt(intervalText.getText().toString());
+            frequency= Integer.parseInt(frequencyText.getText().toString());
+            reminder = new Reminder(frequency, startTime, interval);
             ReminderDAO reminderDAO = new ReminderDAO(this);
             reminder = reminderDAO.save(reminder);
 
@@ -402,13 +410,6 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                     createAndInsertMedicine();
                 }
                 finish();
-            }
-            else {
-                new AlertDialog.Builder(this)
-                        .setMessage(errorMsg)
-                        .setNegativeButton("Ok", null)
-                        .setCancelable(false)
-                        .show();
             }
         }
 
@@ -653,6 +654,7 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
             remindSwitch.setChecked(medicine.isRemind());
             startTimeTextView.setText(Utils.convertTimeToString(medicine.getReminder().getStartTime()));
             intervalText.setText(String.valueOf(medicine.getReminder().getInterval()));
+            frequencyText.setText(String.valueOf(medicine.getReminder().getFrequency()));
         }else {
             reminderlayout.setVisibility(View.GONE);
         }
@@ -700,33 +702,63 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     private boolean isValid(){
 
         if(TextUtils.isEmpty(nameTextView.getText())){
-            errorMsg="Name of Medicine Can not be empty";
+            nameTextView.setError("Medicine Name Can not be empty");
             return false;
         }
         if(TextUtils.isEmpty(quantityTextView.getText())){
-            errorMsg="Medicine Quantity Can not be empty";
+            quantityTextView.setError("Medicine Quantity Can not be empty");
+
             return false;
         }
         if(TextUtils.isEmpty(dosageText.getText())){
-            errorMsg="Daily to be consumed quantity Can not be empty";
+            dosageText.setError("consumed quantity Can not be empty");
+
             return false;
         }
         if(TextUtils.isEmpty(expiryFactorTextView.getText())){
-            errorMsg="Expiry Factor of Medicine Can not be empty";
+            expiryFactorTextView.setError("Expiry Factor of Medicine Can not be empty");
+
             return false;
+        }
+        if(!TextUtils.isEmpty(expiryFactorTextView.getText())){
+            int expiryFactor=Integer.parseInt(expiryFactorTextView.getText().toString());
+            if(expiryFactor<=0){
+                expiryFactorTextView.setError("Expiry Factor can not be less than 1 month");
+                return false;
+            }
+            if(expiryFactor>24){
+                expiryFactorTextView.setError("Expiry Factor can not be more than 2 years");
+                return false;
+            }
         }
         if(remindSwitch.isChecked()) {
             if (TextUtils.isEmpty(intervalText.getText())) {
-                errorMsg = "Interval for Reminder Can not be empty";
+                intervalText.setError("Interval for Reminder Can not be empty");
+                return false;
+            }
+            if (TextUtils.isEmpty(frequencyText.getText())) {
+                frequencyText.setError("Interval for Reminder Can not be empty");
                 return false;
             }
         }
         if(thresholdReminderSwitch.isChecked()) {
             if (TextUtils.isEmpty(thresholdText.getText())) {
-                errorMsg = "Medicine threshold Can not be empty";
+                thresholdText.setError("Medicine threshold Can not be empty");
                 return false;
+            }else {
+                int threshold= Integer.parseInt(thresholdText.getText().toString());
+                int quantity=Integer.parseInt(quantityTextView.getText().toString());
+                if(threshold>quantity){
+                    thresholdText.setError("Threshold Cannot be more than total quantity");
+                    return false;
+                }
             }
         }
+
         return true;
     }
+
+
+
+
 }

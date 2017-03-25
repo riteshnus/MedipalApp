@@ -170,30 +170,30 @@ public class AppointmentActivity extends AppCompatActivity implements CompoundBu
     }
 
     public void openReminderPopup(){
-                final String[] items = {"Before 1 Day", "Before 1 hour", "Before 30min", "Before 10Min"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentActivity.this);
-                builder.setTitle("Choose names: ");
-                builder.setItems(items, new DialogInterface.OnClickListener() {
+        final String[] items = {"Before 1 Day", "Before 1 hour", "Before 30min", "Before 10Min"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentActivity.this);
+        builder.setTitle("Choose names: ");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                ReminderTextView.setText(items[item]);
+            }
+        });
+        builder
+                .setCancelable(false)
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int item) {
-                        ReminderTextView.setText(items[item]);
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+
                     }
                 });
-                builder
-                        .setCancelable(false)
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-
-                            }
-                        });
-
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

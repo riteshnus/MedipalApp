@@ -149,6 +149,8 @@ public class MedicalProvider extends ContentProvider {
                 return insertTable(uri,values,PersonalEntry.APPOINTMENT_TABLE_NAME);
             case MEASUREMENT:
                 return insertTable(uri,values,PersonalEntry.MEASUREMENT_TABLE_NAME);
+            case CONSUMPTION:
+                return insertTable(uri,values,PersonalEntry.CONSUMPTION_TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Uri didnt match with anything");
         }
