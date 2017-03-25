@@ -40,5 +40,6 @@ public class IceContactAdapter extends CursorAdapter {
         String numberText=cursor.getString(columnIndexForNumber);
         numberTextView.setText(numberText);
 
+        
     }
 }

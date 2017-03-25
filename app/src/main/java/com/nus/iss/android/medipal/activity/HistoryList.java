@@ -23,10 +23,10 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.adapter.HistoryConsumptionAdapter;
 import com.nus.iss.android.medipal.adapter.HistoryMeasurementAdapter;
 import com.nus.iss.android.medipal.data.MedipalContract;
-import com.nus.iss.android.medipal.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -229,10 +229,9 @@ public class HistoryList extends AppCompatActivity {
                 lp.copyFrom(alert.getWindow().getAttributes());
                 lp.width = WindowManager.LayoutParams.MATCH_PARENT;
                 lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                //getWindow().setBackgroundDrawable(new ColorDrawable(0x7000000));
                 alert.show();
                 alert.getWindow().setAttributes(lp);
-                //alert.getWindow().setBackgroundDrawable(R.style.MyTheme);
-                //alert.getWindow().getDecorView().getBackground().setColorFilter(new LightingColorFilter(0x999999,0x9999CC));
                 return true;
         }
         return super.onOptionsItemSelected(item);

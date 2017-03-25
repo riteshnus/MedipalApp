@@ -4,11 +4,12 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.dto.Medicine;
@@ -20,19 +21,23 @@ public class ReminderActivity extends AppCompatActivity implements LoaderManager
     private Button ignoreButton;
     private Button snoozeButton;
     private Button takeButton;
+    private TextView reminderMedicine;
     private Medicine medicine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        reminderMedicine = (TextView) findViewById(R.id.reminder_medicine_id);
         Intent myIntent=getIntent();
         if(myIntent!=null){
             medicineUri = myIntent.getData();
-            Log.v(LOG_TAG,"Uri passed from Notification " + medicineUri);
+            reminderMedicine.setText(myIntent.getStringExtra("medicineName"));
+            Log.i(LOG_TAG,"Uri passed from Notification " + medicineUri);
         }
         ignoreButton= (Button) findViewById(R.id.ignore_button);
         snoozeButton= (Button) findViewById(R.id.snooze_button);
         takeButton= (Button) findViewById(R.id.take_button);
+
 
         ignoreButton.setOnClickListener(new View.OnClickListener() {
             @Override

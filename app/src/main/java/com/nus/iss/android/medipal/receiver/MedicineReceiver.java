@@ -8,12 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.util.Log;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.activity.ReminderActivity;
 import com.nus.iss.android.medipal.data.MedipalContract;
 
-import static android.R.id.message;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
@@ -26,9 +26,12 @@ public class MedicineReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         String name = intent.getAction();
+        String medicine = intent.getExtras().getString("medicine");
+        Log.i("medicine"," "+medicine+" action: "+name);
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationManager mNM = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         Intent intent1 = new Intent(context, ReminderActivity.class);
+        intent1.putExtra("medicineName",medicine);
 
         intent1.setData(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);

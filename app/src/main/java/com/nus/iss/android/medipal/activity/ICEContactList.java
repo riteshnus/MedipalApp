@@ -17,9 +17,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.adapter.IceContactAdapter;
 import com.nus.iss.android.medipal.data.MedipalContract;
-import com.nus.iss.android.medipal.R;
 
 /**
  * Created by Ritesh on 3/18/2017.
@@ -69,8 +69,9 @@ public class ICEContactList extends AppCompatActivity implements LoaderManager.L
                 MedipalContract.PersonalEntry.ICE_ID,
                 MedipalContract.PersonalEntry.ICE_NAME,
                 MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER,
+                MedipalContract.PersonalEntry.ICE_SEQUENCE,
                };
-        return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_CONTACT, projectionForIce, null, null, null);
+        return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_CONTACT, projectionForIce, null, null, MedipalContract.PersonalEntry.ICE_SEQUENCE+ " ASC");
 
     }
 
@@ -87,8 +88,8 @@ public class ICEContactList extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         iceContactAdapter.swapCursor(data);
-
     }
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
             iceContactAdapter.swapCursor(null);

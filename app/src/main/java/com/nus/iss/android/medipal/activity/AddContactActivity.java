@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +19,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.dao.ContactDAO;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.ICEContact;
-
-import static com.nus.iss.android.medipal.activity.AppointmentList.APPOINTMENT_LOADER;
 
 /**
  * Created by Ritesh on 3/18/2017.
@@ -39,6 +38,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
     private EditText description;
 
     private static final int ICE_CONTACT_LOADER = 0;
+    private static final int ICE_CONTACT_LOADER_ALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         setContentView(R.layout.contact_detail_form);
         nameTextView = (EditText) findViewById(R.id.et_IceName);
         contactTextView = (EditText) findViewById(R.id.et_IceNo);
-       priorityTextView = (TextView) findViewById(R.id.tv_IcePriority);
+        priorityTextView = (TextView) findViewById(R.id.tv_IcePriority);
         typeTextView = (TextView) findViewById(R.id.tv_IceType);
         description = (EditText) findViewById(R.id.et_IceDescription);
 
@@ -54,7 +54,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
             @Override
             public void onClick(View v) {
 
-                final CharSequence[] items = {"1", "2", "3"};
+                final CharSequence[] items = {"1", "2", "3", "4"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
                 builder.setTitle("Select Your Priority Order");
@@ -96,7 +96,8 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         Intent intent = getIntent();
         mCurrentContactUri = intent.getData();
         if (mCurrentContactUri != null) {
-            getLoaderManager().initLoader(APPOINTMENT_LOADER, null, this);
+            getLoaderManager().initLoader(ICE_CONTACT_LOADER, null, this);
+            getLoaderManager().initLoader(ICE_CONTACT_LOADER_ALL, null, this);
         }
     }
 
@@ -124,8 +125,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         return super.onOptionsItemSelected(item);
     }
 
-    public void createAndInsertContact()
-    {
+    public void createAndInsertContact() {
         int rowsAffected = 0;
         String name;
         String contact;
@@ -133,67 +133,52 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         String type;
         String des;
 
-        if(null != nameTextView.getText() && !nameTextView.getText().toString().isEmpty())
-        {
-        name  = (nameTextView.getText().toString());
-        }
-        else
-        {
+        if (null != nameTextView.getText() && !nameTextView.getText().toString().isEmpty()) {
+            name = (nameTextView.getText().toString());
+        } else {
             nameTextView.setError("Field cannot be blank");
             return;
         }
 
-        if(null != contactTextView.getText() && !contactTextView.getText().toString().isEmpty())
-        {
-            contact  = (contactTextView.getText().toString());
-        }
-        else
-        {
+        if (null != contactTextView.getText() && !contactTextView.getText().toString().isEmpty()) {
+            contact = (contactTextView.getText().toString());
+        } else {
             contactTextView.setError("Field cannot be blank");
             return;
         }
-        if(null != priorityTextView.getText() && !priorityTextView.getText().toString().isEmpty())
-        {
-           priority  = (priorityTextView.getText().toString());
-        }
-        else
-        {
+        if (null != priorityTextView.getText() && !priorityTextView.getText().toString().isEmpty()) {
+            priority = (priorityTextView.getText().toString());
+        } else {
             priorityTextView.setError("Field cannot be blank");
             return;
         }
 
 
-        if(null != typeTextView.getText() && !typeTextView.getText().toString().isEmpty())
-        {
-             type  = (typeTextView.getText().toString());
-        }
-        else
-        {
+        if (null != typeTextView.getText() && !typeTextView.getText().toString().isEmpty()) {
+            type = (typeTextView.getText().toString());
+        } else {
             typeTextView.setError("Field cannot be blank");
             return;
         }
 
-        if(null != description.getText() && !description.getText().toString().isEmpty())
-        {
-          des  = (description.getText().toString());
-        }
-        else
-        {
+        if (null != description.getText() && !description.getText().toString().isEmpty()) {
+            des = (description.getText().toString());
+        } else {
             description.setError("Field cannot be blank");
             return;
         }
 
-        ICEContact newEntry = new ICEContact(name,contact,type,des,priority );
+        ICEContact newEntry = new ICEContact(name, contact, type, des, priority);
         ContactDAO contactDAO = new ContactDAO(this);
         if (mCurrentContactUri == null) {
             contactDAO.saveIce(newEntry);
         } else {
-            rowsAffected = contactDAO.update(newEntry,mCurrentContactUri);
+            rowsAffected = contactDAO.update(newEntry, mCurrentContactUri);
             if (rowsAffected == 0) {
                 Toast.makeText(this, "Update failed", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,ICEContactList.class);
+                Intent intent = new Intent(this, ICEContactList.class);
                 startActivity(intent);
             }
         }
@@ -202,7 +187,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public void onBackPressed() {
-        if(nameTextView.getText().toString().length()!=0|contactTextView.getText().toString().length()!=0|priorityTextView.getText().toString().length()!=0|typeTextView.getText().toString().length()!=0|description.getText().toString().length()!=0){
+        if (nameTextView.getText().toString().length() != 0 | contactTextView.getText().toString().length() != 0 | priorityTextView.getText().toString().length() != 0 | typeTextView.getText().toString().length() != 0 | description.getText().toString().length() != 0) {
 
             new AlertDialog.Builder(this)
                     .setMessage("Are you sure you want to exit?")
@@ -214,41 +199,63 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
                     })
                     .setNegativeButton("No", null)
                     .show();
-        }
-
-        else
-        {
+        } else {
             finish();
         }
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projectionForIce = {
-                MedipalContract.PersonalEntry.ICE_ID,
-                MedipalContract.PersonalEntry.ICE_NAME,
-                MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER,
-                MedipalContract.PersonalEntry.ICE_CONTACT_TYPE,
-                MedipalContract.PersonalEntry.ICE_SEQUENCE,
-                MedipalContract.PersonalEntry.ICE_DESCRIPTION,
-        };
-        return new CursorLoader(this, mCurrentContactUri, projectionForIce, null, null, null);
+        switch (id) {
+            case ICE_CONTACT_LOADER:
+                String[] projectionForIce = {
+                        MedipalContract.PersonalEntry.ICE_ID,
+                        MedipalContract.PersonalEntry.ICE_NAME,
+                        MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER,
+                        MedipalContract.PersonalEntry.ICE_CONTACT_TYPE,
+                        MedipalContract.PersonalEntry.ICE_SEQUENCE,
+                        MedipalContract.PersonalEntry.ICE_DESCRIPTION,
+                };
+                return new CursorLoader(this, mCurrentContactUri, projectionForIce, null, null, null);
+            case ICE_CONTACT_LOADER_ALL:
+                String[] projectionForIceAll = {
+                        MedipalContract.PersonalEntry.ICE_ID,
+                        MedipalContract.PersonalEntry.ICE_NAME,
+                        MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER,
+                        MedipalContract.PersonalEntry.ICE_CONTACT_TYPE,
+                        MedipalContract.PersonalEntry.ICE_SEQUENCE,
+                        MedipalContract.PersonalEntry.ICE_DESCRIPTION,
+                };
+                return new CursorLoader(this, MedipalContract.PersonalEntry.CONTENT_URI_CONTACT, projectionForIceAll, null, null, null);
+        }
+
+        return null;
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (cursor.moveToFirst()) {
-            String contactName = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_NAME));
-            String contactNumber = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER));
-            String contactType = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_CONTACT_TYPE));
-            String priority = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_SEQUENCE));
-            String contactDescription = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_DESCRIPTION));
-            nameTextView.setText(contactName);
-            contactTextView.setText(contactNumber);
-            typeTextView.setText(contactType);
-            priorityTextView.setText(priority);
-            description.setText(contactDescription);
+        switch (loader.getId()) {
+            case ICE_CONTACT_LOADER:
+                if (cursor.moveToFirst()) {
+                    String contactName = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_NAME));
+                    String contactNumber = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER));
+                    String contactType = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_CONTACT_TYPE));
+                    String priority = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_SEQUENCE));
+                    String contactDescription = cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_DESCRIPTION));
+                    nameTextView.setText(contactName);
+                    contactTextView.setText(contactNumber);
+                    typeTextView.setText(contactType);
+                    priorityTextView.setText(priority);
+                    description.setText(contactDescription);
+                }
+            case ICE_CONTACT_LOADER_ALL:
+                for(int i =0; i<cursor.getCount();i++) {
+                    if(cursor.moveToNext()){
+                        int columnIndexForNumber=cursor.getColumnIndex(MedipalContract.PersonalEntry.ICE_SEQUENCE);
+                        Log.i("Sequence in db"," "+cursor.getString(columnIndexForNumber));}
+                }
         }
+
     }
 
     @Override
