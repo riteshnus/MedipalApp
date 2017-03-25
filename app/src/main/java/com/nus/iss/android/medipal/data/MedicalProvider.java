@@ -34,6 +34,7 @@ public class MedicalProvider extends ContentProvider {
     private static final int APPOINTMENT_ID=113;
     private static final int HEALTH_BIO=200;
     private static final int HEALTH_BIO_ID=201;
+    private static final int MEDICINE_REMINDER_ID=202;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -52,10 +53,10 @@ public class MedicalProvider extends ContentProvider {
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.ConsumptionEntry.CONSUMPTION_TABLE_NAME+"/#",CONSUMPTION_ID);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME,MEASUREMENT);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MeasurementEntry.MEASUREMENT_TABLE_NAME+"/#",MEASUREMENT_ID);
-/*        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME+"/#",HEALTH_BIO);
+/*      sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME ,HEALTH_BIO);
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME+"/#",HEALTH_BIO_ID); */
         sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME ,HEALTH_BIO);
-        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.HealthBioEntry.HEALTH_BIO_TABLE_NAME+"/#",HEALTH_BIO_ID);
+        sUriMatcher.addURI(MedipalContract.CONTENT_AUTHORITY, MedipalContract.MEDICINE_REMINDER_JOIN ,MEDICINE_REMINDER_ID);
     }
 
     private MedipalDBHelper dbHelper;
@@ -132,6 +133,9 @@ public class MedicalProvider extends ContentProvider {
                 selection = PersonalEntry._ID +"=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = sqLiteDatabase.query(MedipalContract.AppointmentEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case MEDICINE_REMINDER_ID:
+                cursor = sqLiteDatabase.rawQuery(selection, null);
                 break;
             default:
                 throw new IllegalArgumentException("Can not find query for uri "+uri);

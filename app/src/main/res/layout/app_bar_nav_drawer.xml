@@ -39,7 +39,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:elevation="10dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_medicine"
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:elevation="10dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/bp" />
 
     <TextView
         android:id="@+id/dateTextView"

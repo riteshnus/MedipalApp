@@ -9,7 +9,8 @@
         <item
             android:id="@+id/nav_measurement"
             android:icon="@drawable/bp"
-            android:title="Add Measurement" />
+            android:title="Add Measurement"
+            />
         <item
             android:id="@+id/nav_addMedicine"
             android:icon="@drawable/ic_local_hospital_black_24dp"
@@ -23,6 +24,18 @@
             android:icon="@drawable/ic_today_black_24dp"
             android:title="Appointments" />
     </group>
+
+    <item android:title="History"
+        android:icon="@drawable/ic_history_black_24dp">
+        <menu>
+            <item
+                    android:id="@+id/nav_consumption_history"
+                    android:title="Consumption History" />
+            <item
+                    android:id="@+id/nav_measurement_history"
+                    android:title="Measurement History" />
+        </menu>
+    </item>
 
     <item android:title="Help &amp; Support">
         <menu>

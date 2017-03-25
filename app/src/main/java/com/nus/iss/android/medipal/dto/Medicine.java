@@ -33,6 +33,7 @@ public class Medicine {
         this.expireFactor = expireFactor;
     }
 
+
     public Categories getCategory() {
         return category;
     }

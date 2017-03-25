@@ -234,6 +234,18 @@ public class NavDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_history) {
             Intent intent = new Intent(NavDrawerActivity.this, History.class);
             startActivity(intent);
+        }else if (id == R.id.nav_consumption_history) {
+            final Bundle b = new Bundle();
+            b.putString("NAME", "CONSUMPTION");
+            Intent intent = new Intent(NavDrawerActivity.this, HistoryList.class);
+            intent.putExtras(b);
+            startActivity(intent);
+        } else if (id == R.id.nav_measurement_history) {
+            final Bundle b = new Bundle();
+            b.putString("NAME", "MEASUREMENT");
+            Intent intent = new Intent(NavDrawerActivity.this, HistoryList.class);
+            intent.putExtras(b);
+            startActivity(intent);
         }else if(id == R.id.nav_faq){
             startActivity(new Intent(NavDrawerActivity.this, FaqHelp.class));
         } else if(id == R.id.nav_about_us){

@@ -12,10 +12,12 @@ public class MedipalContract {
     public static final String CONTENT_AUTHORITY = "com.nus.iss.android.medipal";
     public static final Uri BASE_CONTENT = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_PERSONAL = "PersonalBio";
+    public static final String MEDICINE_REMINDER_JOIN = "MedRemindJoin";
 
     public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PERSONAL;
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PERSONAL;
 
+    public final static Uri CONTENT_URI_HEALTH_BIO = Uri.withAppendedPath(MedipalContract.BASE_CONTENT, MEDICINE_REMINDER_JOIN);
 
     /*
      * Table Details for Personal Bio table
@@ -76,6 +78,8 @@ public class MedipalContract {
         public static final String MEDICINE_THRESHOLD = "Threshold";
         public static final String MEDICINE_DATE_ISSUED = "DateIssued";
         public static final String MEDICINE_EXPIRE_FACTOR = "ExpireFactor";
+
+        public static final String MEDICINE_TIME = "Time";
     }
 
     /*
