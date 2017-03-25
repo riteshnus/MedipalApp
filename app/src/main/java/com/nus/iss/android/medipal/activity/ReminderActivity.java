@@ -21,17 +21,17 @@ public class ReminderActivity extends AppCompatActivity implements LoaderManager
     private Button ignoreButton;
     private Button snoozeButton;
     private Button takeButton;
-    private TextView reminderMedicine;
+    private TextView reminderId;
     private Medicine medicine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
-        reminderMedicine = (TextView) findViewById(R.id.reminder_medicine_id);
+        reminderId = (TextView) findViewById(R.id.reminder_id);
         Intent myIntent=getIntent();
         if(myIntent!=null){
             medicineUri = myIntent.getData();
-            reminderMedicine.setText(myIntent.getStringExtra("medicineName"));
+            reminderId.setText(myIntent.getStringExtra("medicineName"));
             Log.i(LOG_TAG,"Uri passed from Notification " + medicineUri);
         }
         ignoreButton= (Button) findViewById(R.id.ignore_button);

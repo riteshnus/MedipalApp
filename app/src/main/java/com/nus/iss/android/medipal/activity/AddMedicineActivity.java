@@ -44,7 +44,6 @@ import com.nus.iss.android.medipal.receiver.MedicineReceiver;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -83,6 +82,7 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     private Uri categoryUri;
     private Uri reminderUri;
     private String errorMsg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -351,42 +351,25 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     }
 
     private void addReminder(Reminder reminder) {
-     /*   Intent myIntent = new Intent(this , MedicineReceiver.class);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        myIntent.putExtra("medicine",medicine.getMedicine());
-        pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        */Date userReminderTime = reminder.getStartTime();
+        Date userReminderTime = reminder.getStartTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(userReminderTime);
-        Intent myIntent = new Intent(this , MedicineReceiver.class);
-        myIntent.putExtra("medicine",medicine.getMedicine());
-        pendingIntent = PendingIntent.getBroadcast(this, 11, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         for(int i=0;i<reminder.getFrequency();i++){
-            AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-
-
-
-
-
-            //calendar.setTime(calendar.getTime());
+            Intent myIntent = new Intent(this , MedicineReceiver.class);
+            myIntent.putExtra("medicine",medicine.getMedicine());
+            pendingIntent = PendingIntent.getBroadcast(this, Constants.pendingIntent_id+i, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Log.i("Calender Time", " " +calendar.getTime());
             Calendar calendarTrigger = Calendar.getInstance();
-            //calendarTrigger.setTimeInMillis(System.currentTimeMillis());
             calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
             calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
             calendarTrigger.set(Calendar.SECOND, 0);
-            Log.i("CalenderTrigger Time", " " +calendarTrigger.getTime());
-            myIntent.setAction("Paracetamol");
-            //alarmManager.set(alarmManager.RTC_WAKEUP,calendarTrigger.getTimeInMillis(),pendingIntent);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+            Log.i("CalenderTrigger Time", " " +calendarTrigger.getTime()+ "Medicine name:"+medicine.getMedicine());
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendarTrigger.getTimeInMillis(),pendingIntent);
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
             calendar.add(Calendar.MINUTE, reminder.getInterval());
             calendar.setTime(calendar.getTime());
         }
-
-
-
-
-
 
         /*Intent myIntent = new Intent(this , MedicineReceiver.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -406,18 +389,6 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         myIntent.setAction("Paracetamol");
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000*reminder.getInterval(), pendingIntent);
 */
-    }
-
-    public void createTimeArray(Date date,int interval,int frequency){
-        ArrayList<Date> listOfTime = new ArrayList<>();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        for(int i=0;i<frequency;i++){
-            cal.add(Calendar.HOUR_OF_DAY, interval);
-            listOfTime.add(cal.getTime());
-            cal.setTime(cal.getTime());
-        }
-        //return listOfTime;
     }
 
     private void setCurentDateAndTimeToTextView() {

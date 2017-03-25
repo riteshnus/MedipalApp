@@ -144,6 +144,7 @@
                 android:value=".activity.MedicineActivity" />
         </activity>
         <activity android:name=".activity.ReminderActivity" />
+        <activity android:name=".activity.ReminderActivityAppointment" />
         <!--<service
             android:name=".services.NotificationIntentService"
             android:exported="true"
@@ -155,7 +156,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>-->
-
+        <receiver
+            android:name=".receiver.AppointmentReceiver"
+            android:enabled="true"/>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package com.nus.iss.android.medipal.activity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.LoaderManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -27,11 +29,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.dao.AppointmentDAO;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.Appointment;
 import com.nus.iss.android.medipal.helper.Utils;
+import com.nus.iss.android.medipal.receiver.AppointmentReceiver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -100,7 +103,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
         timeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimePickerDialog(AddAppointmentActivity.this, time, myCalendarDate.get(Calendar.HOUR_OF_DAY), myCalendarDate.get(Calendar.MINUTE), true).show();
+                new TimePickerDialog(AddAppointmentActivity.this, time, myCalendarDate.get(Calendar.HOUR_OF_DAY), myCalendarDate.get(Calendar.MINUTE), false).show();
             }
         });
 
@@ -174,14 +177,14 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
         });
         builder
                 .setCancelable(false)
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                /*.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
 
                     }
-                });
+                })*/;
 
         AlertDialog alert = builder.create();
         alert.show();
@@ -257,8 +260,32 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
                 startActivity(intent);
             }
         }
+
+        //if(toggleReminder.isChecked()){
+            addReminder();
+        //}
         finish();
     }
+
+    private void addReminder() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(myCalendarDate.getTime());
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+       // for (int i = 0; i < reminder.getFrequency(); i++) {
+            Intent apptIntent = new Intent(this, AppointmentReceiver.class);
+            apptIntent.putExtra("appointment", mApptTittleEditText.getText().toString());
+            apptIntent.putExtra("place", mSelectCategory.getText().toString());
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 61, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Log.i("Calender Time", " " + calendar.getTime());
+            Calendar calendarTrigger = Calendar.getInstance();
+            calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+            calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+            calendarTrigger.set(Calendar.SECOND, 0);
+            Log.i("CalenderTrigger Time", " " + calendarTrigger.getTime());
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -289,6 +316,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
             }
             mApptTittleEditText.setText(apptDescription);
             mSelectCategory.setText(apptLocation);
+            toggleReminder.setChecked(false);
         }
     }
 

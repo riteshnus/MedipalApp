@@ -37,7 +37,7 @@ public class MedicineReceiver extends BroadcastReceiver {
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification mNotify = new Notification.Builder(context)
-                .setContentTitle("Time to Refil " + name)
+                .setContentTitle("Time to Refil " + medicine)
                 .setContentText("Refile Medicine")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
