@@ -24,17 +24,20 @@ public class ReminderActivityAppointment extends AppCompatActivity implements Lo
     private Button OkButton;
     private TextView reminderId;
     private TextView appPlace;
+    private TextView appointmentTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_appointment);
         reminderId = (TextView) findViewById(R.id.appointment_id);
+        appointmentTime = (TextView) findViewById(R.id.reminder_time_text);
         appPlace = (TextView) findViewById(R.id.appointment_place);
         Intent myIntent=getIntent();
         if(myIntent!=null){
             appointmentUri = myIntent.getData();
             reminderId.setText(myIntent.getStringExtra("appointment"));
             appPlace.setText(myIntent.getStringExtra("place"));
+            appointmentTime.setText(myIntent.getStringExtra("timeAppt"));
             Log.i(LOG_TAG,"Uri passed from Notification " + appointmentUri);
         }
         OkButton= (Button) findViewById(R.id.ok_button);

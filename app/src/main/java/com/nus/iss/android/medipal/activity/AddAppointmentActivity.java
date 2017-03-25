@@ -30,6 +30,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
+import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.dao.AppointmentDAO;
 import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.Appointment;
@@ -165,7 +166,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
     }
 
     public void openReminderPopup() {
-        final String[] items = {"Before 1 Day", "Before 1 hour", "Before 30min", "Before 10Min"};
+        final String[] items = {"Before 1 Day", "Before 1 hour", "Before 30 Min", "Before 10 Min"};
         AlertDialog.Builder builder = new AlertDialog.Builder(AddAppointmentActivity.this);
         builder.setTitle("Choose names: ");
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -177,14 +178,14 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
         });
         builder
                 .setCancelable(false)
-                /*.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
 
                     }
-                })*/;
+                });
 
         AlertDialog alert = builder.create();
         alert.show();
@@ -261,21 +262,33 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
             }
         }
 
-        //if(toggleReminder.isChecked()){
+        if(toggleReminder.isChecked()){
             addReminder();
-        //}
+        }
         finish();
     }
 
     private void addReminder() {
+        String whenReminder= ReminderTextView.getText().toString();
+        switch (whenReminder){
+            case "Before 1 Day":
+                myCalendarDate.add(Calendar.HOUR,-24);
+            case "Before 1 hour":
+                myCalendarDate.add(Calendar.HOUR,-1);
+            case "Before 30 Min":
+                myCalendarDate.add(Calendar.MINUTE,-30);
+            case "Before 10 Min":
+                myCalendarDate.add(Calendar.MINUTE,10);
+        }
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(myCalendarDate.getTime());
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-       // for (int i = 0; i < reminder.getFrequency(); i++) {
             Intent apptIntent = new Intent(this, AppointmentReceiver.class);
             apptIntent.putExtra("appointment", mApptTittleEditText.getText().toString());
             apptIntent.putExtra("place", mSelectCategory.getText().toString());
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 61, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            apptIntent.putExtra("timeAppt", timeTextView.getText().toString());
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, Constants.pendingIntent__appointment_id, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Log.i("Calender Time", " " + calendar.getTime());
             Calendar calendarTrigger = Calendar.getInstance();
             calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));

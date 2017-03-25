@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/reminder_time_text"
             android:layout_weight="1"
-            android:text="9:00 PM"/>
+            />
     </LinearLayout>
 
     <LinearLayout

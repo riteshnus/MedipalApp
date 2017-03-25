@@ -21,26 +21,27 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 
 public class AppointmentReceiver extends BroadcastReceiver {
-     private int uniqueId=1;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String name = intent.getAction();
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationManager mNM = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         Intent appReminderIntent = new Intent(context, ReminderActivityAppointment.class);
         String appointment = intent.getExtras().getString("appointment");
         String place = intent.getExtras().getString("place");
-        Log.i("appointment"," "+appointment+" place: "+place);
+        String timeAppt = intent.getExtras().getString("timeAppt");
+        Log.i("appointment"," "+appointment+" place: "+place+" time"+timeAppt);
         appReminderIntent.putExtra("appointment",intent.getExtras().getString("appointment"));
         appReminderIntent.putExtra("place",intent.getExtras().getString("place"));
+        appReminderIntent.putExtra("timeAppt",intent.getExtras().getString("timeAppt"));
 
         appReminderIntent.setData(MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT);
         PendingIntent pIntent = PendingIntent.getActivity(context, 1, appReminderIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification mNotify = new Notification.Builder(context)
                 .setContentTitle("Time to go to "+place)
-                .setContentText(appointment)
+                .setContentText(appointment+" at "+ timeAppt)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)

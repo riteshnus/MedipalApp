@@ -21,13 +21,12 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 
 public class MedicineReceiver extends BroadcastReceiver {
-    private int uniqueId=0;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String name = intent.getAction();
         String medicine = intent.getExtras().getString("medicine");
-        Log.i("medicine"," "+medicine+" action: "+name);
+        Log.i("medicine"," "+medicine);
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationManager mNM = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         Intent intent1 = new Intent(context, ReminderActivity.class);
