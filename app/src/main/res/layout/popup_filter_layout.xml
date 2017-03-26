@@ -98,7 +98,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/missedOrTakenLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,14 +109,14 @@
             android:layout_marginLeft="40dp"
             android:id="@+id/tvFilterOtherText"
             android:textAppearance="?android:textAppearanceMedium"
-            android:text="Format"
+            android:text="Consumption"
             android:layout_weight="0.13" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/spinner"
             android:layout_weight="0.25"/>

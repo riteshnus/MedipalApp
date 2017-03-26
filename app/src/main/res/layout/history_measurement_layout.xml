@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="2dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +19,6 @@
         android:fontFamily="sans-serif"
         android:id="@+id/idDosage"
         android:layout_weight="1"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:textAppearance="?android:textAppearanceSmall"/>
 
@@ -29,7 +28,6 @@
         android:fontFamily="sans-serif"
         android:id="@+id/idMedDate"
         android:layout_weight="1"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_below="@+id/idMedName"
         android:layoutDirection="rtl"

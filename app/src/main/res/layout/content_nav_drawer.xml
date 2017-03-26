@@ -23,18 +23,20 @@
             android:layout_height="wrap_content">
         <ImageButton
             android:id="@+id/ibMorning"
+            android:src="@mipmap/mor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal"
-            android:layout_margin="@dimen/grid_button_margin"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/grid_btn_padding"
             android:adjustViewBounds="true"
             android:background="?android:selectableItemBackground"
-            android:elevation="24dp"
-
-            android:padding="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_main_morning"
-            />
+            android:layout_marginLeft="@dimen/grid_button_margin"
+            android:layout_marginRight="@dimen/grid_button_margin"
+            android:layout_marginTop="@dimen/grid_button_margin"
+            android:layout_marginBottom="@dimen/grid_button_margin"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"  />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,23 +50,28 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content">
         <ImageButton
+            android:src="@mipmap/afternoon"
             android:id="@+id/ibAfternoon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/grid_button_margin"
-
             android:padding="@dimen/grid_btn_padding"
             android:adjustViewBounds="true"
             android:background="?android:selectableItemBackground"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_main_afternoon"/>
+            android:layout_marginLeft="@dimen/grid_button_margin"
+            android:layout_marginRight="@dimen/grid_button_margin"
+            android:layout_marginTop="@dimen/grid_button_margin"
+            android:layout_marginBottom="@dimen/grid_button_margin"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ibAfternoon"
                 android:text="Noon (12PM-6PM)"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:id="@+id/textView2" />
     </RelativeLayout><!--app:srcCompat="@drawable/ic_main_afternoon" />-->
 
 
@@ -73,38 +80,47 @@
             android:layout_height="wrap_content">
         <ImageButton
             android:id="@+id/ibEvening"
+            android:src="@mipmap/eve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_gravity="center_horizontal"
 
-            android:layout_margin="@dimen/grid_button_margin"
             android:adjustViewBounds="true"
             android:background="?android:selectableItemBackground"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_main_evening" />
+
+            android:layout_marginLeft="@dimen/grid_button_margin"
+            android:layout_marginRight="@dimen/grid_button_margin"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/ibEvening"
             android:text="Evening (6PM-12AM)"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView3" />
         </RelativeLayout>
     <RelativeLayout
             android:layout_width="170dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         <ImageButton
             android:id="@+id/ibNight"
+            android:src="@mipmap/night"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/grid_button_margin"
 
             android:padding="20dp"
             android:adjustViewBounds="true"
             android:background="?android:selectableItemBackground"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_main_night" />
+
+            android:layout_marginLeft="@dimen/grid_button_margin"
+            android:layout_marginRight="@dimen/grid_button_margin"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="wrap_content"

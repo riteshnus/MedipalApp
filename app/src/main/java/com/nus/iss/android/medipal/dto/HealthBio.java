@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class HealthBio {
     private String condition;
+    private int id;
     private Date startDate;
     private String conditionType;
 
@@ -17,6 +18,13 @@ public class HealthBio {
         this.conditionType = conditionType;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getCondition() {
         return condition;
     }

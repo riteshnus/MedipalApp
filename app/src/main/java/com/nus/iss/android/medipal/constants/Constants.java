@@ -15,8 +15,11 @@ public  class Constants {
     public static final int ADD_MEASUREMENT_LOADER=0;
     public static final String SIMPLE_TIME_FORMAT="HH:mm";
     public static final int ADD_MEDICINE_LOADER=1;
-    public static final int pendingIntent_id = 1000;
-    public static final int pendingIntent__appointment_id = 2000;
+    public static final int PENDING_INTENT_ID = 1000;
+    public static final int PENDINGINTENT_APPOINTMENT_ID = 2000;
+    public static final int PENDING_INTENT_THRESHOLD_ID = 3000;
+    public static final String MEDICINE_TIME = "Time";
+
     public enum DOSAGE {pills,cc,ml,gr,mg,drops,pieces,puffs,units,teaspoon,tablespoon,patch,mcg,
         l,meq,spray};
 }

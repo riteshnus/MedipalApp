@@ -11,6 +11,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -69,7 +70,10 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
         categoryTextView= (TextView) findViewById(R.id.category_text_view);
         expiryFactorTextView= (TextView) findViewById(R.id.expiryFactor_text_view);
         reminderTimeTextView= (TextView) findViewById(R.id.reminder_start_time);
+
         /*// toolbar
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
 

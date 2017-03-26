@@ -12,8 +12,7 @@ public class Consumption {
     private int quantity;
     private Date consumedOn;
 
-    public Consumption(Medicine medicine, int quantity, Date consumedOn) {
-        this.medicine = medicine;
+    public Consumption( int quantity, Date consumedOn) {
         this.quantity = quantity;
         this.consumedOn = consumedOn;
     }

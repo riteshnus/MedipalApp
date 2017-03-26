@@ -28,6 +28,7 @@ import com.nus.iss.android.medipal.data.MedipalContract;
 public class ICEContactList extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ICE_LOADER =0;
     private IceContactAdapter iceContactAdapter;
+    private  Cursor cursor ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +89,12 @@ public class ICEContactList extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         iceContactAdapter.swapCursor(data);
+        cursor = data;
+        FloatingActionButton fabAddAppt = (FloatingActionButton) findViewById(R.id.add_ice);
+        if(cursor.getCount() >= 4)
+        {
+            fabAddAppt.setVisibility(View.GONE);
+        }
     }
 
     @Override

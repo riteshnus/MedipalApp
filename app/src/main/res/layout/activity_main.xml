@@ -84,34 +84,6 @@
             </LinearLayout>
         </TabHost>
     </android.support.v4.view.ViewPager>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="177dp"
-        android:layout_height="@dimen/standard_45"
-        android:layout_margin="@dimen/standard_21"
-        app:srcCompat="@drawable/ic_add_circle"
-        app:layout_anchorGravity="top|center_horizontal"
-        android:layout_gravity="bottom|end"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:id="@+id/fab"
-        app:layout_anchor="@+id/container"
-        app:layout_anchorGravity="bottom|right"
-        android:layout_gravity="top|left"
-        android:layout_margin="@dimen/fab_margin"/>
 
     <!--
         <android.support.design.widget.FloatingActionButton

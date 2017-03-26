@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 
@@ -23,6 +24,7 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
             + PersonalEntry.USER_DOB + " DATE, "
             +PersonalEntry.USER_ID_NO + " TEXT, "
             +PersonalEntry.USER_POSTAL_CODE + " TEXT, "
+            +PersonalEntry.USER_ADDRESS + " TEXT, "
             +PersonalEntry.USER_HEIGHT + " INTEGER, "
             +PersonalEntry.USER_BLOOD_TYPE  + " TEXT );";
 
@@ -121,7 +123,19 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        Log.w(MedipalDBHelper.class.getName(), "Upgrading database from version "
+                + oldVersion + " to " + newVersion
+                + ", which will destroy all old data");
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.USER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.HEALTH_BIO_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.MEDICINE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.REMINDER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.APPOINTMENT_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.CONSUMPTION_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.CATEGORIES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.ICE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalEntry.MEASUREMENT_TABLE_NAME);
+        onCreate(db);
     }
     @Override
     public void onOpen(SQLiteDatabase db) {

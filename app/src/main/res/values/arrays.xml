@@ -24,11 +24,10 @@
         <item>@string/self_apply</item>
     </string-array>
 
-<string-array name="array_report_option">
+<string-array name="array_missedtaken_option">
         <item>None</item>
-        <item>"Year"</item>
-        <item>"Month"</item>
-        <item>"Week"</item>
+        <item>"Missed"</item>
+        <item>"Taken"</item>
     </string-array>
 
     <string-array name="array_categoryfilter_option">

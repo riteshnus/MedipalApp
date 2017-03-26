@@ -8,29 +8,40 @@
     android:orientation="vertical"
     >
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@mipmap/medicine"/>
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:orientation="vertical">
+       android:orientation="vertical"
+       android:padding="4dp">
 
-       <TextView
-           android:id="@+id/medicine_id"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           tools:text="Medicine ID"
-           />
-       <TextView
-        android:id="@+id/medicine_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Medicine Name"
-        />
-       <TextView
-           android:id="@+id/medicine_quantity_left"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           tools:text="Quantity Left"
-           />
+           <TextView
+               android:id="@+id/medicine_name"
+               android:textSize="20dp"
+               android:layout_marginTop="8dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               tools:text="Medicine Name"
+               />
+
+           <TextView
+               android:id="@+id/medicine_quantity_left"
+               android:layout_marginTop="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="20dp"
+               tools:text="Quantity Left"
+               />
    </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

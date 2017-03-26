@@ -132,7 +132,10 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
         Intent intent = getIntent();
         mCurrentApptUri = intent.getData();
         if (mCurrentApptUri != null) {
+            setTitle("Edit Medicine");
             getLoaderManager().initLoader(APPOINTMENT_LOADER, null, this);
+        }else{
+            setTitle(R.string.add_appointment);
         }
 
     }
@@ -291,7 +294,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
             apptIntent.putExtra("appointment", mApptTittleEditText.getText().toString());
             apptIntent.putExtra("place", mSelectCategory.getText().toString());
             apptIntent.putExtra("timeAppt", timeTextView.getText().toString());
-            pendingIntent = PendingIntent.getBroadcast(this, Constants.pendingIntent__appointment_id, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent = PendingIntent.getBroadcast(this, Constants.PENDINGINTENT_APPOINTMENT_ID, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Log.i("Calender Time", " " + calendar.getTime());
             Calendar calendarTrigger = Calendar.getInstance();
             calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));

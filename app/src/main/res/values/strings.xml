@@ -1,6 +1,5 @@
 <resources>
-
-
+    <string name="empty_view_schedule">Nothing scheduled \n for this part of the day</string>
     <string name="empty_appointment_content">Tab the "+" \n to add your first \n appointment</string>
     <string name="empty_contact_content">Tab the "+" \n to add your first \n ICE</string>
     <string name="appointment_tittle">Appointment tittle</string>
@@ -13,25 +12,24 @@
     <string name="grid_button_margin">10dp</string>
     <string name="grid_layout_margin">10dp</string>
     <string name="grid_btn_padding">10dp</string>
+    <string name="delete">delete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_personal_info">Personal Info</string>
-<string name="menuhistory">History</string>
+    <string name="title_activity_add_health_bio">Add Symptom/Diagnosis</string>
+    <string name="menuhistory">History</string>
     <string name="menuhistorylist">History List</string>
     <string name="filter">Select Filter</string>
     <string name="by_year">By Year</string>
     <string name="filterMedicine">Medicine</string>
     <string name="filterOther">Format</string>
-    <string name="medicine_consumption_history">Medicine Consumption History</string>
+    <string name="consumption_history">Consumption History</string>
     <string name="measurement_history">Measurement History</string>
     <string name="help_screen_faq">Help Screen - FAQ</string>
     <string name="nameFaq">FAQ</string>
+    <string name="Help">Help</string>
     <string name="faqHelp">FAQ</string>
-    <string name="textQues1">When the reminder message will be sent to his/her invites?</string>
-    <string name="textQues2">Is the reminder message customizable?</string>
-    <string name="textAns1">ringee™ send reminder messages to invites at 10 AM Indian Standard Time[IST] on a day. This is routine task and will be send every day at 10 AM IST</string>
-    <string name="textAns2">Users are given option to customize event text, but not event place and date and time of the event.</string>
     <string name="order">" desc"</string>
     <string name="MeasurementList">Measurement</string>
     <string name="app_name">Medipal</string>
@@ -40,6 +38,7 @@
     <string name="userName">Name</string>
     <string name="userAddress">Address</string>
     <string name="add_medicine">Add Medicine</string>
+    <string name="add_appointment">Add Appointment</string>
     <string name="dosage_pills">pills</string>
     <string name="dosage_cc">cc</string>
     <string name="dosage_ml">ml</string>
@@ -70,4 +69,33 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_update">update</string>
     <string name="action_delete">Delete Med</string>
+    <string name="faqQues1">What is Medipal app and how does it work?</string>
+    <string name="faqAns1">Medipal app helps you to manage and take your medicine on time. Medipal allows your family, friends, doctors to aid (if you so choose) by being alerted in case of any emergency.</string>
+    <string name="faqQues2">How do I add a medicine?</string>
+    <string name="faqAns2">1. On the home page tap on the second  \'+\' from the top on the bottom right to  add medicine. \nOR \n1. Tap on the \'Side Menu\' on the top left corner \n3. Tap on \'My Medicine\' menu. Here you can see the list of all active Medicines. Tap the + icon on the right bottom to add a medicine</string>
+    <string name="faqQues3">How do I add an appointment?</string>
+    <string name="faqAns3">1. On the home page tap on the first \'+\' from the top on the bottom right to add appointment. Tap that icon and choose add appointment \n OR \n 1. Tap on the \'Side Menu\' on the top left corner \n 2. Tap on \'Appointment\' menu. Here you can see the list of all active appointments. Tap the + icon on the right bottom to add one</string>
+    <string name="faqQues4">How do I set a reminder for the medicine?</string>
+    <string name="faqAns4">On the \'Add medicine\' page choose the reminder option and set the time of the reminder. You will be notified on the scheduled time</string>
+    <string name="faqQues5">How do I add a measurement and see the history of past measurements ?</string>
+    <string name="faqAns5">1. Tap on the \'Side Menu\' on the top left corner \n 2. Tap on \'Measurement\' menu and add measurement \n 3. To view your past measurements tap on the \'History\' option in the side menu and tap on the \'Measurement History\'</string>
+    <string name="faqQues6">How do I see the history of medicines taken?</string>
+    <string name="faqAns6">1. Tap on the \'Side Menu\' on the top left corner \n 2. Tap on the \'History\' and choose \'Consumption History\' to view all the mediinces taken</string>
+    <string name="pageName">NAME</string>
+    <string name="btnApply">Apply</string>
+    <string name="filterCategory">CategoryFilter</string>
+    <string name="filterMed">MedicineFilter</string>
+    <string name="filterMeasure">MeasurementTypeFilter</string>
+    <string name="filterTakenOrMissed">FormatFilter</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="Consumption">CONSUMPTION</string>
+    <string name="Measurement">MEASUREMENT</string>
+    <string name="None">None</string>
+    <string name="errorNoRecord">No record found !</string>
+    <string name="Systolic">Systolic</string>
+    <string name="Pulse">Pulse</string>
+    <string name="Temperature">Temperature</string>
+    <string name="Weight">Weight</string>
+    <string name="Diastolic">" / Diastolic"</string>
+    <string name="BloodPressure">Blood Pressure</string>
 </resources>

@@ -4,6 +4,8 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -35,7 +37,17 @@
             android:label="@string/title_activity_personal_info"
             android:parentActivityName=".activity.NavDrawerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".activity.AddHealthBioActivity"
+            android:label="@string/title_activity_add_health_bio"
+            android:parentActivityName=".activity.PersonalInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeWithActionBar" />
+
+        <!-- ********** -->
 
         <activity
             android:name=".activity.MainActivityOld"
@@ -63,7 +75,9 @@
             android:authorities="com.nus.iss.android.medipal"
             android:exported="false" />
 
-        <activity android:name=".activity.MedicineActivity" />
+        <activity
+            android:name=".activity.MedicineActivity"
+            android:parentActivityName=".activity.NavDrawerActivity" />
         <activity android:name=".activity.AddMedicineActivity" />
 
         <!--
@@ -75,10 +89,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".activity.History"
-            android:label="@string/menuhistory" />
-        <activity
-            android:name=".activity.HistoryList"
+            android:name=".activity.HistoryListActivity"
             android:label="@string/menuhistorylist"
             android:parentActivityName=".activity.NavDrawerActivity" />
         <activity
@@ -87,7 +98,7 @@
             android:parentActivityName=".activity.NavDrawerActivity" />
         <activity
             android:name=".activity.AboutUs"
-            android:label="@string/faqHelp"
+            android:label="About Us"
             android:parentActivityName=".activity.NavDrawerActivity" />
 
         //Thushara

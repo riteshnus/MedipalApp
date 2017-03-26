@@ -14,43 +14,46 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reminder_id"
-        android:text="Medicine Name" />
+        android:id="@+id/reminder_medicine_id"
+        android:text="MEdicine Name"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="15sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"
+        android:layout_marginLeft="16dp">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Scheduled At"/>
+            android:text="Scheduled At"
+            android:textSize="15sp"
+            />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/reminder_time_text"
             android:layout_weight="1"
-            android:text="9:00 PM"/>
+            android:textSize="15sp"
+            android:hint="blah blah"/>
        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="48dp">
+        android:layout_marginTop="10dp">
     <Button
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/ignore_button"
         android:text="Ignore" />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/snooze_button"
-            android:text="Snooze" />
+
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
