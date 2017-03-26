@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
+   <!-- app:layout_constraintHeight_default="wrap">-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="360dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etxtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:hint="Name"
+                android:inputType="textPersonName" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="Name"
+                android:textStyle="bold|italic" />
+
+            <EditText
+                android:id="@+id/etxtDOB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:focusable="false"
+                android:hint="Date of Birth"
+                android:inputType="date" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="Date of Birth"
+                android:textStyle="bold|italic" />
+
+            <EditText
+                android:id="@+id/etxtIDnum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:hint="ID"
+                android:inputType="text" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="ID"
+                android:textStyle="bold|italic" />
+
+
+            <EditText
+                android:id="@+id/etxtAddr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:hint="Address"
+                android:inputType="textPostalAddress"
+                android:maxLines="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="Address"
+                android:textStyle="bold|italic" />
+
+
+            <EditText
+                android:id="@+id/etxtPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:hint="Postal Code"
+                android:inputType="number" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="Postal Code"
+                android:textStyle="bold|italic" />
+
+            <EditText
+                android:id="@+id/etxtHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:hint="Height"
+                android:inputType="number" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="Height"
+                android:textStyle="bold|italic" />
+
+            <EditText
+                android:id="@+id/etxtBloodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/prof_etxt_padding"
+                android:paddingRight="@dimen/prof_etxt_padding"
+                android:ems="12"
+                android:hint="BloodType"
+                android:inputType="text" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="@dimen/prof_tv_margin"
+                android:text="Blood Type"
+                android:textStyle="bold|italic" />
+
+
+            <!--
+
+            <LinearLayout
+                android:id="@+id/bloodType"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/etxtHeight"
+                android:orientation="horizontal"
+                android:clickable="false">
+
+                <EditText
+                    android:id="@+id/etxtBloodType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:hint="BloodType"
+                    android:inputType="text" />
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                </Spinner>
+            </LinearLayout>
+-->
+
+            <!--            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/bloodType"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="Reset" />
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="Save" />
+            </LinearLayout>
+            -->
+        </LinearLayout>
+    </ScrollView>
+<!--<View
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/guardView"/>-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabProfileEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabProfileSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+</android.support.design.widget.CoordinatorLayout>

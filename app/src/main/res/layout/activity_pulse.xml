@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/iv_pulse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/write"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/et_pls"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:hint="Pulse"
+            android:inputType="number"
+            android:maxLength="3"/>
+
+        <TextView
+            android:id="@+id/tv_pls"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="bpm"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:id="@+id/iv_pls"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/datetime" />
+
+        <TextView
+            android:id="@+id/tv_daypls"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:paddingTop="10dp"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/iv_plsnote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/info"
+            />
+        <TextView
+            android:id="@+id/tv_infopls"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_weight="9"
+            android:hint="Normal Range : 60-100 beats per minutes"
+            android:textColorHighlight="@color/colorPrimary"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+    <ImageView
+        android:id="@+id/iv_plsface"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tv_notesPls"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_weight="9"
+        android:textSize="@dimen/standard_21"
+        android:layout_marginTop="21dp"
+        android:textStyle="italic"
+
+
+        />
+    </LinearLayout>
+</LinearLayout>

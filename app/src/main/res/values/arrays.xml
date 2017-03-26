@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- These are the options displayed in the gender drop-down Spinner -->
+    <string-array name="array_doctor_options">
+        <item>@string/selectCategory</item>
+        <item>@string/doctor</item>
+        <item>@string/clinic</item>
+    </string-array>
+    <string-array name="array_dosage_option">
+        <item>@string/dosage_pills</item>
+        <item>@string/dosage_cc</item>
+        <item>@string/dosage_ml</item>
+        <item>@string/dosage_gr</item>
+        <item>@string/dosage_mg</item>
+        <item>@string/dosage_drops</item>
+        <item>@string/dosage_pieces</item>
+    </string-array>
+
+    <string-array name="array_category_option">
+        <item>@string/supplement</item>
+        <item>@string/chronic</item>
+        <item>@string/incidental</item>
+        <item>@string/complete_course</item>
+        <item>@string/self_apply</item>
+    </string-array>
+
+<string-array name="array_report_option">
+        <item>None</item>
+        <item>"Year"</item>
+        <item>"Month"</item>
+        <item>"Week"</item>
+    </string-array>
+
+    <string-array name="array_categoryfilter_option">
+        <item>"None"</item>
+        <item>"Supplement"</item>
+        <item>"Chronic"</item>
+        <item>"Incidental"</item>
+        <item>"Complete Course"</item>
+        <item>"Self Apply"</item>
+    </string-array>
+
+    <string-array name="array_meaurementtype_option">
+        <item>"None"</item>
+        <item>"Blood Pressure"</item>
+        <item>"Pulse"</item>
+        <item>"Temperature"</item>
+        <item>"Weight"</item>
+    </string-array>
+</resources>

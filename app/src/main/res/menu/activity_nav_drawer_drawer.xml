@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="myImport" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="myGallery" />
+        <item
+            android:id="@+id/nav_measurement"
+            android:icon="@drawable/bp"
+            android:title="Add Measurement" />
+        <item
+            android:id="@+id/nav_medicine"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="My Medicine" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="History" />
+        <item
+            android:id="@+id/nav_appointment"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="myAppointments" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share Report" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send Report" />
+        </menu>
+    </item>
+
+</menu>

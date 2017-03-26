@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity"
+        <!--<activity
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -16,15 +17,128 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
         <activity
-            android:name=".Activity.EntryClass"
+            android:name=".activity.EntryClass"
             android:label="@string/user_form"
             android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".activity.NavDrawerActivity"
+            android:label="@string/title_activity_nav_drawer"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="Today's Schedule"
+            android:parentActivityName=".activity.NavDrawerActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.PersonalInfoActivity"
+            android:label="@string/title_activity_personal_info"
+            android:parentActivityName=".activity.NavDrawerActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.MainActivityOld"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".activity.AppointmentActivity"
+            android:label="Add Appointment"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity android:name=".activity.AppointmentList"
+            android:label="Appointments"
+            android:theme="@style/AppThemeWithActionBar" />
+
+        <activity android:name=".activity.MedicineActivity"
+            android:parentActivityName=".activity.MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activity.MainActivity" />
+        </activity>
+        <activity android:name=".activity.AddMedicineActivity" />
+
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activity.History"
+            android:label="@string/menuhistory" />
+        <activity
+            android:name=".activity.HistoryList"
+            android:label="@string/menuhistorylist" />
+        <activity
+            android:name=".activity.FaqHelp"
+            android:label="@string/faqHelp" />
+        <!--<service
+            android:name=".services.NotificationService"
+            android:enabled="true"
+            android:exported="true"></service>-->
+
+        //Thushara
+        <activity
+            android:name=".activity.BpActivity"
+            android:label="Add Blood Pressure"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".activity.TemperatureActivity"
+            android:label=" Add Temperature"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".activity.PulseActivity"
+            android:label="Add Pulse"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".activity.WeightActivity"
+            android:label="Add Weight"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity android:name=".activity.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.Measurement"
+            android:label="@string/MeasurementList"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".activity.CurrentMedicineActivity"
+            android:parentActivityName=".activity.MedicineActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MedicineActivity" />
+        </activity>
+        <activity android:name=".activity.ReminderActivity" />
+        <service
+            android:name=".services.NotificationIntentService"
+            android:exported="true"
+            android:enabled="true"></service>
+        <receiver android:name=".receiver.MedicineReceiver"
+            android:enabled="true"/>
+        <receiver android:name=".receiver.MedicineReceiver"
+            android:enabled="true"/>
         <provider
+            android:name=".data.MedicalProvider"
             android:authorities="com.nus.iss.android.medipal"
-            android:name=".Data.MedicalProvider"
-            android:exported="false"/>
+            android:exported="false" />
+
     </application>
 
 </manifest>

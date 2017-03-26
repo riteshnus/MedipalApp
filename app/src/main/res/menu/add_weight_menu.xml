@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="com.example.ritesh.medipalapplication.Activity.weightActivity"
+
+    tools:context=".activity.weightActivity">
+    <item
+        android:id="@+id/action_saveWeight"
+        android:title="Add Weight"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="always" />
+</menu>
