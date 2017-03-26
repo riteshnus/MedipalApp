@@ -129,19 +129,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         midnightStart = cal.getTime();
-        Log.e("Compare", midnightStart.toString());
+        /*Log.e("Compare", midnightStart.toString());*/
 
         cal.add(Calendar.HOUR_OF_DAY,4);
         morningStart = cal.getTime();
-        Log.e("Compare", morningStart.toString());
+        /*Log.e("Compare", morningStart.toString());*/
 
         cal.add(Calendar.HOUR_OF_DAY,8);
         noonStart = cal.getTime();
-        Log.e("Compare", noonStart.toString());
+        /*Log.e("Compare", noonStart.toString());*/
 
         cal.add(Calendar.HOUR_OF_DAY,6);
         eveningStart = cal.getTime();
-        Log.e("Compare", eveningStart.toString());
+        /*Log.e("Compare", eveningStart.toString());*/
     }
 
 
@@ -248,9 +248,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     //ScheduledEventJoin scheduledEventJoin = new ScheduledItem(medicineName, medicineConsumeQty, medicineDosage, date, false);
                     Date date = reminderStartTime;
                     while(reminderFrequency>0){
-                        Log.e("Schedule DateTime", "Begin : " + String.valueOf(date));
+/*                      Log.e("Schedule DateTime", "Begin : " + String.valueOf(date));
                         Log.e("Comapare", "1st : " + date.compareTo(midnightStart));
-                        Log.e("Comapare", "2nd : " + date.compareTo(morningStart));
+                        Log.e("Comapare", "2nd : " + date.compareTo(morningStart));*/
                         if(date.compareTo(midnightStart)>=0 && date.compareTo(morningStart)<0){
                             //NIGHT
                             mEventsMatrixCursor.addRow(new String[]{reminderId+"",medicineName,medicineConsumeQty+"",medicineDosage+"",sdfView.format(date),"4","Medicine"});
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                         date = inceaseTimeByGivenNumberOfHours(date,reminderInterval);
                         reminderFrequency--;
-                        Log.e("Schedule DateTime", "End: " + String.valueOf(date));
+                        /*Log.e("Schedule DateTime", "End: " + String.valueOf(date));*/
                     }// End of cursorLoop
 
                     // --- Populate Cursor with sorted data ---
@@ -359,18 +359,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-
-
-
-
-
-
-
-
+    // ****************** FRAGMENT ******************
 
 
     /**
-     * A placeholder fragment containing a simple view.
+     * A placeholder FRAGMENT containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
 
@@ -436,6 +429,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
     }
+
+    // ****************** END FRAGMENT ******************
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

@@ -16,5 +16,5 @@ public  class Constants {
     public static final String SIMPLE_TIME_FORMAT="HH:mm";
     public static final int ADD_MEDICINE_LOADER=1;
     public enum DOSAGE {pills,cc,ml,gr,mg,drops,pieces,puffs,units,teaspoon,tablespoon,patch,mcg,
-        l,meq,spray};
+        l,meq,spray}
 }

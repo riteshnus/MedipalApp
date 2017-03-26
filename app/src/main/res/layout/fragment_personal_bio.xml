@@ -58,7 +58,7 @@
                 android:paddingLeft="@dimen/prof_etxt_padding"
                 android:paddingRight="@dimen/prof_etxt_padding"
                 android:ems="12"
-                android:hint="ID"
+                android:hint="Enter your identity number"
                 android:inputType="text" />
             <TextView
                 android:layout_width="wrap_content"
