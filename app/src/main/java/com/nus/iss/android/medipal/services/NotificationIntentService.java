@@ -144,6 +144,7 @@ public class NotificationIntentService extends IntentService {
             }
 
         }
+        db.close();
         return medicineList;
     }
 }
