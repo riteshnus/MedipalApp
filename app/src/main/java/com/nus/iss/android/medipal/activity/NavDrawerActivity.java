@@ -5,6 +5,8 @@ package com.nus.iss.android.medipal.activity;
  */
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,6 +25,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
+import com.nus.iss.android.medipal.data.MedipalContract;
+import com.nus.iss.android.medipal.data.MedipalDBHelper;
 
 import java.text.SimpleDateFormat;
 
@@ -34,7 +38,7 @@ public class NavDrawerActivity extends AppCompatActivity
     FloatingActionButton fabApptt;
     FloatingActionButton fabMeasure;
     FloatingActionButton fabMedi;
-
+    TextView drawerUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,11 @@ public class NavDrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
+        View header = nv.getHeaderView(0);
+        //header.findViewById(R.id.drawer_user_name)
+        drawerUserName = (TextView) header.findViewById(R.id.drawer_user_name);
 
         /* ---- FAB buttons ---- */
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -150,7 +159,11 @@ public class NavDrawerActivity extends AppCompatActivity
 
         });
         /* ---------- button listeners End ---------- */
+
+        setUserName();
     } // End of onCreate
+
+
 
     private void showFABMenu(){
         isFABOpen=true;
@@ -203,11 +216,17 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setUserName(){
+        MedipalDBHelper dbHelper = new MedipalDBHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT "+ MedipalContract.PersonalEntry.USER_NAME+" FROM " +MedipalContract.PersonalEntry.USER_TABLE_NAME,null);
+        if(c.moveToFirst())  drawerUserName.setText(c.getString(c.getColumnIndex(MedipalContract.PersonalEntry.USER_NAME)));
+        if(!c.isClosed()) c.close();
+        if(db.isOpen())db.close();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

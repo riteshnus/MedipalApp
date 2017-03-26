@@ -5,6 +5,7 @@ package com.nus.iss.android.medipal.activity;
  */
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -93,8 +94,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                // this.finish();
-                NavUtils.navigateUpFromSameTask(this);
+                startActivity(new Intent(this,NavDrawerActivity.class));
+                //this.finish();
+                //NavUtils.navigateUpFromSameTask(this);
                 return true;
 
         }
