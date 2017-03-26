@@ -41,7 +41,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class PersonalInfoActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -210,23 +209,24 @@ public class PersonalInfoActivity extends AppCompatActivity {
             mFabProfileSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    boolean isUpdateFailed=false;
                     if(mIsCursorEmpty){
                         //insert
                         createAndInsertDetail();
                     } else{
                         //update
-                        updateDetail();
+                        isUpdateFailed = updateDetail();
                     }
-
-
-                    mFabProfileSave.setVisibility(View.GONE);
-                    mFabProfileEdit.setVisibility(View.VISIBLE);
-                    //toggleEditable(false);
-                    changeInputType();
-                    // disable onclick listener on DoB
-                    etxtDOB.setOnClickListener(null);
-                    Toast.makeText(getActivity().getApplicationContext(), "Profile Saved", Toast.LENGTH_SHORT).show();
+                    // change edit mode only if update successful
+                    if(!isUpdateFailed) {
+                        mFabProfileSave.setVisibility(View.GONE);
+                        mFabProfileEdit.setVisibility(View.VISIBLE);
+                        //toggleEditable(false);
+                        changeInputType();
+                        // disable onclick listener on DoB
+                        etxtDOB.setOnClickListener(null);
+                        Toast.makeText(getActivity().getApplicationContext(), "Profile Saved", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -273,33 +273,64 @@ public class PersonalInfoActivity extends AppCompatActivity {
             }
         }
 
-        public void updateDetail(){
+        public boolean updateDetail(){
             PersonalBio personalBio;
             String name ;
             String addr = etxtAddr.getText().toString();
+            if(addr.length()>30){
+                etxtAddr.setError("Max. length is 30 characters");
+                return true;
+            }
             String bloodType = etxtBloodType.getText().toString();
+            if(bloodType.length()>10){
+                etxtBloodType.setError("Enter a valid blood type");
+                return true;
+            }
             Date dob;
             try {
                 dob = sdfDB.parse(sdfDB.format(sdfView.parse(String.valueOf(etxtDOB.getText()))));
             } catch (ParseException e) {
                 e.printStackTrace();
                 Toast.makeText(getActivity().getApplicationContext(),"failed to save dob",Toast.LENGTH_SHORT).show();
-                return;
+                return true;
             }
             String height = etxtHeight.getText().toString();
+            if(height.length()>3) {
+                etxtHeight.setError("Enter a valid height in cm");
+                return true;
+            }
             String idNum = etxtIDnum.getText().toString();
+            if(idNum.length()>20){
+                etxtIDnum.setError("Enter a valid ID number");
+                return true;
+            }
             String postalCode = etxtPostalCode.getText().toString();
+            if(postalCode.length()>10){
+                etxtPostalCode.setError("Enter a valid postal code");
+                return true;
+            }
 
             if(mCursor!=null)mCursor.moveToFirst();
             String id = mCursor.getString(mCursor.getColumnIndex("_id"));
+
             if(null!= etxtName.getText() && !etxtName.getText().toString().isEmpty()
-                    && etxtDOB.getText()!=null && !etxtAddr.getText().toString().isEmpty()){
+                    && etxtDOB.getText()!=null && !etxtDOB.getText().toString().isEmpty()){
+
                 name = etxtName.getText().toString();
-                personalBio = new PersonalBio( name, dob, idNum, addr, postalCode, height, bloodType);
-                PersonalBioDAO pbDAO = new PersonalBioDAO(this);
-                pbDAO.update(personalBio,"_id="+id,null);
+                if(name.length()>30){
+                    etxtName.setError("Max. length is 30 characters");
+                    return true;
+                } else {
+                    personalBio = new PersonalBio(name, dob, idNum, addr, postalCode, height, bloodType);
+
+                    PersonalBioDAO pbDAO = new PersonalBioDAO(this);
+                    // Update in DB
+                    pbDAO.update(personalBio, "_id=" + id, null);
+                    return false;
+                }
             }else{
                 etxtName.setError("Field cannot be blank");
+                return true;
             }
         }
 
@@ -342,7 +373,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 etxtDOB.setInputType(InputType.TYPE_NULL);
             }
             if(etxtHeight.getInputType() == InputType.TYPE_NULL) {
-                etxtHeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                etxtHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
             } else{
                 etxtHeight.setInputType(InputType.TYPE_NULL);
             }
@@ -352,7 +383,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 etxtIDnum.setInputType(InputType.TYPE_NULL);
             }
             if(etxtPostalCode.getInputType() == InputType.TYPE_NULL) {
-                etxtPostalCode.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+                etxtPostalCode.setInputType(InputType.TYPE_CLASS_NUMBER);
             } else{
                 etxtPostalCode.setInputType(InputType.TYPE_NULL);
             }

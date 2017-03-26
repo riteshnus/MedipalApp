@@ -45,10 +45,9 @@ public class ToolbarActionModeCallback implements ActionMode.Callback {
 
         switch (item.getItemId()) {
             case R.id.action_delete:
-                //If current fragment is recycler view fragment
-                HealthBioFragment hbFragment = (HealthBioFragment)mFragment;//Get recycler view fragment
+                HealthBioFragment hbFragment = (HealthBioFragment)mFragment;
                 if (hbFragment != null)
-                    hbFragment.deleteRows();//delete selected rows
+                    hbFragment.deleteRows();
                 break;
         }
         return false;
@@ -56,11 +55,10 @@ public class ToolbarActionModeCallback implements ActionMode.Callback {
     }
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        //When action mode destroyed remove selected selections and set action mode to null
-        mHealthBioAdapter.removeSelection();  // remove selection
+        mHealthBioAdapter.removeSelection();
         HealthBioFragment hbFragment = (HealthBioFragment) mFragment;
             if (hbFragment != null)
-                hbFragment.setNullToActionMode();//Set action mode null
+                hbFragment.setNullToActionMode();
     }
 }
 

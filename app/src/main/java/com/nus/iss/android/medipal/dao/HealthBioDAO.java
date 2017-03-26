@@ -28,4 +28,17 @@ public class HealthBioDAO {
         Uri uri = activity.getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI_HEALTH_BIO,values);
         activity.getContentResolver().notifyChange(MedipalContract.PersonalEntry.CONTENT_URI_HEALTH_BIO,null,false);
     }
+
+/*
+    public void delete(HealthBio healthBio) {
+
+    }
+*/
+
+    public int delete(String where) {
+        int rowsAffected = activity.getContentResolver().delete(MedipalContract.PersonalEntry.CONTENT_URI_HEALTH_BIO,where,null);
+        activity.getContentResolver().notifyChange(MedipalContract.PersonalEntry.CONTENT_URI_HEALTH_BIO, null, false);
+        return rowsAffected;
+    }
+
 }

@@ -43,7 +43,7 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
             public View newView(Context context, Cursor cursor, ViewGroup parent) {
                 // inflating view item
                 LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                View rootView  = (View) inflater.inflate(R.layout.item_health_bio,parent,false);
+                View rootView  = inflater.inflate(R.layout.item_health_bio,parent,false);
                 return rootView;
             }
 
@@ -74,6 +74,9 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
                     e.printStackTrace();
                     //Toast.makeText(context, "error setting date", Toast.LENGTH_SHORT).show();
                 }
+
+                TextView _id_holder = (TextView) view.findViewById(R.id.hb_item_id);
+                _id_holder.setText(cursor.getString(cursor.getColumnIndex("_id")));
 /*
                 conditionType.setText(
                         cursor.getString(

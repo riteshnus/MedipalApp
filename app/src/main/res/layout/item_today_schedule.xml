@@ -4,31 +4,43 @@
     android:layout_height="wrap_content">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:visibility="gone"
+    android:layout_marginTop="5dp"
     android:layout_marginBottom="10dp"
     android:background="@android:color/background_light"
     android:id="@+id/item_layout_today_scheduled"
     android:orientation="horizontal">
-
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content"
+    android:src="@mipmap/medicine"/>
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_weight="3">
+    android:layout_weight="3"
+    android:layout_marginLeft="5dp">
     <TextView
         android:id="@+id/schedule_item"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:textColor="@android:color/holo_purple"
         android:textStyle="bold"
-        android:textSize="16sp" />
+        android:fontFamily="sans-serif-medium"
+        android:textSize="23sp"
+        android:hint="testmed"/>
     <TextView
         android:layout_width="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_height="wrap_content"
         android:id="@+id/schedule_subtitle_1"
         android:layout_below="@+id/schedule_item"
-        android:textStyle="bold"
-        android:textSize="13sp" />
+        android:textStyle="bold|italic"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="15sp"
+        android:hint="subtitle"/>
 </RelativeLayout>
 
     <TextView
@@ -37,7 +49,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textStyle="bold"
-        android:textSize="13sp" />
+        android:layout_marginTop="10dp"
+        android:paddingRight="20dp"
+        android:textAlignment="viewEnd"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="20sp"
+        android:hint="time"/>
 </LinearLayout>
     <!--
         <TextView

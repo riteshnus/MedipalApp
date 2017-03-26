@@ -21,5 +21,5 @@ public  class Constants {
     public static final String MEDICINE_TIME = "Time";
 
     public enum DOSAGE {pills,cc,ml,gr,mg,drops,pieces,puffs,units,teaspoon,tablespoon,patch,mcg,
-        l,meq,spray};
+        l,meq,spray}
 }

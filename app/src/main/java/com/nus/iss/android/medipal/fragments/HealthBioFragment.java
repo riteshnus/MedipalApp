@@ -16,15 +16,20 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.activity.AddHealthBioActivity;
 import com.nus.iss.android.medipal.adapter.HealthBioAdapter;
 import com.nus.iss.android.medipal.callback.ToolbarActionModeCallback;
+import com.nus.iss.android.medipal.dao.HealthBioDAO;
 import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.listener.RecyclerClickListener;
 import com.nus.iss.android.medipal.listener.RecyclerTouchListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HealthBioFragment extends android.support.v4.app.Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -37,6 +42,7 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
     private ActionMode mActionMode;
     private FloatingActionButton addHealthBioFab;
     private static final int HEALTH_BIO_LOADER=0;
+    public List<String> selectedViewsIds = new ArrayList<String>();
 
     public HealthBioFragment() {
         // Required empty public constructor
@@ -48,6 +54,7 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
         view = inflater.inflate(R.layout.fragment_health_bio, container, false);
         populateRecyclerView();
         implementRecyclerViewClickListeners();
+
         addHealthBioFab = (FloatingActionButton) view.findViewById(R.id.hb_fab);
         addHealthBioFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,14 +100,17 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
             @Override
             public void onClick(View view, int position) {
                 //If ActionMode not null select item
-                if (mActionMode != null)
+                if (mActionMode != null) {
                     onListItemSelect(position);
+                    selectedViewsIds.add((String.valueOf(((TextView)view).getText())));
+                }
             }
 
             @Override
             public void onLongClick(View view, int position) {
                 //Select item on long click
                 onListItemSelect(position);
+                selectedViewsIds.add((String.valueOf(((TextView)view.findViewById(R.id.hb_item_id)).getText())));
             }
         }));
     }
@@ -142,13 +152,20 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
 
     //Delete selected rows
     public void deleteRows() {
+
+        HealthBioDAO hbDAO = new HealthBioDAO(this.getActivity());
+
+        for(String id : selectedViewsIds){
+            hbDAO.delete("_id="+id);
+        }
         SparseBooleanArray selected = hbAdapter
                 .getSelectedIds();//Get selected ids
 
-        //Loop all selected ids
+/*       //Loop all selected ids
         for (int i = (selected.size() - 1); i >= 0; i--) {
             if (selected.valueAt(i)) {
                 //ToDo : db.delete
+                new HealthBioDAO("_id");
                 //If current id is selected remove the item via key
                 //item_models.remove(selected.keyAt(i));
                 //dummyCursor.
@@ -156,6 +173,7 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
 
             }
         }
+*/
         Toast.makeText(getActivity(), selected.size() + " item(s) deleted.", Toast.LENGTH_SHORT).show();//Show Toast
         mActionMode.finish();//Finish action mode after use
 
@@ -177,7 +195,6 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         //cursor.moveToNext()
         //getLoaderManager().restartLoader(HEALTH_BIO_LOADER,null,this);
-
         hbAdapter.swapCursor(cursor);
         hbAdapter.notifyDataSetChanged();
     }
