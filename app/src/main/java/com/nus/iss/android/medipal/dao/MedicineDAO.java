@@ -3,9 +3,20 @@ package com.nus.iss.android.medipal.dao;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.CursorLoader;
+import android.database.Cursor;
 import android.net.Uri;
 import com.nus.iss.android.medipal.data.MedipalContract;
+import com.nus.iss.android.medipal.dto.Consumption;
 import com.nus.iss.android.medipal.dto.Medicine;
+import com.nus.iss.android.medipal.helper.Utils;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static android.R.attr.data;
 import static com.nus.iss.android.medipal.data.MedipalContract.PersonalEntry;
 
 /**
@@ -63,4 +74,5 @@ public class MedicineDAO {
         activity.getContentResolver().delete(medicineUri,null,null);
         activity.getContentResolver().notifyChange(medicineUri,null,false);
     }
+
 }

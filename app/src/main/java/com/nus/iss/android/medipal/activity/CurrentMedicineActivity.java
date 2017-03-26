@@ -196,7 +196,9 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
         if (item.getItemId() == R.id.action_delete) {
             if (medicineUri != null) {
                 deleteMedicine();
-                finish();
+                Intent myIntent=new Intent(this,MedicineActivity.class);
+                //myIntent.setData(medicineUri);
+                startActivity(myIntent);
             }
         }
         if (item.getItemId() == android.R.id.home) {

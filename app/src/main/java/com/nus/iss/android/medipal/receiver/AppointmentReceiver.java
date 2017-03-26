@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.util.Log;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.activity.AppointmentActivity;
 import com.nus.iss.android.medipal.activity.ReminderActivity;
+import com.nus.iss.android.medipal.activity.ReminderActivityAppointment;
 import com.nus.iss.android.medipal.data.MedipalContract;
 
 import java.util.Random;
@@ -30,14 +32,21 @@ public class AppointmentReceiver extends BroadcastReceiver {
 
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationManager mNM = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        Intent intent1 = new Intent(context, AppointmentActivity.class);
+        Intent appReminderIntent = new Intent(context, ReminderActivityAppointment.class);
+        String appointment = intent.getExtras().getString("appointment");
+        String place = intent.getExtras().getString("place");
+        String timeAppt = intent.getExtras().getString("timeAppt");
+        Log.i("appointment"," "+appointment+" place: "+place+" time"+timeAppt);
+        appReminderIntent.putExtra("appointment",intent.getExtras().getString("appointment"));
+        appReminderIntent.putExtra("place",intent.getExtras().getString("place"));
+        appReminderIntent.putExtra("timeAppt",intent.getExtras().getString("timeAppt"));
 
-        intent1.setData(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE);
-        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        appReminderIntent.setData(MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT);
+        PendingIntent pIntent = PendingIntent.getActivity(context, 1, appReminderIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification mNotify = new Notification.Builder(context)
-                .setContentTitle("Time to go to clinic")
-                .setContentText("Check prerequisite")
+                .setContentTitle("Time to go to "+place)
+                .setContentText(appointment+" at "+ timeAppt)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)

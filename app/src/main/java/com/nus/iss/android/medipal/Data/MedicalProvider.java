@@ -113,6 +113,11 @@ public class MedicalProvider extends ContentProvider {
             case CONSUMPTION:
                 cursor = sqLiteDatabase.rawQuery(selection, null);
                 break;
+            case CONSUMPTION_ID:
+                selection=PersonalEntry.CONSUMPTION_MEDICINE_ID + "=?";
+                selectionArgs=new String[]{String.valueOf( ContentUris.parseId(uri))};
+                cursor = sqLiteDatabase.query(PersonalEntry.CONSUMPTION_TABLE_NAME,projection,selection,selectionArgs, null,null,null);
+                break;
             case APPOINTMENT:
                 cursor=sqLiteDatabase.query(PersonalEntry.APPOINTMENT_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;

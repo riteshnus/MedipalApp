@@ -60,7 +60,12 @@
             android:label="Appointments"
             android:theme="@style/AppThemeWithActionBar" />
 
-        <activity android:name=".activity.MedicineActivity" />
+        <activity android:name=".activity.MedicineActivity"
+            android:parentActivityName=".activity.MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activity.MainActivity" />
+        </activity>
         <activity android:name=".activity.AddMedicineActivity" />
 
         <!--
@@ -121,10 +126,10 @@
                 android:value=".activity.MedicineActivity" />
         </activity>
         <activity android:name=".activity.ReminderActivity" />
-        <!--<service
+        <service
             android:name=".services.NotificationIntentService"
             android:exported="true"
-            android:enabled="true"></service>-->
+            android:enabled="true"></service>
         <receiver android:name=".receiver.MedicineReceiver"
             android:enabled="true"/>
         <receiver android:name=".receiver.MedicineReceiver"

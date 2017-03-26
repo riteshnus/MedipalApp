@@ -1,14 +1,12 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.LoaderManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.CursorLoader;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -16,7 +14,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,8 +50,8 @@ import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.helper.Utils;
 
 import com.nus.iss.android.medipal.receiver.MedicineReceiver;
+import com.nus.iss.android.medipal.services.NotificationIntentService;
 
-import static android.R.id.empty;
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_DATE_FORMAT;
 import static com.nus.iss.android.medipal.constants.Constants.SIMPLE_TIME_FORMAT;
 
@@ -356,27 +354,50 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
        if(remindForMedicine){
            addReminder(reminder);
        }
+        if(thresholdReminderSwitch.isChecked()){
+            addThresholdReminder();
+        }
+    }
+
+    private void addThresholdReminder() {
+
+        Calendar calendar = Calendar.getInstance();
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent myIntent = new Intent(this, NotificationIntentService.class);
+
+        pendingIntent = PendingIntent.getService(this, Constants.PENDING_INTENT_THRESHOLD_ID, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.i("Calender Time", " " + calendar.getTime());
+        Calendar calendarTrigger = Calendar.getInstance();
+        calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+        calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+        calendarTrigger.set(Calendar.SECOND, 0);
+        Log.i("CalenderTrigger Time", " " + calendarTrigger.getTime() + "Medicine name:" + medicine.getMedicine());
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
+
     }
 
     private void addReminder(Reminder reminder) {
-        Intent myIntent = new Intent(this , MedicineReceiver.class);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        myIntent.putExtra("medicine",medicine.getMedicine());
-        pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Date date=reminder.getStartTime();
-        DateFormat format=new SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT);
-        String time=format.format(date);
-        Calendar calendar1=Calendar.getInstance();
-        calendar1.setTime(date);
-        int hour=calendar1.get(Calendar.HOUR_OF_DAY);
-        int minute=calendar1.get(Calendar.MINUTE);
+        Date userReminderTime = reminder.getStartTime();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        myIntent.setAction("Paracetamol");
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000*60*60*reminder.getInterval(), pendingIntent);
-
+        calendar.setTime(userReminderTime);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        for (int i = 0; i < reminder.getFrequency(); i++) {
+            Intent myIntent = new Intent(this, MedicineReceiver.class);
+            myIntent.putExtra("medicine", medicine.getMedicine());
+            myIntent.putExtra("id", medicine.getMedicineId());
+            pendingIntent = PendingIntent.getBroadcast(this, Constants.PENDING_INTENT_ID + i, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Log.i("Calender Time", " " + calendar.getTime());
+            Calendar calendarTrigger = Calendar.getInstance();
+            calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+            calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+            calendarTrigger.set(Calendar.SECOND, 0);
+            Log.i("CalenderTrigger Time", " " + calendarTrigger.getTime() + "Medicine name:" + medicine.getMedicine());
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+            calendar.add(Calendar.MINUTE, reminder.getInterval());
+            calendar.setTime(calendar.getTime());
+        }
     }
 
     private void setCurentDateAndTimeToTextView() {
@@ -475,6 +496,9 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
                 medicine.setReminder(null);
                 reminderDAO.delete(reminderUri);
             }
+        }
+        if(thresholdReminderSwitch.isChecked()){
+            addThresholdReminder();
         }
     }
 
