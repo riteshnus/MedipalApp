@@ -59,6 +59,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
     private TextView ReminderTextView;
     private TextView mSelectCategory;
     private Switch toggleReminder;
+    private PendingIntent pendingIntent;
     private EditText mApptTittleEditText;
     String dateFormat = "EEE, d MMM yyyy";
     String timeFormat = "h:mm a";
@@ -97,7 +98,9 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
         dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(AddAppointmentActivity.this, date, myCalendarDate.get(Calendar.YEAR), myCalendarDate.get(Calendar.MONTH), myCalendarDate.get(Calendar.DAY_OF_MONTH)).show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddAppointmentActivity.this, date, myCalendarDate.get(Calendar.YEAR), myCalendarDate.get(Calendar.MONTH), myCalendarDate.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             }
         });
 
@@ -144,7 +147,6 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
             updateLabel(0);
         }
     };
-
     TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -284,18 +286,19 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(myCalendarDate.getTime());
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
             Intent apptIntent = new Intent(this, AppointmentReceiver.class);
             apptIntent.putExtra("appointment", mApptTittleEditText.getText().toString());
             apptIntent.putExtra("place", mSelectCategory.getText().toString());
             apptIntent.putExtra("timeAppt", timeTextView.getText().toString());
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, Constants.pendingIntent__appointment_id, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent = PendingIntent.getBroadcast(this, Constants.pendingIntent__appointment_id, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Log.i("Calender Time", " " + calendar.getTime());
             Calendar calendarTrigger = Calendar.getInstance();
             calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
             calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
             calendarTrigger.set(Calendar.SECOND, 0);
             Log.i("CalenderTrigger Time", " " + calendarTrigger.getTime());
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
             //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 

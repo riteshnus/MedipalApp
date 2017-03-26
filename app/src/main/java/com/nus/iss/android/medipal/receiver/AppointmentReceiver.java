@@ -32,9 +32,9 @@ public class AppointmentReceiver extends BroadcastReceiver {
         String place = intent.getExtras().getString("place");
         String timeAppt = intent.getExtras().getString("timeAppt");
         Log.i("appointment"," "+appointment+" place: "+place+" time"+timeAppt);
-        appReminderIntent.putExtra("appointment",intent.getExtras().getString("appointment"));
-        appReminderIntent.putExtra("place",intent.getExtras().getString("place"));
-        appReminderIntent.putExtra("timeAppt",intent.getExtras().getString("timeAppt"));
+        appReminderIntent.putExtra("appointment",appointment);
+        appReminderIntent.putExtra("place",place);
+        appReminderIntent.putExtra("timeAppt",place);
 
         appReminderIntent.setData(MedipalContract.PersonalEntry.CONTENT_URI_APPOINTMENT);
         PendingIntent pIntent = PendingIntent.getActivity(context, 1, appReminderIntent, PendingIntent.FLAG_UPDATE_CURRENT);

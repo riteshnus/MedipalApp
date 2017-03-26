@@ -151,14 +151,19 @@
             android:enabled="true"></service>-->
         <receiver
             android:name=".receiver.MedicineReceiver"
-            android:enabled="true"/>
-            <!--android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>-->
+            </intent-filter>
+        </receiver>
+
         <receiver
             android:name=".receiver.AppointmentReceiver"
-            android:enabled="true"/>
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
