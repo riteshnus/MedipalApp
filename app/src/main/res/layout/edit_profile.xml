@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" >
         <LinearLayout android:orientation="vertical" android:id="@+id/main_left_drawer_root" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <RelativeLayout android:id="@+id/main_left_drawer_profile" android:background="@drawable/bg_user_profile_2" android:layout_width="fill_parent" android:layout_height="171.0dip" android:layout_margin="0.0dip">
+            <RelativeLayout android:id="@+id/main_left_drawer_profile" android:background="@drawable/backgroundnew" android:layout_width="fill_parent" android:layout_height="171.0dip" android:layout_margin="0.0dip">
                 <TextView
                     android:textColor="@color/colorWhite"
                     android:layout_centerHorizontal="true"
@@ -15,6 +15,7 @@
                     android:text="Guest"
                     android:maxLines="1"
                     android:layout_alignParentBottom="true"
+                    android:textStyle="bold"
                     style="@style/TextBody" />
 
                 <ImageView android:id="@+id/main_left_drawer_avatar"

@@ -15,44 +15,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appointment_id"
-        android:text="Appointment tittle" />
+        android:text="Appointment title"
+        android:drawableLeft="@drawable/notes"
+        android:drawableTint="#FFED0C2A"
+        android:textSize="20dp"
+        android:drawablePadding="8dp"
+        android:layout_marginTop="20dp"
+        android:gravity="fill_vertical"/>
 
     <TextView
+        android:drawableLeft="@drawable/ic_location"
+        android:drawableTint="#FFED0C2A"
+        android:drawablePadding="15dp"
+        android:textSize="20dp"
+        android:gravity="fill_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appointment_place"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:text="Appointment Place" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="8dp"
+        >
+
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Scheduled At"/>
-        <TextView
-            android:layout_width="0dp"
+            android:gravity="fill_vertical"
+            android:drawableLeft="@drawable/datetime"
+            android:drawablePadding="8dp"
+            android:drawableTint="#FFED0C2A"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/reminder_time_text"
             android:layout_weight="1"
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="48dp">
+
+
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/ok_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/ok_button"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:background="#FFF8E5AE"
             android:text="Ok" />
 
-    </LinearLayout>
+
 </LinearLayout>

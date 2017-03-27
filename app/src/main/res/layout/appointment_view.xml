@@ -10,22 +10,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/notes"
-            />
+            android:layout_weight="1"
+            android:tint="#FFED0C2A"
+            app:srcCompat="@drawable/notes" />
 
         <TextView
             android:id="@+id/tv_appt_desc"
             android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_gravity="center"
-            android:textSize="25dp"
             android:layout_height="wrap_content"
-           />
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:textSize="25dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,6 +44,7 @@
         <TextView
             android:id="@+id/tv_doctorOrClinic"
             android:layout_width="0dp"
+            android:textSize="20dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="4"
@@ -61,6 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:tint="#FFED0C2A"
             android:layout_weight="1"
             app:srcCompat="@drawable/datetime" />
 
@@ -68,6 +70,7 @@
             android:id="@+id/tv_dateTime"
             android:layout_width="0dp"
             android:layout_weight="4"
+            android:textSize="20dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>

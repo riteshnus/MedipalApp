@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textStyle="bold|italic"
+            android:textSize="20dp"
             android:text="Condition Description"
             />
         <EditText
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:maxLines="4"
+            android:textSize="20dp"
             android:scrollHorizontally="false"
             android:hint="Enter health description here"
             android:text=""/>
@@ -35,15 +37,17 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_allergy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:text="Allergy" />
+          <RadioButton
+              android:id="@+id/rb_allergy"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="30dp"
+              android:textSize="20dp"
+              android:text="Allergy" />
 
-            <RadioButton
+          <RadioButton
                 android:id="@+id/rb_condition"
+              android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Condition" />
@@ -58,14 +62,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="?attr/colorAccent"
-                android:src="@android:drawable/ic_menu_my_calendar" />
+                android:src="@mipmap/date"
+                android:tint="#FFED0C2A"/>
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textStyle="bold|italic"
+            android:textSize="20dp"
             android:text="Start Date"
             android:layout_weight="9"/>
             </LinearLayout>

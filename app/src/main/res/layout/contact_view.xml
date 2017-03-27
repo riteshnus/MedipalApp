@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:hint="test"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_marginTop="10dp"/>
     </LinearLayout>
 
@@ -37,7 +37,7 @@
                     android:layout_weight="4"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                   android:drawableLeft="@android:drawable/stat_sys_vp_phone_call"
+                   android:drawableLeft="@android:drawable/sym_action_call"
                    android:drawablePadding="29dp"
                    android:gravity="center_vertical"
                    android:hint="test"

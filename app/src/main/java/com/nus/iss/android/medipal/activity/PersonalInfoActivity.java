@@ -153,7 +153,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         Calendar dobCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener mDate;
         boolean mIsCursorEmpty;
-        private SimpleDateFormat sdfView = new SimpleDateFormat("d MMM yyyy");;
+        private SimpleDateFormat sdfView = new SimpleDateFormat("d MMM yyyy");
         private SimpleDateFormat sdfDB= new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 
         // Views
@@ -266,7 +266,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
             if(null!= etxtName.getText() && !etxtName.getText().toString().isEmpty()){
                 name = etxtName.getText().toString();
                 personalBio = new PersonalBio( name, dob, idNum, addr, postalCode, height, bloodType);
-                PersonalBioDAO pbDAO = new PersonalBioDAO(this);
+                PersonalBioDAO pbDAO = new PersonalBioDAO(this.getActivity());
                 pbDAO.save(personalBio);
             }else{
                 etxtName.setError("Field cannot be blank");
@@ -323,7 +323,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 } else {
                     personalBio = new PersonalBio(name, dob, idNum, addr, postalCode, height, bloodType);
 
-                    PersonalBioDAO pbDAO = new PersonalBioDAO(this);
+                    PersonalBioDAO pbDAO = new PersonalBioDAO(this.getActivity());
                     // Update in DB
                     pbDAO.update(personalBio, "_id=" + id, null);
                     return false;
@@ -421,12 +421,12 @@ public class PersonalInfoActivity extends AppCompatActivity {
         public void populatePersonalBio(Cursor cursor){
             if(cursor.moveToFirst()) {
 
-                etxtName.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_NAME)));
-                etxtPostalCode.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_POSTAL_CODE)));
-                etxtIDnum.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_ID_NO)));
+                etxtName.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_NAME)).trim());
+                etxtPostalCode.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_POSTAL_CODE)).trim());
+                etxtIDnum.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_ID_NO)).trim());
                 etxtHeight.setText("" + cursor.getInt(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_HEIGHT)));
-                etxtBloodType.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_BLOOD_TYPE)));
-                etxtAddr.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_ADDRESS)));
+                etxtBloodType.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_BLOOD_TYPE)).trim());
+                etxtAddr.setText(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_ADDRESS)).trim());
                 try {
                     etxtDOB.setText(
                             sdfView.format(sdfDB.parse(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_DOB)))));

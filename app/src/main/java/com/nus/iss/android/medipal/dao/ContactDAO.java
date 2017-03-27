@@ -18,7 +18,7 @@ public class ContactDAO {
         this.activity=activity;
     }
 
-    public void saveIce(ICEContact iceContact){
+    public Uri saveIce(ICEContact iceContact){
         ContentValues val= new ContentValues();
         val.put(MedipalContract.PersonalEntry.ICE_NAME, iceContact.getName());
         val.put(MedipalContract.PersonalEntry.ICE_CONTACT_NUMBER, iceContact.getContactNo());
@@ -27,6 +27,7 @@ public class ContactDAO {
         val.put(MedipalContract.PersonalEntry.ICE_DESCRIPTION, iceContact.getDescription());
         Uri myUri = activity.getContentResolver().insert(MedipalContract.PersonalEntry.CONTENT_URI_CONTACT,val);
         activity.getContentResolver().notifyChange(MedipalContract.PersonalEntry.CONTENT_URI_CONTACT,null,false);
+        return myUri;
     }
 
     public int update(ICEContact iceContact, Uri mCurrentUri){

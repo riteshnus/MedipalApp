@@ -27,6 +27,7 @@
         <item
             android:id="@+id/nav_appointment"
             android:icon="@drawable/ic_today_black_24dp"
+            
             android:title="Appointments" />
     </group>
 
@@ -35,10 +36,13 @@
         <menu>
             <item
                     android:id="@+id/nav_consumption_history"
-                    android:title="Consumption History" />
+                    android:title="Consumption History"
+                android:icon="@drawable/ic_history_black_24dp"/>
             <item
                     android:id="@+id/nav_measurement_history"
-                    android:title="Measurement History" />
+                    android:title="Measurement History"
+                android:icon="@drawable/ic_history_black_24dp"
+                />
         </menu>
     </item>
 

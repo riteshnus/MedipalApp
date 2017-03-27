@@ -8,37 +8,44 @@
     >
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        app:srcCompat="@mipmap/ic_medtaken"
-        android:layout_gravity="right"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/ic_medtaken"
+        android:tint="#FF05922F"
         android:visibility="gone"
+        android:layout_weight="2"
+        android:layout_gravity="left"
+        android:layout_marginRight="15dp"
         android:id="@+id/ivTakenMedicine" />
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        app:srcCompat="@mipmap/ic_medmissed"
-        android:layout_gravity="right"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="2"
+        app:srcCompat="@drawable/ic_medmissed"
+        android:tint="#FFF40808"
         android:visibility="gone"
+        android:layout_marginRight="15dp"
         android:id="@+id/ivMissedMedicine" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="3">
+        android:layout_weight="6">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/idMedName"
                 android:fontFamily="sans-serif-medium"
+                android:id="@+id/idMedName"
+                android:textSize="20dp"
                 android:layout_weight="1"
                 android:textAppearance="?android:textAppearanceMedium"/>
 
@@ -47,9 +54,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:id="@+id/idDosage"
-                android:layout_gravity="center"
                 android:layout_marginTop="1dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:textAppearance="?android:textAppearanceMedium"/>
@@ -57,14 +63,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
             android:id="@+id/idMedDate"
             android:layout_weight="1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:layout_below="@+id/idMedName"
-            android:layoutDirection="rtl"
-            android:textAppearance="?android:textAppearanceSmall"/>
+            android:layoutDirection="rtl" />
 
 
     </LinearLayout>

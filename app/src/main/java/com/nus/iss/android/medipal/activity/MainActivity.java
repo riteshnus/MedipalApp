@@ -18,6 +18,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +45,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.nus.iss.android.medipal.activity.MainActivity.PlaceholderFragment.mCursorAdapter;
-import static com.nus.iss.android.medipal.helper.Utils.inceaseTimeByGivenNumberOfHours;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>   {
     //Todo: Rename as TodayScheduleActivity
@@ -246,11 +246,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                     //Reminder reminder = new Reminder(reminderFrequency,reminderStartTime,reminderInterval);
                     //ScheduledEventJoin scheduledEventJoin = new ScheduledItem(medicineName, medicineConsumeQty, medicineDosage, date, false);
-                    Date date = reminderStartTime;
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(reminderStartTime);
+                    calendar.set(1970,0,1);
+                    Date date = calendar.getTime();
                     while(reminderFrequency>0){
-/*                      Log.e("Schedule DateTime", "Begin : " + String.valueOf(date));
-                        Log.e("Comapare", "1st : " + date.compareTo(midnightStart));
-                        Log.e("Comapare", "2nd : " + date.compareTo(morningStart));*/
+                      Log.e("Schedule DateTime", "Begin : " + String.valueOf(date));
                         if(date.compareTo(midnightStart)>=0 && date.compareTo(morningStart)<0){
                             //NIGHT
                             mEventsMatrixCursor.addRow(new String[]{reminderId+"",medicineName,medicineConsumeQty+"",medicineDosage+"",sdfView.format(date),"4","Medicine"});
@@ -273,28 +274,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             //eveningEvents.add(scheduledItem);
                         }
 
-                        date = inceaseTimeByGivenNumberOfHours(date,reminderInterval);
+
+                        // Always keep the date same
+                        calendar.add(Calendar.HOUR_OF_DAY,reminderInterval);
+                        Log.e("loop end : ",cal.getTime().toString());
+                        calendar.set(1970,0,1); // keeping date as epoch; for same day
+                        date=calendar.getTime();
+                        Log.e("loop end : ",date.toString());
                         reminderFrequency--;
                         /*Log.e("Schedule DateTime", "End: " + String.valueOf(date));*/
-                    }// End of cursorLoop
+                    }
 
-                    // --- Populate Cursor with sorted data ---
-   /*                 sortEvents();
-
-                    populateCursor();
-                    */
-                    // ---
-
-                    mCursorAdapter.swapCursor(mEventsMatrixCursor);
-                    mCursorAdapter.notifyDataSetChanged();
+                }// End of cursorLoop
+                mCursorAdapter.swapCursor(mEventsMatrixCursor);
+                mCursorAdapter.notifyDataSetChanged();
 
 
-                    //ScheduledEventJoin scheduledEventJoin = new ScheduledEventJoin(medicineName, medicineConsumeQty, medicineDosage, reminder, false);
-                    //scheduledEventJoinList.add(scheduledEventJoin);
-/*                        int remindrIdColumnIndex = data.getColumnIndex(MedipalContract.MedicineEntry.MEDICINE_REMINDERID);
-                        int reminderId = data.getInt(remindrIdColumnIndex);
-                        reminderIDList.add(reminderId);*/
-                }
 
                 //getLoaderManager().restartLoader(REMINDER_LOADER, null, this);
 

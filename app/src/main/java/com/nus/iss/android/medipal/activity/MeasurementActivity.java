@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.nus.iss.android.medipal.R;
 
-public class Measurement extends AppCompatActivity {
+public class MeasurementActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +29,22 @@ public class Measurement extends AppCompatActivity {
 
     public void sendTemperature(View view)
     {
-        Intent intent = new Intent(Measurement.this, TemperatureActivity.class);
+        Intent intent = new Intent(MeasurementActivity.this, TemperatureActivity.class);
         startActivity(intent);
     }
     public void sendPulse(View view)
     {
-        Intent intent = new Intent(Measurement.this, PulseActivity.class);
+        Intent intent = new Intent(MeasurementActivity.this, PulseActivity.class);
         startActivity(intent);
     }
     public void sendWeight(View view)
     {
-        Intent intent = new Intent(Measurement.this, WeightActivity.class);
+        Intent intent = new Intent(MeasurementActivity.this, WeightActivity.class);
         startActivity(intent);
     }
     public void sendBp(View view)
     {
-        Intent intent = new Intent(Measurement.this, BpActivity.class);
+        Intent intent = new Intent(MeasurementActivity.this, BpActivity.class);
         startActivity(intent);
     }
 }

@@ -19,44 +19,47 @@ public class MeasurementDAO {
 
 
     private Activity activity;
-        public MeasurementDAO(Activity activity){
-            this.activity=activity;
-        }
 
-         public void saveBp(BloodPressure measurement){
-        ContentValues val= new ContentValues();
+    public MeasurementDAO(Activity activity) {
+        this.activity = activity;
+    }
+
+    public Uri saveBp(BloodPressure measurement) {
+        ContentValues val = new ContentValues();
         val.put(PersonalEntry.MEASUREMENT_SYSTOLIC, measurement.getSystolic());
-        val.put(PersonalEntry.MEASUREMENT_DIASTOLIC,measurement.getDiastolic());
+        val.put(PersonalEntry.MEASUREMENT_DIASTOLIC, measurement.getDiastolic());
         val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
-        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT,val);
-        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT,null,false);
-
-                 }
-
-
-    public void savePulse(Pulse measurement){
-        ContentValues val= new ContentValues();
-        val.put(PersonalEntry.MEASUREMENT_PULSE,measurement.getPulse());
-        val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
-        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT,val);
-        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT,null,false);
-
+        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT, val);
+        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT, null, false);
+        return myUri;
     }
-    public void saveWeight(Weight measurement){
-        ContentValues val= new ContentValues();
-        val.put(PersonalEntry.MEASUREMENT_WEIGHT,measurement.getWeight());
-        val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
-        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT,val);
-        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT,null,false);
 
+
+    public Uri savePulse(Pulse measurement) {
+        ContentValues val = new ContentValues();
+        val.put(PersonalEntry.MEASUREMENT_PULSE, measurement.getPulse());
+        val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
+        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT, val);
+        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT, null, false);
+        return myUri;
     }
-    public void saveTemp(Temperature measurement){
-        ContentValues val= new ContentValues();
-        val.put(PersonalEntry.MEASUREMENT_TEMPERATURE,measurement.getTemperature());
-        val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
-        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT,val);
-        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT,null,false);
 
+    public Uri saveWeight(Weight measurement) {
+        ContentValues val = new ContentValues();
+        val.put(PersonalEntry.MEASUREMENT_WEIGHT, measurement.getWeight());
+        val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
+        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT, val);
+        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT, null, false);
+        return myUri;
+    }
+
+    public Uri saveTemp(Temperature measurement) {
+        ContentValues val = new ContentValues();
+        val.put(PersonalEntry.MEASUREMENT_TEMPERATURE, measurement.getTemperature());
+        val.put(PersonalEntry.MEASUREMENT_MEASURED_ON, String.valueOf(measurement.getMeasuredOn()));
+        Uri myUri = activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEASUREMENT, val);
+        activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEASUREMENT, null, false);
+        return myUri;
     }
 
 }

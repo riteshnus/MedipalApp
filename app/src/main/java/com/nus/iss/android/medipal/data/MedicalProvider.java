@@ -338,25 +338,4 @@ public class MedicalProvider extends ContentProvider {
         return rowUpdated;
     }
 
-    /*private int updateUser(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs,String tableName){
-        if(contentValues.containsKey(MedipalContract.PersonalEntry.USER_NAME)){
-            String userName = contentValues.getAsString(MedipalContract.PersonalEntry.USER_NAME);
-            Log.v(LOG_TAG,"User: "+userName);
-            if(userName == null){
-                throw new IllegalArgumentException("Name can not be blank");
-            }
-        }
-
-        if(contentValues.size()==0){
-            return 0;
-        }
-
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        int rowUpdated = sqLiteDatabase.update(tableName,contentValues,selection,selectionArgs);
-        if(rowUpdated !=0){
-            getContext().getContentResolver().notifyChange(uri,null);
-        }
-        return rowUpdated;
-
-    }*/
 }

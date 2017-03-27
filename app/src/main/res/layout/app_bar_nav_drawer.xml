@@ -56,16 +56,32 @@
         android:layout_margin="@dimen/fab_margin"
         app:elevation="5dp"
         app:srcCompat="@drawable/bp" />
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|start"
+    android:orientation="vertical"
+    >
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="20dp"
+        android:layout_above="@+id/nav_today"
+        android:layout_marginLeft="20dp"
         android:elevation="24dp"
         android:text="Date"
         android:textSize="@dimen/dateFontSize"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav_today"
+        android:elevation="24dp"
+        android:layout_marginStart="20dp"
+        android:text="Today"
+        android:textSize="@dimen/dateFontSize"
         android:textStyle="bold" />
-
+</LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -15,18 +15,23 @@
             <ImageView
                 android:id="@+id/iv_measuretbp"
                 android:layout_width="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/bp"
+                android:tint="#FFED0C2A"
                 />
 
              <Button
                  android:id="@+id/bt_bp"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
-                 android:layout_marginRight="10dp"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginEnd="10dp"
                  android:layout_weight="9"
                  android:onClick="sendBp"
+                 android:background="#FFF8E5AE"
                  android:text="Blood Pressure" />
          </LinearLayout>
         <LinearLayout
@@ -40,7 +45,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     app:srcCompat="@drawable/temp"
+                    android:tint="#FFED0C2A"
                     />
                 <Button
                     android:id="@+id/bt_temp"
@@ -49,32 +57,43 @@
                     android:text="Temperature"
                     android:onClick="sendTemperature"
                     android:layout_weight="9"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="#FFF8E5AE"
                   />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/iv_measurepulse"
-                app:srcCompat="@drawable/timeline"/>
-            <Button
-                android:id="@+id/bt_pulse"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Pulse"
-                android:layout_weight="9"
-                android:onClick="sendPulse"
-                android:layout_marginRight="10dp"
 
-                />
-        </LinearLayout>
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:id="@+id/iv_measurepulse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:tint="#FFED0C2A"
+            app:srcCompat="@drawable/timeline" />
+
+        <Button
+            android:id="@+id/bt_pulse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#FFF8E5AE"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="9"
+            android:onClick="sendPulse"
+            android:text="Pulse"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -83,15 +102,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="10dp"
                 android:id="@+id/iv_measureweight"
+                android:layout_marginTop="10dp"
+                android:tint="#FFED0C2A"
                 app:srcCompat="@drawable/weight"/>
             <Button
                 android:id="@+id/bt_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Weight"
-               android:layout_weight="9"
-                android:layout_marginRight="10dp"
+               android:layout_weight="6.68"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#FFF8E5AE"
                 android:onClick="sendWeight"/>
         </LinearLayout>
 

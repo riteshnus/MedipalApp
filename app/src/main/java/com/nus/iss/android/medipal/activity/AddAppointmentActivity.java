@@ -297,6 +297,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements Compoun
             pendingIntent = PendingIntent.getBroadcast(this, Constants.PENDINGINTENT_APPOINTMENT_ID, apptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Log.i("Calender Time", " " + calendar.getTime());
             Calendar calendarTrigger = Calendar.getInstance();
+            calendarTrigger.set(Calendar.DATE, calendar.get(Calendar.DATE));
             calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
             calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
             calendarTrigger.set(Calendar.SECOND, 0);

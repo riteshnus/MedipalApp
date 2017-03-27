@@ -5,44 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFE4DFE1"
+    android:background="#FFFEF3A3"
     android:weightSum="1">
 
     <TextView
-        android:layout_width="338dp"
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/ic_launcher"
-        android:gravity="center_vertical"
-        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_weight="0.03"
+        android:drawableLeft="@mipmap/ic_launcher"
         android:drawablePadding="10dp"
-        android:typeface="serif"
-        android:hint="An Applications that manages all your appointments and medicines. Also monitor your progress with daily measurement feed. " />
+        android:hint="An Application that manages all your appointments, medicines, personal details and health conditions along with your daily measurement feeds. "
+        android:textAlignment="textStart"
+        android:textSize="20dp"
+        android:typeface="serif" />
 
 
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="228dp"
-            android:layout_marginStart="100dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="100dp"
-            android:drawableLeft="@mipmap/team"
-            android:drawablePadding="15dp"
-            android:gravity="center_vertical"
-            android:hint="FT - 02"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="228dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="60dp"
+        android:drawableLeft="@mipmap/team"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:drawableTint="#FFED0C2A"
+        android:hint="FT - 02"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:textStyle="normal"
         android:typeface="serif"
-        android:hint="Siddharth Deshmukh\nRitesh Kumar\nShubhanshu gautam\nMedha Sharma\nThushara Joseph\nMathura Krishnan "
-        android:textSize="15dp"/>
+        android:hint="Siddharth Deshmukh"
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:hint="Ritesh Kumar "
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:hint="Medha Sharma "
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:hint="Thushara Joseph "
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:hint="Shubhanshu gautam "
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:hint="Mathura Krishnan "
+        android:textSize="20dp"/>
 
 </LinearLayout>

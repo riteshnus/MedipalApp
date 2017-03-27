@@ -76,7 +76,7 @@
                 android:paddingLeft="@dimen/prof_etxt_padding"
                 android:paddingRight="@dimen/prof_etxt_padding"
                 android:ems="12"
-                android:hint="Address"
+                android:hint="Home Address"
                 android:inputType="textPostalAddress"
                 android:maxLines="3" />
             <TextView
@@ -113,7 +113,7 @@
                 android:paddingLeft="@dimen/prof_etxt_padding"
                 android:paddingRight="@dimen/prof_etxt_padding"
                 android:ems="12"
-                android:hint="Height"
+                android:hint="Height in cm"
                 android:digits="0123456789."
                 android:inputType="number" />
             <TextView
@@ -131,7 +131,7 @@
                 android:paddingLeft="@dimen/prof_etxt_padding"
                 android:paddingRight="@dimen/prof_etxt_padding"
                 android:ems="12"
-                android:hint="BloodType"
+                android:hint="Enter Blood Group"
                 android:inputType="text" />
             <TextView
                 android:layout_width="wrap_content"

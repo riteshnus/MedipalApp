@@ -58,7 +58,7 @@ public class MedipalDBHelper extends SQLiteOpenHelper {
             + PersonalEntry.MEDICINE_DATE_ISSUED + " DATE, "
             +PersonalEntry.MEDICINE_EXPIRE_FACTOR  + " INTEGER );";
 
-    // Create Table for Measurement
+    // Create Table for MeasurementActivity
     public static final  String SQL_CREATE_MEASUREMENT_DATA_TABLE =  "CREATE TABLE " + PersonalEntry.MEASUREMENT_TABLE_NAME + " ("
             + PersonalEntry.MEASUREMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PersonalEntry.MEASUREMENT_SYSTOLIC + " INTEGER, "

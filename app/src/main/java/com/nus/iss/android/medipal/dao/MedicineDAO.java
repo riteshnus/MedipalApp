@@ -22,7 +22,7 @@ public class MedicineDAO {
        this.activity=activity;
     }
 
-    public void save(Medicine medicine){
+    public Uri save(Medicine medicine){
         ContentValues values=new ContentValues();
         values.put(PersonalEntry.MEDICINE_MEDICINE_NAME,medicine.getMedicine());
         values.put(PersonalEntry.MEDICINE_DESCRIPTION,medicine.getDescription());
@@ -40,9 +40,10 @@ public class MedicineDAO {
         Uri newUri=activity.getContentResolver().insert(PersonalEntry.CONTENT_URI_MEDICINE,values);
         medicine.setMedicineId((int) ContentUris.parseId(newUri));
         activity.getContentResolver().notifyChange(PersonalEntry.CONTENT_URI_MEDICINE,null,false);
+        return newUri;
     }
 
-    public void update(Medicine medicine, Uri medicineUri){
+    public int update(Medicine medicine, Uri medicineUri){
         ContentValues values=new ContentValues();
         values.put(PersonalEntry.MEDICINE_MEDICINE_NAME,medicine.getMedicine());
         values.put(PersonalEntry.MEDICINE_DESCRIPTION,medicine.getDescription());
@@ -59,9 +60,11 @@ public class MedicineDAO {
         }
         int rowUpdate=activity.getContentResolver().update(medicineUri,values,null,null);
         activity.getContentResolver().notifyChange(medicineUri,null,false);
+        return rowUpdate;
     }
-    public void delete(Uri medicineUri){
-        activity.getContentResolver().delete(medicineUri,null,null);
+    public int delete(Uri medicineUri){
+        int rowAffected = activity.getContentResolver().delete(medicineUri,null,null);
         activity.getContentResolver().notifyChange(medicineUri,null,false);
+        return rowAffected;
     }
 }

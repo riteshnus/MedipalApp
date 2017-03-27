@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.LoaderManager;
 import android.content.DialogInterface;
 import android.content.Loader;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.dao.MeasurementDAO;
+import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.Weight;
 
 import java.text.ParseException;
@@ -38,7 +40,7 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
     private String normalWeight="You are in optimal shape! Good Work!";
     private String lowWeight="You are below Weight! Eat more1";
     private String hightWeight=" You are over weight! Eat Less!";
-    private double height = 1.56;
+    private double height;
     private ImageView emoji;
     private SimpleDateFormat sdf;
     private SimpleDateFormat sdf2;
@@ -60,8 +62,14 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
         String currentDateandTime = sdf.format(new Date());
         mesureDate.setText(currentDateandTime);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
+        }
+        //Added by Medha to calculate user height
+        calculateHeight();
 
 
         /*datepicker*/
@@ -101,27 +109,27 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
                 }
 
                 int weight = Integer.parseInt(weightTextView.getText().toString());
-                double result = calBmi(weight,height);
-
-                if(result<18.5){
-
-                    notes.setText(lowWeight);
-                    notes.setTextColor(Color.rgb(255,165,0));
-                    emoji.setImageResource(R.mipmap.emoneutral);
-
-                }
-                else if(result>= 18.5 & result <= 25.5){
-
-                    notes.setText(normalWeight);
-                    notes.setTextColor(Color.rgb(0,128,0));
-                    emoji.setImageResource(R.mipmap.emohappy);
-
-                }
-                else
+                if(height > 0)
                 {
-                    notes.setText(hightWeight);
-                    notes.setTextColor(Color.rgb(200,0,0));
-                    emoji.setImageResource(R.mipmap.emosad);
+                    double result = calBmi(weight, height);
+
+                    if (result < 18.5) {
+
+                        notes.setText(lowWeight);
+                        notes.setTextColor(Color.rgb(255, 165, 0));
+                        emoji.setImageResource(R.mipmap.emoneutral);
+
+                    } else if (result >= 18.5 & result <= 25.5) {
+
+                        notes.setText(normalWeight);
+                        notes.setTextColor(Color.rgb(0, 128, 0));
+                        emoji.setImageResource(R.mipmap.emohappy);
+
+                    } else {
+                        notes.setText(hightWeight);
+                        notes.setTextColor(Color.rgb(200, 0, 0));
+                        emoji.setImageResource(R.mipmap.emosad);
+                    }
                 }
             }
 
@@ -131,6 +139,16 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
 
 /*bracket ends*/
 
+    }
+
+    //Method added by Medha to calculate user height
+    private void calculateHeight()
+    {
+        Cursor cursor = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_PERSONAL, null, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            height = cursor.getDouble(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_HEIGHT))/100;
+        }
     }
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -158,7 +176,7 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
         mesureDate.setText(sdf.format(myCalendar.getTime()));
     }
 
-    private double calBmi(int wt,double ht){
+    private double calBmi(double wt,double ht){
        double bmi;
         bmi = (wt)/ht*ht;
         return bmi;

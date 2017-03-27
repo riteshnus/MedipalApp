@@ -113,6 +113,8 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
 
     }
 
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

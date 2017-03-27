@@ -7,21 +7,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:tint="#FFED0C2A"
             android:src="@mipmap/appt" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2.5"
             android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
             android:orientation="vertical">
 
             <TextView
@@ -30,18 +29,15 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:hint="Description"
-               android:textSize="22dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_appt_time"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="5dp"
                 android:hint="test"
-                android:textStyle="italic"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

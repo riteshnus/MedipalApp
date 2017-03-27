@@ -78,7 +78,7 @@ public class MedipalContract {
         public static final String MEDICINE_EXPIRE_FACTOR="ExpireFactor";
 
         /*
-       * Table Details for Measurement table
+       * Table Details for MeasurementActivity table
        * */
         public static final String MEASUREMENT_TABLE_NAME="measurement";
         public static final String MEASUREMENT_ID=BaseColumns._ID;

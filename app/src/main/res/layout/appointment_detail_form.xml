@@ -8,110 +8,77 @@
         android:id="@+id/ev_appt_tittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="@string/appointment_tittle"
-        android:textSize="25dp"
-        android:maxLength="255"
         android:layout_margin="30dp"
-        />
+        android:hint="@string/appointment_tittle"
+        android:maxLength="255"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="22dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="33dp"
-            android:layout_weight="1"
-            android:src="@mipmap/doc"
-            android:layout_margin="20dp"
-            />
-        <!--<LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical">-->
 
         <TextView
             android:id="@+id/select_category"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:drawableLeft="@mipmap/doc"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:textAlignment="gravity"
-            android:layout_gravity="center"
-            android:layout_weight="8"
             android:textSize="20dp"
             android:hint="select Category"
             android:drawableRight="@mipmap/arrow"
             android:layout_marginRight="20dp"/>
-        <!--<Spinner
-            android:id="@+id/select_doctor"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:spinnerMode="dropdown"
-            >
-        </Spinner>-->
-        <!--</LinearLayout>-->
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="33dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_schedule"
-            android:layout_margin="20dp"
-            />
-        <!--<CalendarView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CalendarView>-->
+
         <TextView
             android:id="@+id/app_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="12dp"
+            android:drawableTint="#FFED0C2A"
             android:layout_weight="5"
+            android:drawableLeft="@drawable/datetime"
             android:hint="Test date"
-            android:textSize="20dp"
-            android:layout_marginTop="25dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/app_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_weight="3"
-            android:textSize="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2"
             android:hint="Test time"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAlignment="textEnd"
+            android:textSize="20dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
 
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="33dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_add_alert"
-            android:layout_margin="20dp"
-            />
 
         <TextView
             android:id="@+id/app_reminder"
             android:layout_width="0dp"
             android:layout_height="33dp"
             android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:drawablePadding="15dp"
             android:layout_weight="5"
-            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_add_alert"
+            android:drawableTint="#FFED0C2A"
             android:hint="Reminder"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             />
@@ -120,8 +87,8 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/ReminderSwitch" />
+            android:id="@+id/ReminderSwitch"
+            android:layout_marginRight="20dp"/>
 
     </LinearLayout>
 </LinearLayout>

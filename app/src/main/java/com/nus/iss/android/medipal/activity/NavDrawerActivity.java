@@ -85,7 +85,7 @@ public class NavDrawerActivity extends AppCompatActivity
         fabMeasure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NavDrawerActivity.this,Measurement.class);
+                Intent intent = new Intent(NavDrawerActivity.this,MeasurementActivity.class);
                 startActivity(intent);
             }
         });
@@ -223,7 +223,7 @@ public class NavDrawerActivity extends AppCompatActivity
         MedipalDBHelper dbHelper = new MedipalDBHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT "+ MedipalContract.PersonalEntry.USER_NAME+" FROM " +MedipalContract.PersonalEntry.USER_TABLE_NAME,null);
-        if(c.moveToFirst())  drawerUserName.setText(c.getString(c.getColumnIndex(MedipalContract.PersonalEntry.USER_NAME)));
+        if(c.moveToFirst())  drawerUserName.setText(c.getString(c.getColumnIndex(MedipalContract.PersonalEntry.USER_NAME)).trim());
         if(!c.isClosed()) c.close();
         if(db.isOpen())db.close();
     }
@@ -241,7 +241,7 @@ public class NavDrawerActivity extends AppCompatActivity
             Intent intent = new Intent(NavDrawerActivity.this,MedicineActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_measurement) {
-            Intent intent = new Intent(NavDrawerActivity.this,Measurement.class);
+            Intent intent = new Intent(NavDrawerActivity.this,MeasurementActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_appointment) {
             Intent intent = new Intent(NavDrawerActivity.this, AppointmentList.class);

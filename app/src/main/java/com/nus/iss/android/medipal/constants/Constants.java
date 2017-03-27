@@ -19,6 +19,7 @@ public  class Constants {
     public static final int PENDINGINTENT_APPOINTMENT_ID = 2000;
     public static final int PENDING_INTENT_THRESHOLD_ID = 3000;
     public static final String MEDICINE_TIME = "Time";
+    public static final String SIMPLE_DATETIME_FORMAT="EEE, d MMM, HH:mm a";
 
     public enum DOSAGE {pills,cc,ml,gr,mg,drops,pieces,puffs,units,teaspoon,tablespoon,patch,mcg,
         l,meq,spray}

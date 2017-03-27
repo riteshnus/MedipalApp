@@ -8,8 +8,6 @@ import android.net.Uri;
 import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.Reminder;
 
-import static android.R.attr.id;
-
 /**
  * Created by siddharth on 3/14/2017.
  */
@@ -42,8 +40,9 @@ public class ReminderDAO {
         activity.getContentResolver().notifyChange(reminderUri,null,false);
         return reminder;
     }
-    public void delete(Uri reminderUri){
-        activity.getContentResolver().delete(reminderUri,null,null);
+    public int delete(Uri reminderUri){
+        int rowAffected = activity.getContentResolver().delete(reminderUri,null,null);
         activity.getContentResolver().notifyChange(reminderUri,null,false);
+        return rowAffected;
     }
 }

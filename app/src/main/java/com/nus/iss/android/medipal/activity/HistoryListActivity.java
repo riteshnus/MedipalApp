@@ -42,17 +42,46 @@ public class HistoryListActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_history_list);
+
+        Bundle bundle = getIntent().getExtras();
+        String text = bundle.getString(getString(R.string.pageName));
+        String category = bundle.getString(getString(R.string.filterCategory));
+        String medicine = bundle.getString(getString(R.string.filterMed));
+        String measurementType = bundle.getString(getString(R.string.filterMeasure));
+        String missedOrTaken = bundle.getString(getString(R.string.filterTakenOrMissed));
+
+        //To identify the button click either consumption or measurement
+        if (Objects.equals(text, getString(R.string.Consumption))) {
+            getConsumptionList(category, medicine, missedOrTaken);
+            setTitle(R.string.consumption_history);
+        }
+
+        if (Objects.equals(text, getString(R.string.Measurement))) {
+            getMeasurementList(measurementType);
+            setTitle(R.string.measurement_history);
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId())
         {
+            //Back button click
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+
+            //Filter button click
             case R.id.filter:
                 Bundle bundle = getIntent().getExtras();
                 String text = bundle.getString(getString(R.string.pageName));
-                //Filter Option
+
+                //Creating alert dialog on click of filter icon
                 AlertDialog.Builder builder = new AlertDialog.Builder(HistoryListActivity.this).setCancelable(true)
                         .setPositiveButton(R.string.btnApply, new DialogInterface.OnClickListener() {
                             @Override
@@ -79,7 +108,7 @@ public class HistoryListActivity extends AppCompatActivity
 
                 View mView = getLayoutInflater().inflate(R.layout.popup_filter_layout, null);
 
-                //To manage filter options
+                //To manage the visibility of filter options
                 View categoryLayout = mView.findViewById(R.id.catLayout);
                 View medicineLayout = mView.findViewById(R.id.medLayout);
                 View measurementLayout = mView.findViewById(R.id.measurementLayout);
@@ -117,38 +146,13 @@ public class HistoryListActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_list);
-
-        Bundle bundle = getIntent().getExtras();
-        String text = bundle.getString(getString(R.string.pageName));
-        String category = bundle.getString(getString(R.string.filterCategory));
-        String medicine = bundle.getString(getString(R.string.filterMedicine));
-        String measurementType = bundle.getString(getString(R.string.filterMeasure));
-        String missedOrTaken = bundle.getString(getString(R.string.filterTakenOrMissed));
-
-        //To identify the button click either consumption or measurement
-        if (Objects.equals(text, getString(R.string.Consumption))) {
-            getConsumptionList(category, medicine, missedOrTaken);
-            setTitle(R.string.consumption_history);
-        }
-
-        if (Objects.equals(text, getString(R.string.Measurement))) {
-            getMeasurementList(measurementType);
-            setTitle(R.string.measurement_history);
-        }
-    }
-
+    //Method to generate missed or taken spinner
     private void getMissedOrTakenSpinner(View mView)
     {
-        // Missed OR Taken filter spinner
         Spinner missedOrTaken = (Spinner) mView.findViewById(R.id.spinner);
         ArrayAdapter missedtakenAdapter = ArrayAdapter.createFromResource(HistoryListActivity.this,
                 R.array.array_missedtaken_option, android.R.layout.simple_spinner_item);
-        missedtakenAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        missedtakenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         missedOrTaken.setAdapter(missedtakenAdapter);
 
 
@@ -175,13 +179,13 @@ public class HistoryListActivity extends AppCompatActivity
         });
     }
 
+    //Method to generate measurement spinner
     private void getMeasurementSpinner(View mView)
     {
-        //measurement spinner
         Spinner measurement = (Spinner) mView.findViewById(R.id.spinnerMeasurementType);
         ArrayAdapter measurementTypeSpinnerAdapter = ArrayAdapter.createFromResource(HistoryListActivity.this,
                 R.array.array_meaurementtype_option, android.R.layout.simple_spinner_item);
-        measurementTypeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        measurementTypeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         measurement.setAdapter(measurementTypeSpinnerAdapter);
 
         //Measurement type spinner value selection
@@ -205,13 +209,13 @@ public class HistoryListActivity extends AppCompatActivity
         });
     }
 
+    //Method to generate medicine spinner
     private void getMedicineSpinner(View mView) {
-        //medicine spinner
         Spinner medicine = (Spinner) mView.findViewById(R.id.spinnerMedicine);
         List<String> arrayMedicine = getAllMedicine();
         ArrayAdapter<String> medicineSpinnerAdapter = new ArrayAdapter<>(HistoryListActivity.this,
                 android.R.layout.simple_spinner_item, arrayMedicine);
-        medicineSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        medicineSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         medicine.setAdapter(medicineSpinnerAdapter);
 
         //medicine spinner value selection
@@ -235,12 +239,12 @@ public class HistoryListActivity extends AppCompatActivity
         });
     }
 
+    //Method to generate category spinner
     private void getCategorySpinner(View mView) {
-        //category spinner
         final Spinner category = (Spinner) mView.findViewById(R.id.spinnerCategory);
         ArrayAdapter categorySpinnerAdapter = ArrayAdapter.createFromResource(HistoryListActivity.this,
                 R.array.array_categoryfilter_option, android.R.layout.simple_spinner_item);
-        categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(categorySpinnerAdapter);
 
         //category spinner value selection
@@ -285,14 +289,10 @@ public class HistoryListActivity extends AppCompatActivity
         String[] projection = new String[]{MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME};
         List<String> list = new ArrayList<>();
         list.add(getString(R.string.None));
-        list.add("   ");
-        list.add("   ");
         Cursor cursor = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_MEDICINE, projection, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 list.add(cursor.getString(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEDICINE_MEDICINE_NAME)));//adding 2nd column data
-                list.add("   ");
-                list.add("   ");
             } while (cursor.moveToNext());
         }
 

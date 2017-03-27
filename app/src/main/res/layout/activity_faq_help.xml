@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_faq_help"
@@ -14,10 +19,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_menu_send"
+        android:drawableTint="#FFED0C2A"
+        android:drawablePadding="10dp"
         android:layout_marginTop="5dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:textStyle="bold"
         android:fontFamily="sans-serif"
+        android:textSize="20dp"
         android:text="@string/faqQues1"
         android:id="@+id/ques1" />
 
@@ -28,9 +37,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
         android:id="@+id/ans1"
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif"
         android:text="@string/faqAns1"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:textStyle="italic"
+       />
 
     <View style="@style/Divider"/>
 
@@ -38,8 +50,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_menu_send"
+        android:drawablePadding="10dp"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
+        android:drawableTint="#FFED0C2A"
+        android:layout_marginTop="8dp"
+        android:textSize="20dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:fontFamily="sans-serif"
         android:text="@string/faqQues2"
@@ -52,9 +68,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/ans2"
         android:fontFamily="sans-serif"
+        android:layout_marginTop="5dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:text="@string/faqAns2"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:textStyle="italic"
+        />
     <View style="@style/Divider"/>
 
     <!--Question 3-->
@@ -62,8 +81,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_menu_send"
+        android:drawablePadding="10dp"
+        android:drawableTint="#FFED0C2A"
         android:textStyle="bold"
+        android:textSize="20dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:fontFamily="sans-serif"
         android:text="@string/faqQues3"
@@ -75,10 +98,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ans3"
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif"
         android:textAppearance="?android:textAppearanceMedium"
         android:text="@string/faqAns3"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:textStyle="italic"
+        />
     <View style="@style/Divider"/>
 
     <!--Question 4-->
@@ -86,7 +112,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20dp"
+        android:drawableLeft="@drawable/ic_menu_send"
+        android:drawableTint="#FFED0C2A"
+        android:drawablePadding="10dp"
         android:textStyle="bold"
         android:textAppearance="?android:textAppearanceMedium"
         android:fontFamily="sans-serif"
@@ -99,10 +129,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ans4"
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif"
         android:textAppearance="?android:textAppearanceMedium"
         android:text="@string/faqAns4"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:textStyle="italic"
+      />
     <View style="@style/Divider"/>
 
 
@@ -111,7 +144,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_menu_send"
+        android:drawableTint="#FFED0C2A"
+        android:drawablePadding="10dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:textAppearance="?android:textAppearanceMedium"
         android:fontFamily="sans-serif"
@@ -122,12 +159,15 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         android:id="@+id/ans5"
         android:fontFamily="sans-serif"
         android:textAppearance="?android:textAppearanceMedium"
         android:text="@string/faqAns5"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:textStyle="italic"
+        />
     <View style="@style/Divider"/>
 
     <!--Question 6-->
@@ -135,8 +175,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_menu_send"
+        android:drawableTint="#FFED0C2A"
+        android:drawablePadding="10dp"
         android:textStyle="bold"
+        android:textSize="20dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:fontFamily="sans-serif"
         android:text="@string/faqQues6"
@@ -149,9 +193,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/ans6"
         android:fontFamily="sans-serif"
+        android:layout_marginTop="5dp"
+        android:textStyle="italic"
         android:textAppearance="?android:textAppearanceMedium"
         android:text="@string/faqAns6"
         android:visibility="gone"/>
     <View style="@style/Divider"/>
 
 </LinearLayout>
+</ScrollView>

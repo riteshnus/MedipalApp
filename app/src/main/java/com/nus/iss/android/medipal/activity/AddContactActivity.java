@@ -119,7 +119,6 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         switch (item.getItemId()) {
             case R.id.action_save:
                 createAndInsertContact();
-                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -172,6 +171,7 @@ public class AddContactActivity extends AppCompatActivity implements LoaderManag
         ContactDAO contactDAO = new ContactDAO(this);
         if (mCurrentContactUri == null) {
             contactDAO.saveIce(newEntry);
+            finish();
         } else {
             rowsAffected = contactDAO.update(newEntry, mCurrentContactUri);
             if (rowsAffected == 0) {

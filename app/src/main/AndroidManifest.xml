@@ -113,7 +113,7 @@
         <activity
             android:name=".activity.PulseActivity"
             android:label="Add Pulse"
-            android:parentActivityName=".activity.Measurement"
+            android:parentActivityName=".activity.MeasurementActivity"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
             android:name=".activity.WeightActivity"
@@ -127,14 +127,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.Measurement"
+            android:name=".activity.MeasurementActivity"
             android:label="@string/MeasurementList"
             android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppThemeWithActionBar" />
 
         <activity
             android:name=".activity.ICEContactList"
-            android:label="ICE Contact"
+            android:label="Emergency Contact"
             android:parentActivityName=".activity.NavDrawerActivity"
             android:theme="@style/AppThemeWithActionBar" />
         <activity

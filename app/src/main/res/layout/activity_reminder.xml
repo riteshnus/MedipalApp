@@ -13,12 +13,14 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:drawableLeft="@mipmap/medicine"
+        android:gravity="fill_vertical"
         android:layout_height="wrap_content"
         android:id="@+id/reminder_medicine_id"
-        android:text="MEdicine Name"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:textSize="15sp"/>
+        android:textSize="20dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,19 +28,16 @@
         android:layout_marginTop="5dp"
         android:textSize="15sp"
         android:layout_marginLeft="16dp">
+
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Scheduled At"
-            android:textSize="15sp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/datetime"
+            android:gravity="fill_vertical"
+            android:drawableTint="#FFED0C2A"
             android:id="@+id/reminder_time_text"
             android:layout_weight="1"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:hint="blah blah"/>
        </LinearLayout>
 
@@ -52,12 +51,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/ignore_button"
-        android:text="Ignore" />
+        android:background="#FFF8E5AE"
+        android:text="Ignore"
+        android:layout_marginEnd="5dp"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#FFF8E5AE"
             android:id="@+id/take_button"
             android:text="Take" />
     </LinearLayout>

@@ -1,17 +1,20 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.LoaderManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.constants.Constants;
@@ -112,6 +116,9 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         thresholdReminderSwitch = (Switch) findViewById(R.id.threshold_remind_switch);
         descriptionEditText = (EditText) findViewById(R.id.description_text);
         remindSwitch = (Switch) findViewById(R.id.remind_switch);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
         thresholdReminderSwitch.setChecked(Boolean.FALSE);
         thresholdText.setVisibility(View.GONE);
         addListeners();
@@ -220,37 +227,37 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals(Constants.DOSAGE.pills)) {
+                    if (selection.equals(Constants.DOSAGE.pills.toString())) {
                         dosage=0;
-                    } else if (selection.equals(Constants.DOSAGE.cc)) {
+                    } else if (selection.equals(Constants.DOSAGE.cc.toString())) {
                         dosage=1;
-                    } else if (selection.equals(Constants.DOSAGE.ml)) {
+                    } else if (selection.equals(Constants.DOSAGE.ml.toString())) {
                         dosage=2;
-                    }else if (selection.equals(Constants.DOSAGE.gr)) {
+                    }else if (selection.equals(Constants.DOSAGE.gr.toString())) {
                         dosage=3;
-                    }else if (selection.equals(Constants.DOSAGE.mg)) {
+                    }else if (selection.equals(Constants.DOSAGE.mg.toString())) {
                         dosage=4;
-                    }else if (selection.equals(Constants.DOSAGE.drops)) {
+                    }else if (selection.equals(Constants.DOSAGE.drops.toString())) {
                         dosage=5;
-                    }else if (selection.equals(Constants.DOSAGE.pieces)) {
+                    }else if (selection.equals(Constants.DOSAGE.pieces.toString())) {
                         dosage=6;
-                    }else if (selection.equals(Constants.DOSAGE.puffs)) {
+                    }else if (selection.equals(Constants.DOSAGE.puffs.toString())) {
                         dosage=7;
-                    }else if (selection.equals(Constants.DOSAGE.units)) {
+                    }else if (selection.equals(Constants.DOSAGE.units.toString())) {
                         dosage=8;
-                    }else if (selection.equals(Constants.DOSAGE.teaspoon)) {
+                    }else if (selection.equals(Constants.DOSAGE.teaspoon.toString())) {
                         dosage=9;
-                    }else if (selection.equals(Constants.DOSAGE.tablespoon)) {
+                    }else if (selection.equals(Constants.DOSAGE.tablespoon.toString())) {
                         dosage=10;
-                    }else if (selection.equals(Constants.DOSAGE.patch)) {
+                    }else if (selection.equals(Constants.DOSAGE.patch.toString())) {
                         dosage=11;
-                    }else if (selection.equals(Constants.DOSAGE.mcg)) {
+                    }else if (selection.equals(Constants.DOSAGE.mcg.toString())) {
                         dosage=12;
-                    }else if (selection.equals(Constants.DOSAGE.l)) {
+                    }else if (selection.equals(Constants.DOSAGE.l.toString())) {
                         dosage=13;
-                    }else if (selection.equals(Constants.DOSAGE.meq)) {
+                    }else if (selection.equals(Constants.DOSAGE.meq.toString())) {
                         dosage=14;
-                    }else if (selection.equals(Constants.DOSAGE.spray)) {
+                    }else if (selection.equals(Constants.DOSAGE.spray.toString())) {
                         dosage=15;
                     }
                 }
@@ -336,8 +343,8 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
         Date startTime = null;
         try {
             issueDate = formatForDate.parse(String.valueOf(dateOfIssueTextView.getText()));
-            startTime = calSaveReminder.getTime();
-            //startTime = formatForTime.parse(String.valueOf(startTimeTextView.getText()));
+            //startTime = calSaveReminder.getTime();
+            startTime = formatForTime.parse(String.valueOf(startTimeTextView.getText()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -384,11 +391,14 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
     }
 
     private void addReminder(Reminder reminder) {
+        boolean handleTmrw = false;
         Date userReminderTime = reminder.getStartTime();
         Calendar calendar = Calendar.getInstance();
+        calendar.set(1970,0,1);
         if (!userReminderTime.after(calendar.getTime())) {
             Date tomorrow = new Date(userReminderTime.getTime() + (1000 * 60 * 60 * 24));
             userReminderTime = tomorrow;
+            handleTmrw = true;
         }
         calendar.setTime(userReminderTime);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -400,13 +410,14 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
             pendingIntent = PendingIntent.getBroadcast(this, Constants.PENDING_INTENT_ID + i, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             Log.i("Calender Time", " " + calendar.getTime());
             Calendar calendarTrigger = Calendar.getInstance();
-            calendarTrigger.set(Calendar.DATE, calendar.get(Calendar.DATE));
+            if(handleTmrw)
+                calendarTrigger.add(Calendar.DATE, 1);
             calendarTrigger.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
             calendarTrigger.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
             calendarTrigger.set(Calendar.SECOND, 0);
             Log.i("CalenderTrigger Time", " " + calendarTrigger.getTime() + "Medicine name:" + medicine.getMedicine());
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
-            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
             calendar.add(Calendar.MINUTE, reminder.getInterval());
             calendar.setTime(calendar.getTime());
         }
@@ -732,27 +743,53 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(nameTextView.getText().toString().length()!=0){
+
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+
+        else
+        {
+            finish();
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
     }
 
     private boolean isValid() {
 
         if(TextUtils.isEmpty(nameTextView.getText())){
             nameTextView.setError("Medicine Name Can not be empty");
+            Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
             return false;
         }
         if(TextUtils.isEmpty(quantityTextView.getText())){
             quantityTextView.setError("Medicine Quantity Can not be empty");
+            Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
 
             return false;
         }
         if(TextUtils.isEmpty(dosageText.getText())){
             dosageText.setError("consumed quantity Can not be empty");
+            Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
 
             return false;
         }
         if(TextUtils.isEmpty(expiryFactorTextView.getText())){
             expiryFactorTextView.setError("Expiry Factor of Medicine Can not be empty");
+            Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
 
             return false;
         }
@@ -760,32 +797,38 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
             int expiryFactor=Integer.parseInt(expiryFactorTextView.getText().toString());
             if(expiryFactor<=0){
                 expiryFactorTextView.setError("Expiry Factor can not be less than 1 month");
+                Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
                 return false;
             }
             if(expiryFactor>24){
                 expiryFactorTextView.setError("Expiry Factor can not be more than 2 years");
+                Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
         if(remindSwitch.isChecked()) {
             if (TextUtils.isEmpty(intervalText.getText())) {
                 intervalText.setError("Interval for Reminder Can not be empty");
+                Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
                 return false;
             }
             if (TextUtils.isEmpty(frequencyText.getText())) {
                 frequencyText.setError("Interval for Reminder Can not be empty");
+                Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
         if(thresholdReminderSwitch.isChecked()) {
             if (TextUtils.isEmpty(thresholdText.getText())) {
                 thresholdText.setError("Medicine threshold Can not be empty");
+                Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
                 return false;
             }else {
                 int threshold= Integer.parseInt(thresholdText.getText().toString());
                 int quantity=Integer.parseInt(quantityTextView.getText().toString());
                 if(threshold>quantity){
                     thresholdText.setError("Threshold Cannot be more than total quantity");
+                    Toast.makeText(this,"Error Occurred",Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }

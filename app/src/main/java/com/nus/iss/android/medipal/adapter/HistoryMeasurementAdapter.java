@@ -9,9 +9,9 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
+import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.helper.Utils;
-
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -45,9 +45,8 @@ public class HistoryMeasurementAdapter extends CursorAdapter
         TextView valueMeasure = (TextView) view.findViewById(R.id.idDosage);
         TextView dateMeasure = (TextView) view.findViewById(R.id.idMedDate);
 
-        String timeMeasure, bpDiastolic = null, bpSystolic = null, pulse = null, temp = null, weight = null, type = null, value = null, date = null;
+        String bpDiastolic = null, bpSystolic = null, pulse = null, temp = null, weight = null, type = null, value = null, date = null;
         Date dateMeasurement;
-        Long timeMeasurement;
 
         if(cursor.getColumnIndex(MedipalContract.PersonalEntry.MEASUREMENT_DIASTOLIC) != -1)
         {
@@ -80,15 +79,8 @@ public class HistoryMeasurementAdapter extends CursorAdapter
             try
             {
                 dateMeasurement = Utils.converStringToDate(date);
-                DateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                DateFormat formatDate = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault());
                 date = formatDate.format(dateMeasurement);
-                //date = Utils.convertDateToString(dateMeasurement);
-
-//                timeMeasurement = dateMeasurement.getTime();
-//                timeMeasure = timeMeasurement.toString();
-
-                //date = date + timeMeasure;
-
             }
             catch (ParseException e)
             {
@@ -98,23 +90,23 @@ public class HistoryMeasurementAdapter extends CursorAdapter
 
         if(bpSystolic != null && !bpSystolic.isEmpty())
         {
-            type = "Blood Pressure : Systolic";
+            type = context.getString(R.string.BloodPressure) + " : " + context.getString(R.string.Systolic) + " / ";
             value = bpSystolic;
         }
 
         if(bpDiastolic != null && !bpDiastolic.isEmpty())
         {
-            type = type + " / Diastolic";
+            type = type + context.getString(R.string.Diastolic);
             value = bpSystolic + " / " + bpDiastolic;
         }
         else if(pulse != null && !pulse.isEmpty())
         {
-            type = "Pulse";
+            type = context.getString(R.string.Pulse);
             value = pulse;
         }
         else if(temp != null && !temp.isEmpty())
         {
-            type = "Temperature";
+            type = context.getString(R.string.Temperature);
             value = temp;
             Double d = Double.parseDouble(value);
             DecimalFormat df2 = new DecimalFormat(".#");
@@ -123,7 +115,7 @@ public class HistoryMeasurementAdapter extends CursorAdapter
         }
         else if(weight != null && !weight.isEmpty())
         {
-            type = "Weight";
+            type = context.getString(R.string.Weight);
             value = weight;
         }
 

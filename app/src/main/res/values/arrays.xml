@@ -14,6 +14,15 @@
         <item>@string/dosage_mg</item>
         <item>@string/dosage_drops</item>
         <item>@string/dosage_pieces</item>
+        <item>@string/puffs</item>
+        <item>@string/units</item>
+        <item>@string/teaspoon</item>
+        <item>@string/tablespoon</item>
+        <item>@string/patch</item>
+        <item>@string/mcg</item>
+        <item>@string/l</item>
+        <item>@string/meq</item>
+        <item>@string/spray</item>
     </string-array>
 
     <string-array name="array_category_option">

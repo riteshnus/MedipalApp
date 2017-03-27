@@ -20,8 +20,9 @@
         android:id="@+id/name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="20dp"
         android:drawableLeft="@mipmap/med"
+        android:drawableTint="#FFED0C2A"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:hint="Medicine name"
         android:maxLength="50"
@@ -31,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:maxLength="3"
@@ -53,7 +54,7 @@
             android:layout_weight="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:inputType="number"
-            android:textSize="20sp" />
+            android:textSize="20dp" />
 
         <!-- Input field -->
         <LinearLayout
@@ -73,23 +74,25 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:id="@+id/date_of_issue_text"
-        android:text="Date of Issue"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:drawableLeft="@mipmap/date"
         android:layout_marginLeft="4dp"
-        android:textSize="20sp"/>
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@mipmap/date"
+        android:gravity="fill_vertical"
+        android:text="Date of Issue"
+        android:drawableTint="#FFED0C2A"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/expiry_text"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:inputType="number"
         android:maxLength="2"
@@ -113,7 +116,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:fontFamily="sans-serif" />
 
         <!-- Input field -->
@@ -140,9 +143,10 @@
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/notes"
         android:hint="Symptoms/Medical Diagnosis"
+        android:drawableTint="#FFED0C2A"
         android:maxLength="255"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="20sp">
+        android:textSize="20dp">
 
     </EditText>
 
@@ -159,7 +163,7 @@
             android:layout_weight="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Reminder"
-            android:textSize="20sp"
+            android:textSize="20dp"
             />
         <Switch
             android:layout_width="0dp"
@@ -167,46 +171,51 @@
             android:id="@+id/remind_switch"
             android:layout_height="wrap_content" />
     </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/reminder_layout"
-    android:layout_marginBottom="4dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/reminder_time"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/datetime"
-        android:text="Start Time"
-        android:layout_marginBottom="8dp"
-        android:textSize="20sp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/interval_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_weight="1"
-        android:inputType="number"
-        android:hint="@string/interval"/>
 
-        <EditText
-            android:id="@+id/frequency_text"
-            android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/reminder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/reminder_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:inputType="number"
-            android:layout_weight="1"
-            android:hint="frequency"/>
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/datetime"
+            android:text="Start Time"
+            android:drawableTint="#FFED0C2A"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/interval_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/interval"
+                android:inputType="number"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/frequency_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="frequency"
+                android:inputType="number"
+                android:textSize="20dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -220,7 +229,7 @@
             android:layout_weight="1"
             android:text="Threshold Reminder"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="20sp"
+            android:textSize="20dp"
             />
         <Switch
             android:layout_width="0dp"
@@ -233,7 +242,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:maxLength="3"

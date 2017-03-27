@@ -1,41 +1,28 @@
 package com.nus.iss.android.medipal.activity;
 
-import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.LoaderManager;
-import android.app.PendingIntent;
 import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.nus.iss.android.medipal.R;
-import com.nus.iss.android.medipal.constants.Constants;
 import com.nus.iss.android.medipal.dao.MedicineDAO;
 import com.nus.iss.android.medipal.data.MedipalContract;
 import com.nus.iss.android.medipal.dto.Reminder;
 import com.nus.iss.android.medipal.helper.Utils;
 
-
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
-import static android.R.attr.category;
-import static android.R.attr.format;
-import static android.os.Build.VERSION_CODES.M;
 
 public class CurrentMedicineActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -197,17 +184,37 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
             myIntent.setData(medicineUri);
             startActivity(myIntent);
         }
-        if (item.getItemId() == R.id.action_delete) {
-            if (medicineUri != null) {
-                deleteMedicine();
-                finish();
-            }
+        if (item.getItemId() == R.id.action_delete)
+        {
+            //Updated by Medha, date = 27-03-2017
+            deletePopup();
         }
         if (item.getItemId() == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //Added by Medha, date = 27-03-2017
+    private void deletePopup()
+    {
+        new android.support.v7.app.AlertDialog.Builder(this)
+                .setMessage(R.string.deletePopupMsg)
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        if (medicineUri != null)
+                        {
+                            deleteMedicine();
+                            finish();
+                        }
+                        //finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     @Override

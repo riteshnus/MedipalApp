@@ -1,9 +1,7 @@
 package com.nus.iss.android.medipal.activity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -124,8 +122,8 @@ public class AddHealthBioActivity extends AppCompatActivity {
         }
 
         HealthBio healthBio = new HealthBio(description,condStartDate,condType);
-        HealthBioDAO hbDao = new HealthBioDAO(this);
-        hbDao.save(healthBio);
+        HealthBioDAO healthBioDAO = new HealthBioDAO(this);
+        healthBioDAO.save(healthBio);
         finish(); // finish activity
     }
 
