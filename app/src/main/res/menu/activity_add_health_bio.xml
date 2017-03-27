@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/action_save"
-        android:title="Save"
+        android:title="@string/add_hb_save"
         android:icon="@drawable/ic_done"
         app:showAsAction="always" />
 </menu>

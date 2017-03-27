@@ -11,9 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nus.iss.android.medipal.R;
 import com.nus.iss.android.medipal.dao.MedicineDAO;
@@ -22,6 +24,7 @@ import com.nus.iss.android.medipal.dto.Reminder;
 import com.nus.iss.android.medipal.helper.Utils;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CurrentMedicineActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -42,7 +45,7 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
     private int expiry_factor=0;
     private String issue_date;
     private TextView reminderTimeTextView;
-    private String reminderStartTime;
+    private String timeFormat = "h:mm a";
 
     private Reminder reminder;
 
@@ -147,9 +150,12 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
                   int columnIndxForReminderStartTime=data.getColumnIndex(MedipalContract.PersonalEntry.REMINDER_START_TIME);
                   String reminderStartTime=data.getString(columnIndxForReminderStartTime);
                   try {
-
-                      String reminderStartText=Utils.getTimeFromDateString(reminderStartTime);
-                      reminderTimeTextView.setText(reminderStartText);
+                      Log.i("time","In DB"+reminderStartTime);
+                      Date reminderDate = Utils.converStringToDate(reminderStartTime);
+                      SimpleDateFormat sdfTime = new SimpleDateFormat(timeFormat);
+                      Log.i("time","Reminder"+sdfTime.format(reminderDate.getTime()));
+                      //String reminderStartText=Utils.getTimeFromDateString(reminderStartTime);
+                      reminderTimeTextView.setText(sdfTime.format(reminderDate.getTime()));
                   } catch (ParseException e) {
                       e.printStackTrace();
                   }
@@ -207,10 +213,10 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
                     {
                         if (medicineUri != null)
                         {
-                            deleteMedicine();
+                            deleteMedicine(medicineUri);
                             finish();
                         }
-                        //finish();
+                        finish();
                     }
                 })
                 .setNegativeButton("No", null)
@@ -221,8 +227,17 @@ public class CurrentMedicineActivity extends AppCompatActivity implements Loader
     public void onBackPressed() {
         super.onBackPressed();
     }
-    private void deleteMedicine() {
-        MedicineDAO medicineDAO=new MedicineDAO(this);
-        medicineDAO.delete(medicineUri);
+    private void deleteMedicine(Uri medicineUri)
+    {
+        int rowsAffected;
+        MedicineDAO medicineDAO = new MedicineDAO(this);
+        rowsAffected = medicineDAO.delete(medicineUri);
+        if (rowsAffected == 0) {
+            Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Record deleted", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,MedicineActivity.class);
+            startActivity(intent);
+        }
     }
 }

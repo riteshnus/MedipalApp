@@ -22,7 +22,6 @@
     <string name="l">l</string>
     <string name="spray">spray</string>
     <string name="meq">meq</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_personal_info">Personal Info</string>
     <string name="title_activity_add_health_bio">Add Symptom/Diagnosis</string>
@@ -107,4 +106,31 @@
     <string name="Diastolic">" Diastolic"</string>
     <string name="BloodPressure">Blood Pressure</string>
     <string name="deletePopupMsg">Are you sure you want to delete?</string>
+    <string name="about_us_hint">An Application that manages all your appointments, medicines, personal details and health conditions along with your daily measurement feeds.</string>
+    <string name="about_us_team">FT - 02</string>
+    <string name="about_us_m1">Siddharth Deshmukh</string>
+    <string name="ritesh_kumar">about_us_m2</string>
+    <string name="about_us_m3">Medha Sharma</string>
+    <string name="about_us_m4">Thushara Joseph</string>
+    <string name="about_us_m5">Shubhanshu Gautam</string>
+    <string name="about_us_m6">Mathura Krishnan</string>
+    <string name="add_hb_save">Save</string>
+    <string name="add_hb_condition_description">Condition Description</string>
+    <string name="add_hb_start_date">Start Date</string>
+    <string name="add_hb_condition">Condition</string>
+    <string name="add_hb_allergy">Allergy</string>
+    <string name="add_hb_descr_hint">Enter health description here</string>
+    <string name="add_medi_hint_medicine_name">Medicine name</string>
+    <string name="add_medi_hint_qty_issued">Quantity Issued</string>
+    <string name="add_medi_hint_date_of_issue">Date of Issue</string>
+    <string name="add_medi_hint_cat">Category</string>
+    <string name="bp_sys_high">Sys(high)</string>
+    <string name="bp_slash">/</string>
+    <string name="bp_dia_low">Dia(Low)</string>
+    <string name="bp_mmhg">mmHg</string>
+    <string name="bp_hint">Systolic Normal Range : less than 120mmHg Diastolic Normal Range : less than 80mmhg</string>
+    <string name="cur_med_desc">Description</string>
+    <string name="cur_med_cat">Category</string>
+    <string name="cur_med_exp">Expiry Date</string>
+    <string name="cur_med_remind">Reminder</string>
 </resources>

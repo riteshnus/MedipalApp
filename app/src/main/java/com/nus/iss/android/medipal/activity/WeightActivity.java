@@ -78,15 +78,13 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-
                 new DatePickerDialog(WeightActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-/*textchange listerner*/
 
+        /*textchange listerner*/
         weightTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
@@ -145,7 +143,7 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
     private void calculateHeight()
     {
         Cursor cursor = this.getContentResolver().query(MedipalContract.PersonalEntry.CONTENT_URI_PERSONAL, null, null, null, null);
-        if(cursor.moveToFirst())
+        if(cursor!=null && cursor.moveToFirst())
         {
             height = cursor.getDouble(cursor.getColumnIndex(MedipalContract.PersonalEntry.USER_HEIGHT))/100;
         }
@@ -158,12 +156,10 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabel();
-
         }
 
     };
@@ -201,7 +197,7 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
 
     public void createAndInsertMeasurement() {
 
-        int weight = 0;
+        int weight ;
         if(null != weightTextView.getText() && !weightTextView.getText().toString().isEmpty()) {
             weight = Integer.parseInt(weightTextView.getText().toString());
         }else{
@@ -209,7 +205,7 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
             return;
         }
 
-        Date textField = null;
+        Date textField ;
         try {
             textField = sdf2.parse(sdf2.format(sdf.parse(String.valueOf(mesureDate.getText()))));
         } catch (ParseException e) {
@@ -262,13 +258,7 @@ public class WeightActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
-    /**
-     * Called when a previously created loader is being reset, and thus
-     * making its data unavailable.  The application should at this point
-     * remove any references it has to the Loader's data.
-     *
-     * @param loader The Loader that is being reset.
-     */
+
     @Override
     public void onLoaderReset(Loader<Object> loader) {
 

@@ -26,7 +26,6 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="normal"
-        android:onClick="sendAddHealthBio"
         app:srcCompat="@android:drawable/ic_input_add"
         android:id="@+id/hb_fab"
         app:layout_anchor="@+id/hb_layout"

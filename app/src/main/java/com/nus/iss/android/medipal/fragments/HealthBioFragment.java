@@ -40,7 +40,6 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
     private static MatrixCursor dummyCursor;
     private static HealthBioAdapter hbAdapter;
     private ActionMode mActionMode;
-    private FloatingActionButton addHealthBioFab;
     private static final int HEALTH_BIO_LOADER=0;
     public List<String> selectedViewsIds = new ArrayList<String>();
 
@@ -55,6 +54,7 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
         populateRecyclerView();
         implementRecyclerViewClickListeners();
 
+        FloatingActionButton addHealthBioFab;
         addHealthBioFab = (FloatingActionButton) view.findViewById(R.id.hb_fab);
         addHealthBioFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,27 +66,11 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
         return view;
     }
 
-    // ToDo : implement fetch cursor
-    //Populate Recycler with dummy data
     private void populateRecyclerView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-/*        // ToDO---------------
-        dummyCursor = new MatrixCursor(new String[]{
-                MedipalContract.HealthBioEntry.HEALTH_BIO_ID,
-                MedipalContract.HealthBioEntry.HEALTH_CONDITION,
-                MedipalContract.HealthBioEntry.HEALTH_CONDITION_TYPE,
-                MedipalContract.HealthBioEntry.HEALTH_START_DATE});
-        // item_models = new ArrayList<>();
-        for (int i = 1; i <= 40; i++){
-            //item_models.add(new HealthBio("Condition " + i, new Date(System.currentTimeMillis()), "C" + i));
-            dummyCursor.addRow(new String[]{i+"","Condition " + i, new Date(System.currentTimeMillis()).toString(), "C" + i});
-        }
-        // ToDo----------------*/
-
-        // hbAdapter = new HealthBioAdapter(getActivity(), dummyCursor);
         getLoaderManager().initLoader(HEALTH_BIO_LOADER,null,this);
         hbAdapter = new HealthBioAdapter(getActivity(), null);
         recyclerView.setAdapter(hbAdapter);
@@ -94,7 +78,7 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
     }
 
 
-    //Implement item click and long click over recycler view
+    //Implement item click and long click on recycler view
     private void implementRecyclerViewClickListeners() {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerClickListener() {
             @Override
@@ -143,12 +127,6 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
             mActionMode = null;
     }
 
-    public void sendAddHealthBio(View view)
-    {
-        Intent intent = new Intent(getContext(),AddHealthBioActivity.class);
-        startActivity(intent);
-    }
-
 
     //Delete selected rows
     public void deleteRows() {
@@ -161,19 +139,6 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
         SparseBooleanArray selected = hbAdapter
                 .getSelectedIds();//Get selected ids
 
-/*       //Loop all selected ids
-        for (int i = (selected.size() - 1); i >= 0; i--) {
-            if (selected.valueAt(i)) {
-                //ToDo : db.delete
-                new HealthBioDAO("_id");
-                //If current id is selected remove the item via key
-                //item_models.remove(selected.keyAt(i));
-                //dummyCursor.
-                //hbAdapter.notifyDataSetChanged(); //notify hbAdapter
-
-            }
-        }
-*/
         Toast.makeText(getActivity(), selected.size() + " item(s) deleted.", Toast.LENGTH_SHORT).show();//Show Toast
         mActionMode.finish();//Finish action mode after use
 
@@ -194,7 +159,6 @@ public class HealthBioFragment extends android.support.v4.app.Fragment implement
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         //cursor.moveToNext()
-        //getLoaderManager().restartLoader(HEALTH_BIO_LOADER,null,this);
         hbAdapter.swapCursor(cursor);
         hbAdapter.notifyDataSetChanged();
     }

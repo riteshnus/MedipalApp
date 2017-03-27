@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/datetime"
+            android:drawablePadding="18dp"
             android:gravity="fill_vertical"
             android:drawableTint="#FFED0C2A"
             android:id="@+id/reminder_time_text"

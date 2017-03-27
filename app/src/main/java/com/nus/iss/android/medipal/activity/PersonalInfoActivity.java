@@ -54,7 +54,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -66,16 +68,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Edit Personal Bio !", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
 
     }
 
@@ -93,13 +85,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 startActivity(new Intent(this,NavDrawerActivity.class));
-                //this.finish();
-                //NavUtils.navigateUpFromSameTask(this);
                 return true;
 
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -165,24 +153,11 @@ public class PersonalInfoActivity extends AppCompatActivity {
         EditText etxtIDnum;
         EditText etxtPostalCode;
 
-        public PersonalBioFragment() {
-        }
-
-        public PersonalBioFragment newInstance(int sectionNumber) {
-            PersonalBioFragment fragment = new PersonalBioFragment();
-/*            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);*/
-            return fragment;
-        }
-
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             mRootView = inflater.inflate(R.layout.fragment_personal_bio, container, false);
             getLoaderManager().initLoader(0,null,this);
             findAllViewsById();
-            //populatePersonalBio(); // pre-populate
             //toggleEditable(false);
             changeInputType();
             mFabProfileEdit = (FloatingActionButton) mRootView.findViewById(R.id.fabProfileEdit);
@@ -226,6 +201,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                         // disable onclick listener on DoB
                         etxtDOB.setOnClickListener(null);
                         Toast.makeText(getActivity().getApplicationContext(), "Profile Saved", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(),NavDrawerActivity.class)); // Move to home page
                     }
                 }
             });
@@ -313,8 +289,12 @@ public class PersonalInfoActivity extends AppCompatActivity {
             if(mCursor!=null)mCursor.moveToFirst();
             String id = mCursor.getString(mCursor.getColumnIndex("_id"));
 
-            if(null!= etxtName.getText() && !etxtName.getText().toString().isEmpty()
-                    && etxtDOB.getText()!=null && !etxtDOB.getText().toString().isEmpty()){
+            if(etxtDOB.getText()==null || etxtDOB.getText().toString().isEmpty()){
+                etxtDOB.setError("Enter your date of birth");
+                return true;
+            }
+
+            if(null!= etxtName.getText() && !etxtName.getText().toString().isEmpty()) {
 
                 name = etxtName.getText().toString();
                 if(name.length()>30){
@@ -415,7 +395,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
             //cursor.moveToNext()
             mCursor = cursor;
             populatePersonalBio(cursor);
-            //getLoaderManager().restartLoader(0,null,this);
         }
 
         public void populatePersonalBio(Cursor cursor){
@@ -469,7 +448,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     return new HealthBioFragment();
 
             }
-            return PlaceholderFragment.newInstance(position + 1); // TODO remove this and return 2 fragments: for profile and health bio
+            return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override

@@ -23,7 +23,7 @@
             android:drawableLeft="@drawable/notes"
             android:drawablePadding="25dp"
             android:gravity="center_vertical"
-            android:text="Description"
+            android:text="@string/cur_med_desc"
             android:drawableTint="#FFED0C2A"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -44,7 +44,7 @@
             android:drawableLeft="@mipmap/select"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:text="Category"
+            android:text="@string/cur_med_cat"
             android:drawableTint="#FFED0C2A"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -66,7 +66,7 @@
             android:drawablePadding="10dp"
             android:drawableTint="#FFED0C2A"
             android:gravity="center_vertical"
-            android:text="Expiry Date"
+            android:text="@string/cur_med_exp"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
             android:drawableLeft="@drawable/ic_add_alert"
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
-            android:text="Reminder"/>
+            android:text="@string/cur_med_remind"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Sys(high)"
+            android:hint="@string/bp_sys_high"
             android:inputType="number"
             android:maxHeight="3dp"
             android:maxLength="3"
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="/"
+            android:text="@string/bp_slash"
             android:textAlignment="center" />
 
         <EditText
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Dia(Low)"
+            android:hint="@string/bp_dia_low"
             android:inputType="number"
             android:textAlignment="center"
             android:maxLength="3"
@@ -54,7 +54,7 @@
 
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="mmHg"/>
+            android:text="@string/bp_mmhg"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="6"
-            android:hint="Systolic Normal Range : less than 120mmHg\nDiastolic Normal Range : less than 80mmhg"
+            android:hint="@string/bp_hint"
             android:lines="5"
             android:maxLines="5"
             android:textAppearance="?android:textAppearanceMedium"
@@ -123,7 +123,6 @@
         <TextView
             android:id="@+id/ev_bpnotes"
             android:layout_width="0dp"
-            android:hint="gfdgdfg"
             android:layout_height="wrap_content"
             android:textStyle="italic"
             android:textSize="@dimen/standard_21"

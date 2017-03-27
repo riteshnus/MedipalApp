@@ -49,7 +49,6 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
 
             @Override
             public void bindView(View view, Context context, Cursor cursor) {
-                // ToDo: use view.getTag -> viewholder and remove below finds..
                 TextView condition = (TextView) view.findViewById(R.id.hb_condition);
                 TextView conditionType = (TextView)view.findViewById(R.id.hb_condition_type);
                 TextView startDate = (TextView) view.findViewById(R.id.hb_start_date);
@@ -72,21 +71,11 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
                             );
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    //Toast.makeText(context, "error setting date", Toast.LENGTH_SHORT).show();
                 }
 
                 TextView _id_holder = (TextView) view.findViewById(R.id.hb_item_id);
                 _id_holder.setText(cursor.getString(cursor.getColumnIndex("_id")));
-/*
-                conditionType.setText(
-                        cursor.getString(
-                                cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_CONDITION_TYPE)));
-
-               startDate.setText(
-                        cursor.getString(
-                                cursor.getColumnIndex(MedipalContract.HealthBioEntry.HEALTH_START_DATE)));
-
- */           }
+           }
         };
     } // *** End of Constructor ***
 
@@ -157,12 +146,7 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
 
 
     public void swapCursor(Cursor cursor){
-        Cursor oldCursor = mCursorAdapter.swapCursor(cursor);
-
-/*        if(oldCursor!=null){
-            oldCursor.close();
-        }
-*/
+        mCursorAdapter.swapCursor(cursor);
     }
 
 
@@ -180,7 +164,7 @@ public class HealthBioAdapter extends RecyclerView.Adapter<HealthBioAdapter.Heal
 
             this.condition = (TextView) rootView.findViewById(R.id.hb_condition);
             this.startDate = (TextView) rootView.findViewById(R.id.hb_start_date);
-            this.conditionType = (TextView) rootView.findViewById(R.id.hb_condition);
+            this.conditionType = (TextView) rootView.findViewById(R.id.hb_condition_type);
 
         }
     }

@@ -48,12 +48,11 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         medicineListView.setEmptyView(emptyView);
-        ListView listView= (ListView) findViewById(R.id.list_medicine);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        medicineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 int medicineId=medicineList.get(position).getMedicineId();
@@ -65,7 +64,7 @@ public class MedicineActivity extends AppCompatActivity implements LoaderManager
         });
 
         medicineAdpter=new MedicineAdapter(this,null,0);
-        listView.setAdapter(medicineAdpter);
+        medicineListView.setAdapter(medicineAdpter);
         setTitle("Active Medicine");
         fab= (FloatingActionButton) findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {

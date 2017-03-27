@@ -35,30 +35,31 @@
         android:layout_weight="6">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
                 android:id="@+id/idMedName"
                 android:textSize="20dp"
                 android:layout_weight="1"
+                android:hint="tdgd"
                 android:textAppearance="?android:textAppearanceMedium"/>
 
             <TextView
+                android:id="@+id/idDosage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:id="@+id/idDosage"
-                android:layout_marginTop="1dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="1dp"
                 android:layout_weight="1"
+                android:hint="0ffyfyfuy"
+                android:layout_marginStart="30dp"
                 android:orientation="horizontal"
-                android:textAppearance="?android:textAppearanceMedium"/>
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="20dp" />
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"

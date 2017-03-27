@@ -24,7 +24,7 @@
         android:drawableLeft="@mipmap/med"
         android:drawableTint="#FFED0C2A"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="Medicine name"
+        android:hint="@string/add_medi_hint_medicine_name"
         android:maxLength="50"
         />
     <EditText
@@ -36,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:maxLength="3"
-        android:hint="Quantity Issued"/>
+        android:hint="@string/add_medi_hint_qty_issued"/>
     <LinearLayout
         android:id="@+id/container_dosage"
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp"
         android:drawableLeft="@mipmap/date"
         android:gravity="fill_vertical"
-        android:text="Date of Issue"
+        android:text="@string/add_medi_hint_date_of_issue"
         android:drawableTint="#FFED0C2A"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20dp" />
@@ -108,7 +108,7 @@
 
         <!-- Label -->
         <TextView
-            android:text="Category"
+            android:text="@string/add_medi_hint_cat"
             android:id="@+id/category_text"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
