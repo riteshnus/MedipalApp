@@ -441,7 +441,7 @@ public class AddMedicineActivity extends AppCompatActivity implements LoaderMana
             Log.i("CalenderTrigger Time", " " + calendarTrigger.getTime() + "Medicine name:" + medicine.getMedicine());
             //alarmManager.set(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(), pendingIntent);
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarTrigger.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
-            calendar.add(Calendar.MINUTE, reminder.getInterval());
+            calendar.add(Calendar.HOUR, reminder.getInterval());
             calendar.setTime(calendar.getTime());
         }
     }
